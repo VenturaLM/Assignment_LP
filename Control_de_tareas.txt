@@ -10,11 +10,11 @@
 
 
 -----------------------------------------------------------------
-NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[x]
+NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[]
 -----------------------------------------------------------------
 
 -----------------------------------------------------------------
-PALABRAS RESERVADAS:		[x]							CHECK
+PALABRAS RESERVADAS:		[]							CHECK
 -----------------------------------------------------------------
 	#mod												[ ]
 	#div												[ ]
