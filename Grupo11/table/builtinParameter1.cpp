@@ -6,6 +6,7 @@
 	\version 1.0
 */
 
+
 #include <iostream>
 
 // Delete the comment if you want to use atof in the operator overload >>
@@ -13,22 +14,29 @@
 
 #include "builtinParameter1.hpp"
 
+
 lp::BuiltinParameter1 &lp::BuiltinParameter1::operator=(const lp::BuiltinParameter1 &f)
-{
-	// Check that is not the current object
-	if (this != &f)
-	{
-		// Inherited methods
-		this->setName(f.getName());
+  {
+ 	// Check that is not the current object
+		if (this != &f) 
+		{
+			// Inherited methods
+			this->setName(f.getName());
 
-		this->setToken(f.getToken());
+			this->setToken(f.getToken());
 
-		this->setNParameters(f.getNParameters());
+			this->setNParameters(f.getNParameters());
 
-		// Own method
-		this->setFunction(f.getFunction());
-	}
+			// Own method
+			this->setFunction(f.getFunction());
+		}
 
-	// Return the current object
-	return *this;
-}
+    // Return the current object
+		return *this;
+  }
+
+
+
+
+
+
