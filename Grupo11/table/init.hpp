@@ -71,7 +71,7 @@ static struct
 	int token;
 } keyword[] = {
 	{"escribir", PRINT},
-	{"read", READ},
+	{"leer", READ},
 	{"if", IF},		  // NEW in example 17
 	{"else", ELSE},	  // NEW in example 17
 	{"while", WHILE}, // NEW in example 17
