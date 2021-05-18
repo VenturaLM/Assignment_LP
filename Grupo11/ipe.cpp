@@ -1,5 +1,5 @@
 /*! 
-  \file interpreter.cpp
+  \file ipe.cpp
   \brief Main program
 */
 
@@ -38,7 +38,7 @@ bool interactiveMode; //!< Control the interactive mode of execution of the inte
 int control = 0; //!< To control the interactive mode in "if" and "while" sentences
 
 // New in example 2
-extern FILE *yyin;    //!< Standard input device for yylex()
+extern FILE *yyin;	  //!< Standard input device for yylex()
 std::string progname; //!<  Program name
 //
 
@@ -90,56 +90,56 @@ lp::Table table; //!< Table of Symbols
 */
 int main(int argc, char *argv[])
 {
-  /* Option -t needed to debug */
-  /* 1, on; 0, off */
-  yydebug = 0;
+	/* Option -t needed to debug */
+	/* 1, on; 0, off */
+	yydebug = 0;
 
-  /* 
+	/* 
    If the input file exists 
       then 
            it is set as input device for yylex();
       otherwise
             the input device is the keyboard (stdin)
  */
-  if (argc == 2)
-  {
-    yyin = fopen(argv[1], "r");
+	if (argc == 2)
+	{
+		yyin = fopen(argv[1], "r");
 
-    interactiveMode = false;
-  }
-  else
-  {
-    interactiveMode = true;
-  }
+		interactiveMode = false;
+	}
+	else
+	{
+		interactiveMode = true;
+	}
 
-  // Copy the name of the interpreter
-  progname = argv[0];
+	// Copy the name of the interpreter
+	progname = argv[0];
 
-  /* Number of decimal places */
-  std::cout.precision(7);
+	/* Number of decimal places */
+	std::cout.precision(7);
 
-  /* 
+	/* 
    Table of symbols initialization 
    Must be written before the recovery sentence: setjmp
  */
-  init(table);
+	init(table);
 
-  /* Sets a viable state to continue after a runtime error */
-  setjmp(begin);
+	/* Sets a viable state to continue after a runtime error */
+	setjmp(begin);
 
-  /* The name of the function to handle floating-point errors is set */
-  signal(SIGFPE, fpecatch);
+	/* The name of the function to handle floating-point errors is set */
+	signal(SIGFPE, fpecatch);
 
-  // Parser function
-  yyparse();
+	// Parser function
+	yyparse();
 
-  if (interactiveMode == false)
-  {
-    /* NEW in example 15 */
-    root->print();
-    root->evaluate();
-  }
+	if (interactiveMode == false)
+	{
+		/* NEW in example 15 */
+		root->print();
+		root->evaluate();
+	}
 
-  /* End of program */
-  return 0;
+	/* End of program */
+	return 0;
 }
