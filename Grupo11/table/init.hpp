@@ -70,7 +70,7 @@ static struct
 	std::string name;
 	int token;
 } keyword[] = {
-	{"print", PRINT},
+	{"escribir", PRINT},
 	{"read", READ},
 	{"if", IF},		  // NEW in example 17
 	{"else", ELSE},	  // NEW in example 17
