@@ -211,7 +211,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %left PLUS MINUS 
 
 /* MODIFIED in example 5 */
-%left MULTIPLICATION DIVISION MODULO
+%left MULTIPLICATION DIVISION MODULO ENTIRE_DIVISION
 
 %left LPAREN RPAREN
 
@@ -450,6 +450,12 @@ exp:	NUMBER
 		  // Create a new division node	
 		  $$ = new lp::DivisionNode($1, $3);
 	   }
+
+	| 	exp ENTIRE_DIVISION exp
+		{
+		  // Create a new quotient node
+		  $$ = new lp::DivisionEnteraNode($1, $3);
+	   	}
 
 	| 	LPAREN exp RPAREN
        	{ 

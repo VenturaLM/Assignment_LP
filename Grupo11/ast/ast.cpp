@@ -462,9 +462,50 @@ double lp::DivisionNode::evaluateNumber()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+void lp::DivisionEnteraNode::print()
+{
+	std::cout << "DivisionEnteraNode: " << std::endl;
+	this->_left->print();
+	std::cout << " #div ";
+	this->_right->print();
+}
+
+double lp::DivisionEnteraNode::evaluateNumber()
+{
+	int result = 0.0;
+
+	// Ckeck the types of the expressions
+	if (this->getType() == NUMBER)
+	{
+		double leftNumber, rightNumber;
+
+		leftNumber = this->_left->evaluateNumber();
+		rightNumber = this->_right->evaluateNumber();
+
+		// The divisor is not zero
+		if (std::abs(rightNumber) > ERROR_BOUND)
+		{
+			result = leftNumber / rightNumber;
+		}
+		else
+		{
+			warning("Runtime error", "Division by zero");
+		}
+	}
+	else
+	{
+		warning("Runtime error: the expressions are not numeric for", "Entire division");
+	}
+
+	return result;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 void lp::ModuloNode::print()
 {
-	std::cout << "ModuloNode: %" << std::endl;
+	std::cout << "ModuloNode: #mod" << std::endl;
 	std::cout << "\t";
 	this->_left->print();
 	std::cout << "\t";

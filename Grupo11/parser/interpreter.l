@@ -161,17 +161,18 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 
 "*"	    { return MULTIPLICATION; } 	/* NEW in example 3 */
 "/"     { return DIVISION; } 		/* NEW in example 3 */
+"#div"  { return ENTIRE_DIVISION; }	/* NEW in final assignment. */
 
 "("     { return LPAREN; } 			/* NEW in example 3 */
 ")"	    { return RPAREN; } 			/* NEW in example 3 */
 
 
 
-"%"     { return MODULO; }			/* NEW in example 5 */
+"#mod"     { return MODULO; }		/* NEW in final assignment. */
 
 "^"	    { return POWER; }			/* NEW in example 5 */
 
-"=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
+":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
 
 
 "=="	{ return EQUAL; }			/* NEW in example 15 */

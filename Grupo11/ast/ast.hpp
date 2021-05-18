@@ -674,6 +674,37 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	class DivisionEnteraNode : public NumericOperatorNode
+	{
+	public:
+		/*!
+		\brief Constructor of DivisionNode uses NumericOperatorNode's constructor as members initializer
+		\param L: pointer to ExpNode
+		\param R: pointer to ExpNode
+		\post  A new DivisionEnteraNode is created with the parameter
+	*/
+		DivisionEnteraNode(ExpNode *L, ExpNode *R) : NumericOperatorNode(L, R)
+		{
+			// Empty
+		}
+		/*!
+		\brief   Print the DivisionEnteraNode
+		\return  void
+		\sa		 evaluate()
+	*/
+		void print();
+
+		/*!
+		\brief   Evaluate the DivisionEnteraNode
+		\return  double
+		\sa		 print
+	*/
+		double evaluateNumber();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*!	
   \class   ModuloNode
   \brief   Definition of atributes and methods of ModuloNode class
