@@ -61,6 +61,8 @@ NUMBER1 {DIGIT}+(\.{DIGIT}+)?
 
 NUMBER2 {DIGIT}(\.{DIGIT}+)?(E[+-]?{DIGIT}+)?
 
+INVALID_NUMBER {DIGIT}+(\.)(E[+-]?{DIGIT}+)?|{DIGIT}+(\.{DIGIT}+)?(E[+-]?)({DIGIT}+)?|{DIGIT}+(\.)(E[+-]?)
+
 IDENTIFIER  {LETTER}({LETTER}+|{DIGIT}+|(\_{LETTER})+|(\_{DIGIT})+)*
 
 INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DIGIT}|\_)?
@@ -94,16 +96,19 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 			return COMMA;
 		}
 
-{NUMBER1}|{NUMBER2}  {
+{NUMBER1}|{NUMBER2} {
 					  /* MODIFIED in example 4 */
 					  /* Conversion of type and sending of the numerical value to the parser */
 					   yylval.number = atof(yytext); 
 
                        return NUMBER; 
-                      }
+                    }
+{INVALID_NUMBER}  	{
+                	warning("Lexical error: Not a valid number.", yytext);
+              	}
 
 
-{IDENTIFIER}   		 {
+{IDENTIFIER}   		{
 						 /* NEW in example 7 */
 						 std::string identifier(yytext);
 
@@ -146,7 +151,10 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 								/*  If the identifier is in the table then its token is returned  */
 								return s->getToken();
 							}
-                     }
+                    }
+{INVALID_IDENTIFIER} {
+                  warning("Lexical error: Not a valid identifier.", yytext);
+                }
 
 "-"		{ return MINUS;  } 			/* NEW in example 3 */
 "+"		{ return PLUS;   } 			/* NEW in example 3 */
