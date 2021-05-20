@@ -381,10 +381,10 @@ if:	/* Simple conditional statement */
 
 
 	/*  NEW in example 17 */
-while:  WHILE controlSymbol cond stmt 
+while:  WHILE controlSymbol cond DO stmt ENDWHILE
 		{
 			// Create a new while statement node
-			$$ = new lp::WhileStmt($3, $4);
+			$$ = new lp::WhileStmt($3, $5);
 
 			// To control the interactive mode
 			control--;

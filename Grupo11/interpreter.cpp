@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 	if (interactiveMode == false)
 	{
 		/* NEW in example 15 */
-		root->print();
+		//root->print();
 		root->evaluate();
 	}
 

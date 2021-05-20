@@ -38,10 +38,10 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 		si_no											[x]
 		fin_si											[x]
 
-	SENTENCIA DE BUCLE MIENTRAS:						[ ]
+	SENTENCIA DE BUCLE MIENTRAS:						[x]
 		mientras										[x]
-		hacer											[ ]
-		fin_mientras									[ ]
+		hacer											[x]
+		fin_mientras									[x]
 
 	SENTENCIA DE BUCLE REPETIR:							[ ]
 		repetir											[ ]
@@ -165,7 +165,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 				si_no lista de sentencias
 			fin_si
 
-		BUCLE "mientras"								[ ]
+		BUCLE "mientras"								[x]
 			mientras condición hacer
 					lista de sentencias
 			fin_mientras
