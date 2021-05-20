@@ -218,7 +218,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %nonassoc  UNARY
 
 // Maximum precedence 
-/* MODIFIED in example 5 */
+/* MODIFIED in final assignment. */
 %right POWER
 
 

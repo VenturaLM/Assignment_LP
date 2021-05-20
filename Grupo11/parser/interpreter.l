@@ -168,9 +168,9 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 
 
 
-"#mod"     { return MODULO; }		/* NEW in final assignment. */
+"#mod"  { return MODULO; }		/* NEW in final assignment. */
 
-"^"	    { return POWER; }			/* NEW in example 5 */
+"**"	{ return POWER; }		/* NEW in final assignment. */
 
 ":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
 
