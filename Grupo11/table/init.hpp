@@ -57,8 +57,8 @@ static struct
 	std::string name;
 	bool value;
 } logicalConstant[] = {
-	{"true", true},
-	{"false", false},
+	{"verdadero", true},
+	{"falso", false},
 	{"", 0}};
 
 // NEW in example 12
@@ -72,8 +72,10 @@ static struct
 } keyword[] = {
 	{"escribir", PRINT},
 	{"leer", READ},
-	{"si", IF},			 // NEW in example 17
-	{"si_no", ELSE},	 // NEW in example 17
+	{"si", IF}, // NEW in example 17
+	{"entonces", THEN},
+	{"si_no", ELSE}, // NEW in example 17
+	{"fin_si", ENDIF},
 	{"mientras", WHILE}, // NEW in example 17
 	{"", 0}};
 

@@ -16,12 +16,15 @@ NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[ ]
 -----------------------------------------------------------------
 PALABRAS RESERVADAS:		[ ]							CHECK
 -----------------------------------------------------------------
-	#mod												[ ]
-	#div												[ ]
+	#mod												[x]
+	#div												[x]
 
-	#o 													[ ]
-	#y													[ ]
-	#no													[ ]
+	#o 													[x]
+	#y													[x]
+	#no													[x]
+
+	#verdadero											[x]
+	#falso												[x]
 
 	leer												[x]
 	leer_cadena											[ ]
@@ -29,11 +32,11 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 	escribir											[x]
 	escribir_cadena										[ ]
 
-	SENTENCIA CONDICIONAL:								[ ]
+	SENTENCIA CONDICIONAL:								[x]
 		si												[x]
-		entonces										[ ]
+		entonces										[x]
 		si_no											[x]
-		fin_si											[ ]
+		fin_si											[x]
 
 	SENTENCIA DE BUCLE MIENTRAS:						[ ]
 		mientras										[x]
@@ -151,12 +154,12 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		escribir_cadena									[ ]
 
 	SENTENCIAS DE CONTROL								[ ]
-		CONDICIONAL SIMPLE								[ ]
+		CONDICIONAL SIMPLE								[x]
 			si condición
 				entonces lista de sentencias
 			fin_si
 
-		CONDICIONAL COMPUESTA							[ ]
+		CONDICIONAL COMPUESTA							[x]
 			si condición
 				entonces lista de sentencias
 				si_no lista de sentencias
