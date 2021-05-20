@@ -113,7 +113,9 @@ namespace lp
 	{
 		// Inherited attributes
 		o << n._name << std::endl;
+
 		o << n._token << std::endl;
+
 		o << n._type << std::endl;
 
 		// Own attribute

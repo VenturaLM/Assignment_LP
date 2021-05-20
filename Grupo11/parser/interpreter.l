@@ -70,7 +70,7 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 
 /* NEW in example 3 */
 /* STATE  */
-%x ERROR
+%x ERROR STRING_ST Q1
 
 /*! \name REGULAR EXPRESSIONS  */
 %%
@@ -79,12 +79,38 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 
 \n      { 
 			/* Line counter */
-           	lineNumber++; 
-	
+			lineNumber++; 
+
 			/* MODIFIED in example 3 */
 			/* COMMENTED in example 5 */
-        	/* return NEWLINE; */
-        }
+			/* return NEWLINE; */
+		}
+
+"'"						{ 
+							/* Se activa el reconocimiento de la cadena */
+							BEGIN STRING_ST;
+						}
+<STRING_ST>"'"			{ /* Fin de la cadena: se vuelve al estado por defecto */
+							BEGIN 0;
+							yytext[yyleng-1]='\0';
+							yylval.string = yytext;
+							return STRING;
+						}
+<STRING_ST>"\\\'"		{yymore();}
+<STRING_ST>.			{yymore();}
+
+"#"         {
+				yymore();
+				BEGIN(Q1);
+			}
+<Q1>[^#]	{
+				yymore();
+			}
+
+<Q1>"#" 	{
+				BEGIN 0;
+			}
+
 
 ";"		{
 			/* NEW in example 5 */
@@ -176,7 +202,7 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 ":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
 
 
-"="	{ return EQUAL; }			/* NEW in final assignment. */
+"="		{ return EQUAL; }			/* NEW in final assignment. */
 
 "<>"	{ return NOT_EQUAL; }		/* NEW in final assignemnt. */
 

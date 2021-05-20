@@ -136,6 +136,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /* Data type YYSTYPE  */
 /* NEW in example 4 */
 %union {
+  char *string;
   char * identifier; 				 /* NEW in example 7 */
   double number;  
   bool logic;						 /* NEW in example 15 */
@@ -184,6 +185,10 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 /* MODIFIED in example 4 */
 %token <number> NUMBER
+/*******************************************/
+
+/*******************************************/
+%token <string> STRING
 /*******************************************/
 
 /*******************************************/
