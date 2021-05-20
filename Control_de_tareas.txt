@@ -23,8 +23,8 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 	#y													[x]
 	#no													[x]
 
-	#verdadero											[x]
-	#falso												[x]
+	verdadero											[x]
+	falso												[x]
 
 	leer												[x]
 	leer_cadena											[ ]

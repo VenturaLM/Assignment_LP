@@ -77,6 +77,8 @@ static struct
 	{"si_no", ELSE}, // NEW in example 17
 	{"fin_si", ENDIF},
 	{"mientras", WHILE}, // NEW in example 17
+	{"hacer", DO},
+	{"fin_mientras", ENDWHILE},
 	{"", 0}};
 
 // NEW in example 13
