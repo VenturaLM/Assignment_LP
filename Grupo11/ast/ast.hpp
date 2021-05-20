@@ -1668,6 +1668,63 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*!	
+  \class   ForStmt
+  \brief   Definition of atributes and methods of ForStmt class
+  \note    ForStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class ForStmt : public Statement
+	{
+	private:
+		std::string _identifier; //identifier
+		ExpNode *_exp1;			 //1º expresion
+		ExpNode *_exp2;			 //2º expresion
+		ExpNode *_stepExp;		 //step expresion
+		Statement *_stmt;		 //!< Statement of the for loop
+
+	public:
+		/*!		
+	\brief Constructor of ForStmt
+	\param condition: ExpNode of the condition
+	\param statement1: First statement
+	\param statement2: Second statement 
+	\post  A new ForStmt is created with the parameters
+*/
+		ForStmt(std::string identifier, ExpNode *exp1, ExpNode *exp2, ExpNode *stepExp, Statement *statement) : _identifier(identifier)
+		{
+			this->_exp1 = exp1;
+			this->_exp2 = exp2;
+			this->_stepExp = stepExp;
+			this->_stmt = statement;
+		}
+
+		ForStmt(std::string identifier, ExpNode *exp1, ExpNode *exp2, Statement *statement) : _identifier(identifier)
+		{
+			this->_exp1 = exp1;
+			this->_exp2 = exp2;
+			this->_stepExp = NULL;
+			this->_stmt = statement;
+		}
+
+		/*!
+	\brief   Print the ForStmt
+	\return  void
+	\sa		 evaluate
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the ForStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
   \class   RepeatStmt
   \brief   Definition of atributes and methods of RepeatStmt class
   \note    RepeatStmt Class publicly inherits from Statement class 
@@ -1681,7 +1738,7 @@ namespace lp
 
 	public:
 		/*!		
-	\brief Constructor of  RepeatStmt
+	\brief Constructor of RepeatStmt
 	\param condition: ExpNode of the condition
 	\param statement: Statement of the body of the loop 
 	\post  A new RepeatStmt is created with the parameters

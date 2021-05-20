@@ -156,7 +156,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block repeat
+%type <st> stmt asgn print read if while block repeat for
 
 %type <prog> program
 
@@ -170,7 +170,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* NEW in example 17: IF, ELSE, WHILE */
-%token PRINT READ IF ELSE WHILE THEN ENDIF DO ENDWHILE REPEAT UNTIL
+%token PRINT READ IF ELSE WHILE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM
 
 /* NEW in example 17 */
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -317,6 +317,11 @@ stmt: SEMICOLON  /* Empty statement: ";" */
  		// Default action
  		// $$ = $1;
  	 }
+	| for
+ 	 {
+ 		// Default action
+ 		// $$ = $1;
+ 	 }
 	/*  NEW in example 17 */
 	| block 
 	 {
@@ -382,6 +387,26 @@ if:	/* Simple conditional statement */
 		// To control the interactive mode
 		control--;
 	}
+;
+
+for:  FOR controlSymbol VARIABLE FROM exp TO exp DO stmt ENDFOR
+		{
+			// Create a new for statement node
+			$$ = new lp::ForStmt($3, $5, $7, $9);
+
+			// To control the interactive mode
+			control--;
+    }
+;
+
+for:  FOR controlSymbol VARIABLE FROM exp TO exp STEP exp DO stmt ENDFOR
+		{
+			// Create a new for statement node
+			$$ = new lp::ForStmt($3, $5, $7, $9, $11);
+
+			// To control the interactive mode
+			control--;
+    }
 ;
 
 repeat:  REPEAT controlSymbol stmt UNTIL cond

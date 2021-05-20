@@ -1319,6 +1319,104 @@ void lp::IfStmt::evaluate()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::ForStmt::print()
+{
+	std::cout << "ForStmt: " << std::endl;
+	// identifier
+	std::cout << this->_identifier;
+	// exp1
+	this->_exp1->print();
+	// exp2
+	this->_exp2->print();
+	// identifier
+	if (this->_stepExp != NULL)
+	{
+		this->_stepExp->print();
+	}
+
+	// Body of the for loop
+	std::cout << "\t";
+	this->_stmt->print();
+
+	std::cout << std::endl;
+}
+
+void lp::ForStmt::evaluate()
+{
+	//check if condition is boolean
+	if (this->_exp1->getType() != NUMBER)
+	{
+		warning("Runtime error: incompatible types for", "first for expresion");
+	}
+	else if (this->_exp2->getType() != NUMBER)
+	{
+		warning("Runtime error: incompatible types for", "second for expresion");
+	}
+	else
+	{
+		lp::Variable *var = (lp::Variable *)table.getSymbol(this->_identifier);
+
+		//check if _identifier is a number
+		if (var->getType() != NUMBER)
+		{
+			table.eraseSymbol(this->_identifier);
+
+			// Insert the variable in the table of symbols as NumericVariable
+			// with the type NUMBER and the value
+			lp::NumericVariable *v = new lp::NumericVariable(this->_identifier, VARIABLE, NUMBER, 0);
+			table.installSymbol(v);
+		}
+
+		int step;
+		//check if step is NULL
+		if (this->_stepExp != NULL)
+		{
+			step = this->_stepExp->evaluateNumber();
+		}
+		else
+		{
+			//if step doesn't exists, put the default value of one
+			step = 1;
+		}
+
+		if (step == 0)
+		{
+			warning("Infinite loop in for: ", "step equals zero");
+		}
+		else if ((this->_exp1->evaluateNumber() > this->_exp2->evaluateNumber()) and step > 0)
+		{
+			warning("Infinite loop in for: ", "'from' greater than 'to' and step is positive");
+		}
+		else if ((this->_exp1->evaluateNumber() < this->_exp2->evaluateNumber()) and step < 0)
+		{
+			warning("Infinite loop in for: ", "'to' greater than 'from' and step is negative");
+		}
+		else
+		{
+			//Numeric variable to modify the identifier
+			lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_identifier);
+			//for loop
+			//from _exp1 to _exp2 with step "step"
+			for (int a = this->_exp1->evaluateNumber(); a <= this->_exp2->evaluateNumber(); a = a + step)
+			{
+				//modify the identifier in every step
+				v->setValue(a);
+				// std::list<Statement *>::iterator i = this->_stmt->begin();
+				// //execute the list of statements
+				// while (i != _stmt->end())
+				// {
+				// 	(*i)->evaluate();
+				// 	i++;
+				// }
+				this->_stmt->evaluate();
+			}
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
 void lp::RepeatStmt::print()
