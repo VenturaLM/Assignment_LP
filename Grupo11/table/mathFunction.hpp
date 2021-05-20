@@ -44,7 +44,6 @@ double Exp(double x);
 */
 double Sqrt(double x);
 
-
 /*!	
 	\brief   Compute the integer part a real number
 	\param	 x: double
@@ -61,8 +60,6 @@ double integer(double x);
 */
 double Random();
 
-
-
 ////////////////////////////////
 
 /*!	
@@ -73,7 +70,5 @@ double Random();
 	\sa		 
 */
 double Atan2(double x, double y);
-
-
 
 #endif

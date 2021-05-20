@@ -18,31 +18,31 @@
 	\namespace lp
 	\brief Name space for the subject Language Processors
 */
-namespace lp{
+namespace lp
+{
 
-/*!	
+	/*!	
   \class NumericConstant
   \brief Definition of atributes and methods of NumericConstant class
   \note  NumericConstant Class publicly inherits from Constant class
 */
-class NumericConstant:public lp::Constant
-{
-/*!		
+	class NumericConstant : public lp::Constant
+	{
+		/*!		
 \name Private atributes of NumericConstant class
 */
 	private:
-		double      _value;   //!< \brief Numeric value of the NumericConstant
+		double _value; //!< \brief Numeric value of the NumericConstant
 
-/*!		
+		/*!		
 \name Public methods of NumericConstant class
 */
 	public:
-
-/*!	
+		/*!	
 	\name Constructors
 */
-		
-/*!		
+
+		/*!		
 	\brief Constructor with arguments with default values
 	\note  Inline function that uses Constant's constructor as members initializer
 	\param name: name of the NumericConstant
@@ -53,13 +53,12 @@ class NumericConstant:public lp::Constant
 	\post  A new NumericConstant is created with the values of the parameters
 	\sa   setName, setValue
 */
-	inline NumericConstant(std::string name="", int token = 0, int type = 0, double value=0.0): 
- 	Constant(name,token,type)
-	{
-		this->setValue(value);
-	}
-		
-/*!		
+		inline NumericConstant(std::string name = "", int token = 0, int type = 0, double value = 0.0) : Constant(name, token, type)
+		{
+			this->setValue(value);
+		}
+
+		/*!		
 	\brief Copy constructor
 	\note  Inline function
 	\param n: object of NumericConstant class
@@ -67,25 +66,24 @@ class NumericConstant:public lp::Constant
 	\post  A new NumericConstant is created with the values of an existent NumericConstant
 	\sa    setName, setValue
 */
-	NumericConstant(const NumericConstant & n)
-	{
-		// Inherited methods
-		this->setName(n.getName());
+		NumericConstant(const NumericConstant &n)
+		{
+			// Inherited methods
+			this->setName(n.getName());
 
-		this->setToken(n.getToken());
+			this->setToken(n.getToken());
 
-		this->setType(n.getType());
-		
-		// Own method
-		this->setValue(n.getValue());
-	}
+			this->setType(n.getType());
 
+			// Own method
+			this->setValue(n.getValue());
+		}
 
-/*!	
+		/*!	
 	\name Observer
 */
-	
-/*!	
+
+		/*!	
 	\brief  Public method that returns the value of the NumericConstant
 	\note   Función inline
 	\pre    None
@@ -93,18 +91,16 @@ class NumericConstant:public lp::Constant
     \return Value of the NumericConstant
 	\sa		getValue
 */
-	inline double getValue() const
-	{
-		return this->_value;
-	}
+		inline double getValue() const
+		{
+			return this->_value;
+		}
 
-
-
-/*!	
+		/*!	
 	\name Modifier
 */
-		
-/*!	
+
+		/*!	
 	\brief   This functions modifies the value of the NumericConstant
 	\note    Inline function
 	\param   value: new value of the NumericConstant
@@ -113,51 +109,45 @@ class NumericConstant:public lp::Constant
 	\return  void
 	\sa 	 setValue
 */
-	inline void setValue(const double & value)
-	{
-	    this->_value = value;
-	}
+		inline void setValue(const double &value)
+		{
+			this->_value = value;
+		}
 
-
-
-		
-/*!	
+		/*!	
 	\name I/O Functions
 */
-		
-/*!		
+
+		/*!		
 	\brief Read a NumericConstant
 	\pre   None
 	\post  The atributes of the NumericConstant are modified with the read values
     \sa    write
 */
-	void read();
+		void read();
 
-	
-/*!		
+		/*!		
 	\brief Write a NumericConstant
 	\pre   None
 	\post  None
     \sa    read
 */
-	void write() const;
+		void write() const;
 
-
-/*!	
+		/*!	
 	\name Operators
 */
-	
-/*!		
+
+		/*!		
 	\brief  Assignment Operator
 	\param  n: objectoof NumericConstant class
 	\post   The atributes of this object are equal to the atributes of the parameter
 	\return Reference to this object
 */
-	NumericConstant &operator=(const NumericConstant &n);
-	
+		NumericConstant &operator=(const NumericConstant &n);
 
- //! \name Friend functions
-/*!		
+		//! \name Friend functions
+		/*!		
 	\brief  Insertion operator
 	\param  i: input stream
 	\param  n: object of NumericConstant class
@@ -165,9 +155,9 @@ class NumericConstant:public lp::Constant
 	\post   The atributes of the NumericConstant are modified with the inserted values from the input stream
 	\return The input stream
 */
-	friend std::istream &operator>>(std::istream &i, NumericConstant &n);
+		friend std::istream &operator>>(std::istream &i, NumericConstant &n);
 
-/*!		
+		/*!		
 	\brief  Extraction operator
 	\param  o: output stream
 	\param  n: object of NumericConstant class
@@ -175,12 +165,12 @@ class NumericConstant:public lp::Constant
 	\post   The atributes of the NumericConstant are written in the output stream
 	\return The output stream
 */
-	friend std::ostream &operator<<(std::ostream &o, NumericConstant const &n);
-	
-// End of NumericConstant class
-};
+		friend std::ostream &operator<<(std::ostream &o, NumericConstant const &n);
 
-// End of name space lp
+		// End of NumericConstant class
+	};
+
+	// End of name space lp
 }
 
 // End of _NUMERICCONSTANT_HPP_

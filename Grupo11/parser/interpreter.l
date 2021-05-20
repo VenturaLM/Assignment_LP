@@ -187,11 +187,11 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 
 "<"		{ return LESS_THAN; }		/* NEW in example 15 */
 
-"!"		{ return NOT; }				/* NEW in example 15 */
+"#no"	{ return NOT; }				/* NEW in example 15 */
 
-"||"	{ return OR; }				/* NEW in example 15 */
+"#o"	{ return OR; }				/* NEW in example 15 */
 
-"&&"	{ return AND; }				/* NEW in example 15 */
+"#y"	{ return AND; }				/* NEW in example 15 */
 
 "{"		{ return LETFCURLYBRACKET; } 	/* NEW in example 17 */
 

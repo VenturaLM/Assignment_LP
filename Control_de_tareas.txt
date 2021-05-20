@@ -10,33 +10,36 @@
 
 
 -----------------------------------------------------------------
-NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[]
+NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[ ]
 -----------------------------------------------------------------
 
 -----------------------------------------------------------------
-PALABRAS RESERVADAS:		[]							CHECK
+PALABRAS RESERVADAS:		[ ]							CHECK
 -----------------------------------------------------------------
-	#mod												[ ]
-	#div												[ ]
+	#mod												[x]
+	#div												[x]
 
-	#o 													[ ]
-	#y													[ ]
-	#no													[ ]
+	#o 													[x]
+	#y													[x]
+	#no													[x]
 
-	leer												[ ]
+	#verdadero											[x]
+	#falso												[x]
+
+	leer												[x]
 	leer_cadena											[ ]
 
-	escribir											[ ]
+	escribir											[x]
 	escribir_cadena										[ ]
 
-	SENTENCIA CONDICIONAL:								[ ]
-		si												[ ]
-		entonces										[ ]
-		si_no											[ ]
-		fin_si											[ ]
+	SENTENCIA CONDICIONAL:								[x]
+		si												[x]
+		entonces										[x]
+		si_no											[x]
+		fin_si											[x]
 
 	SENTENCIA DE BUCLE MIENTRAS:						[ ]
-		mientras										[ ]
+		mientras										[x]
 		hacer											[ ]
 		fin_mientras									[ ]
 
@@ -151,12 +154,12 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		escribir_cadena									[ ]
 
 	SENTENCIAS DE CONTROL								[ ]
-		CONDICIONAL SIMPLE								[ ]
+		CONDICIONAL SIMPLE								[x]
 			si condición
 				entonces lista de sentencias
 			fin_si
 
-		CONDICIONAL COMPUESTA							[ ]
+		CONDICIONAL COMPUESTA							[x]
 			si condición
 				entonces lista de sentencias
 				si_no lista de sentencias
