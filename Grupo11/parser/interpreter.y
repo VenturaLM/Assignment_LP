@@ -156,7 +156,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block
+%type <st> stmt asgn print read if while block repeat
 
 %type <prog> program
 
@@ -170,7 +170,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* NEW in example 17: IF, ELSE, WHILE */
-%token PRINT READ IF ELSE WHILE THEN ENDIF DO ENDWHILE
+%token PRINT READ IF ELSE WHILE THEN ENDIF DO ENDWHILE REPEAT UNTIL
 
 /* NEW in example 17 */
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -202,7 +202,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 %left AND
 
-%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN  EQUAL NOT_EQUAL
+%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL
 
 %left NOT
 /*******************************************************/
@@ -312,6 +312,11 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
+	| repeat
+ 	 {
+ 		// Default action
+ 		// $$ = $1;
+ 	 }
 	/*  NEW in example 17 */
 	| block 
 	 {
@@ -379,6 +384,15 @@ if:	/* Simple conditional statement */
 	}
 ;
 
+repeat:  REPEAT controlSymbol stmt UNTIL cond
+		{
+			// Create a new repeat statement node
+			$$ = new lp::RepeatStmt($5, $3);
+
+			// To control the interactive mode
+			control--;
+    }
+;
 
 	/*  NEW in example 17 */
 while:  WHILE controlSymbol cond DO stmt ENDWHILE

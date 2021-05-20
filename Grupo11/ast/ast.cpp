@@ -1321,6 +1321,33 @@ void lp::IfStmt::evaluate()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
+void lp::RepeatStmt::print()
+{
+	std::cout << "RepeatStmt: " << std::endl;
+	// Condition
+	std::cout << "\t";
+	this->_cond->print();
+
+	// Body of the repeat loop
+	std::cout << "\t";
+	this->_stmt->print();
+
+	std::cout << std::endl;
+}
+
+void lp::RepeatStmt::evaluate()
+{
+	// While the condition is true. the body is run
+	do
+	{
+		this->_stmt->evaluate();
+	} while (this->_cond->evaluateBool() == false);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+// NEW in example 17
+
 void lp::WhileStmt::print()
 {
 	std::cout << "WhileStmt: " << std::endl;

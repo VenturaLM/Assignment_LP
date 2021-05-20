@@ -79,6 +79,8 @@ static struct
 	{"mientras", WHILE}, // NEW in example 17
 	{"hacer", DO},
 	{"fin_mientras", ENDWHILE},
+	{"repetir", REPEAT},
+	{"hasta", UNTIL},
 	{"", 0}};
 
 // NEW in example 13

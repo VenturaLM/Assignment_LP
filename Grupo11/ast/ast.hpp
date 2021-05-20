@@ -1551,6 +1551,49 @@ namespace lp
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
+  \class   RepeatStmt
+  \brief   Definition of atributes and methods of RepeatStmt class
+  \note    RepeatStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class RepeatStmt : public Statement
+	{
+	private:
+		ExpNode *_cond;	  //!< Condicion of the repeat statement
+		Statement *_stmt; //!< Statement of the body of the repeat loop
+
+	public:
+		/*!		
+	\brief Constructor of  RepeatStmt
+	\param condition: ExpNode of the condition
+	\param statement: Statement of the body of the loop 
+	\post  A new RepeatStmt is created with the parameters
+*/
+		RepeatStmt(ExpNode *condition, Statement *statement)
+		{
+			this->_cond = condition;
+			this->_stmt = statement;
+		}
+
+		/*!
+	\brief   Print the RepeatStmt
+	\return  void
+	\sa		 evaluate
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the RepeatStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	// NEW in example 17
 
 	/*!	
