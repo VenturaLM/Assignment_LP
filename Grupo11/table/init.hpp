@@ -81,10 +81,10 @@ static struct
 	{"fin_mientras", ENDWHILE},
 	{"repetir", REPEAT},
 	{"hasta", UNTIL},
-	{"para", UNTIL},
-	{"fin_para", UNTIL},
-	{"desde", UNTIL},
-	{"paso", UNTIL},
+	{"para", FOR},
+	{"fin_para", ENDFOR},
+	{"desde", FROM},
+	{"paso", STEP},
 	{"", 0}};
 
 // NEW in example 13

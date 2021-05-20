@@ -389,7 +389,7 @@ if:	/* Simple conditional statement */
 	}
 ;
 
-for:  FOR controlSymbol VARIABLE FROM exp TO exp DO stmt ENDFOR
+for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmt ENDFOR
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9);
@@ -399,7 +399,7 @@ for:  FOR controlSymbol VARIABLE FROM exp TO exp DO stmt ENDFOR
     }
 ;
 
-for:  FOR controlSymbol VARIABLE FROM exp TO exp STEP exp DO stmt ENDFOR
+for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9, $11);

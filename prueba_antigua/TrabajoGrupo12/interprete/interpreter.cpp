@@ -13,8 +13,6 @@
 	+ New statements: if, while, block
 */
 
-
-
 // New in example 2
 #include <stdio.h>
 #include <string>
@@ -39,12 +37,10 @@ bool interactiveMode; //!< Control the interactive mode of execution of the inte
 /* NEW in example 17 */
 int control = 0; //!< To control the interactive mode in "if" and "while" sentences
 
-
 // New in example 2
-extern FILE * yyin; //!< Standard input device for yylex()
+extern FILE *yyin;	  //!< Standard input device for yylex()
 std::string progname; //!<  Program name
 //
-
 
 //////////////////////////////////////////////
 // NEW in example 6
@@ -56,7 +52,6 @@ std::string progname; //!<  Program name
 // Error recovery functions
 #include "error/error.hpp"
 
-
 lp::AST *root; //!< Root of the abstract syntax tree AST
 /////////////////////////////////////////////
 
@@ -64,7 +59,6 @@ lp::AST *root; //!< Root of the abstract syntax tree AST
 // NEW in example 10
 
 #include "table/init.hpp"
-
 
 /*
  jhmp_buf
@@ -79,8 +73,6 @@ extern jmp_buf begin; //!<  It enables recovery of runtime errors
 #include "table/table.hpp"
 
 lp::Table table; //!< Table of Symbols
-
-
 
 // cout.precision
 #include <iostream>
@@ -98,69 +90,71 @@ lp::Table table; //!< Table of Symbols
 */
 int main(int argc, char *argv[])
 {
- // Option -t needed
- //  yydebug = 1;
+	// Option -t needed
+	//  yydebug = 1;
 
- /*
+	/*
    If the input file exists
       then
            it is set as input device for yylex();
       otherwise
             the input device is the keyboard (stdin)
  */
- if (argc == 2)
- {
-     std::string filename(argv[1]);
-     if (filename.size()<3) {
-       std::cerr << "File's name not valid" << '\n';
-       exit(-1);
-     }
-     if ((filename[filename.size()-1] != 'p') or (filename[filename.size()-2] != '.')) {
-       std::cerr << "The file must have '.p' extension" << '\n';
-       exit(-1);
-     }
-     yyin = fopen(filename.c_str(),"r");
-     if (yyin == NULL) {
-       std::cerr << "Input file does not exist" << '\n';
-       exit(-1);
-     }
+	if (argc == 2)
+	{
+		std::string filename(argv[1]);
+		if (filename.size() < 3)
+		{
+			std::cerr << "File's name not valid" << '\n';
+			exit(-1);
+		}
+		if ((filename[filename.size() - 1] != 'p') or (filename[filename.size() - 2] != '.'))
+		{
+			std::cerr << "The file must have '.p' extension" << '\n';
+			exit(-1);
+		}
+		yyin = fopen(filename.c_str(), "r");
+		if (yyin == NULL)
+		{
+			std::cerr << "Input file does not exist" << '\n';
+			exit(-1);
+		}
 
+		interactiveMode = false;
+	}
+	else
+	{
+		interactiveMode = true;
+	}
 
-	 interactiveMode = false;
- }
-else
- {
-	interactiveMode = true;
- }
-
- // Copy the name of the interpreter
+	// Copy the name of the interpreter
 	progname = argv[0];
 
- /* Number of decimal places */
- std::cout.precision(7);
+	/* Number of decimal places */
+	std::cout.precision(7);
 
- /*
+	/*
    Table of symbols initialization
    Must be written before the recovery sentence: setjmp
  */
-   init(table);
+	init(table);
 
-/* Sets a viable state to continue after a runtime error */
- setjmp(begin);
+	/* Sets a viable state to continue after a runtime error */
+	setjmp(begin);
 
- /* The name of the function to handle floating-point errors is set */
- signal(SIGFPE,fpecatch);
+	/* The name of the function to handle floating-point errors is set */
+	signal(SIGFPE, fpecatch);
 
- // Parser function
-  yyparse();
+	// Parser function
+	yyparse();
 
- if (interactiveMode == false)
- {
-  /* NEW in example 15 */
-  /*   root->print();  */
-       root->evaluate();
- }
+	if (interactiveMode == false)
+	{
+		/* NEW in example 15 */
+		/*   root->print();  */
+		root->evaluate();
+	}
 
- /* End of program */
- return 0;
+	/* End of program */
+	return 0;
 }
