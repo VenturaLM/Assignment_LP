@@ -1,2 +1,4 @@
-dato := Cordoba_2021;
+dato := 7;
+si(dato <> 7) entonces
 escribir(dato);
+fin_si
