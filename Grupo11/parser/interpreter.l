@@ -4,6 +4,8 @@
 */
 %{
 #include <iostream>
+/* uso de strdup */
+#include <string.h>
 
 /*********************/
 /* NEW in example 4 */
@@ -44,9 +46,8 @@ extern lp::Table table; //!< External Table of Symbols
 
 extern int lineNumber; //!< External line counter
 
-/* uso de strdup */
-#include <string.h>
-
+char *string;
+unsigned int stringLength = 0;
 
 %}
 
