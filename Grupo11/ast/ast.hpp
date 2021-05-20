@@ -228,6 +228,53 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	/*!
+  \class StringNode
+  \brief Definition of atributes and methods of StringNode class
+  \note  StringNode Class publicly inherits from ExpNode class
+*/
+	class StringNode : public ExpNode
+	{
+	private:
+		std::string _string; //!< \brief number of the StringNode
+
+	public:
+		/*!
+	\brief Constructor of StringNode
+	\param value: std::string
+	\post  A new StringNode is created with the value of the parameter
+	\note  Inline function
+*/
+		StringNode(std::string value)
+		{
+			this->_string = value;
+		}
+
+		/*!
+	\brief   Get the type of the expression: STRING
+	\return  int
+	\sa		 print
+	*/
+		int getType();
+
+		/*!
+		\brief   Print the expression
+		\return  void
+		\sa		 evaluate()
+	*/
+		void print();
+
+		/*!
+		\brief   Evaluate the expression
+		\return  double
+		\sa		 print
+	*/
+		std::string evaluateString();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*!	
   \class   UnaryOperatorNode
   \brief   Definition of atributes and methods of UnaryOperatorNode class
@@ -457,6 +504,37 @@ namespace lp
 	\return  int
 	\sa		 print()
 	*/
+		int getType();
+	};
+
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!
+	\class   StringOperatorNode
+	\brief   Definition of atributes and methods of StringOperatorNode class
+	\note    StringOperatorNode Class publicly inherits from OperatorNode class
+	\warning Abstract class, because it does not redefine the print method of ExpNode
+	*/
+	class StringOperatorNode : public OperatorNode
+	{
+	public:
+		/*!
+			\brief Constructor of StringOperatorNode uses OperatorNode's constructor as members initializer
+			\param L: pointer to ExpNode
+			\param R: pointer to ExpNode
+			\post  A new StringOperatorNode is created with the parameters
+		*/
+		StringOperatorNode(ExpNode *L, ExpNode *R) : OperatorNode(L, R)
+		{
+			//	Empty
+		}
+
+		/*!
+		\brief   Get the type of the children expressions
+		\return  int
+		\sa		 print()
+		*/
 		int getType();
 	};
 
@@ -775,6 +853,43 @@ namespace lp
 	\sa		 print
 */
 		double evaluateNumber();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!
+	\class   ConcatNode
+	\brief   Definition of atributes and methods of ConcatNode class
+	\note    ConcatNode Class publicly inherits from NumericOperatorNode class and adds its own print and evaluate functions
+	*/
+	class ConcatNode : public StringOperatorNode
+	{
+	public:
+		/*!
+		\brief Constructor of ConcatNode uses NumericOperatorNode's constructor as members initializer
+		\param L: pointer to ExpNode
+		\param R: pointer to ExpNode
+		\post  A new ConcatNode is created with the parameter
+	*/
+		ConcatNode(ExpNode *L, ExpNode *R) : StringOperatorNode(L, R)
+		{
+			// Empty
+		}
+
+		/*!
+		\brief   Print the ConcatNode
+		\return  void
+		\sa		 evaluate()
+	*/
+		void print();
+
+		/*!
+		\brief   Evaluate the ConcatNode
+		\return  string
+		\sa		 print
+	*/
+		std::string evaluateString();
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
