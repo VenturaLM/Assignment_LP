@@ -112,7 +112,7 @@ OPERADORES:				[ ]								CHECK
 		DIVISION /										[x]
 		DIVISION_ENTERA #div							[x]
 		MODULO #mod										[x]
-		POTENCIA **										[ ]
+		POTENCIA **										[x]
 
 	ALFANUMERICOS										[ ]
 		CONCATENACION ||								[ ]
