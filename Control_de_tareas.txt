@@ -10,11 +10,11 @@
 
 
 -----------------------------------------------------------------
-NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[]
+NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[ ]
 -----------------------------------------------------------------
 
 -----------------------------------------------------------------
-PALABRAS RESERVADAS:		[]							CHECK
+PALABRAS RESERVADAS:		[ ]							CHECK
 -----------------------------------------------------------------
 	#mod												[ ]
 	#div												[ ]
@@ -23,20 +23,20 @@ PALABRAS RESERVADAS:		[]							CHECK
 	#y													[ ]
 	#no													[ ]
 
-	leer												[ ]
+	leer												[x]
 	leer_cadena											[ ]
 
-	escribir											[ ]
+	escribir											[x]
 	escribir_cadena										[ ]
 
 	SENTENCIA CONDICIONAL:								[ ]
-		si												[ ]
+		si												[x]
 		entonces										[ ]
-		si_no											[ ]
+		si_no											[x]
 		fin_si											[ ]
 
 	SENTENCIA DE BUCLE MIENTRAS:						[ ]
-		mientras										[ ]
+		mientras										[x]
 		hacer											[ ]
 		fin_mientras									[ ]
 

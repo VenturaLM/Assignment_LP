@@ -23,8 +23,7 @@ void yyerror(std::string errorMessage);
 	\param  errorMessage2: second error message
 	\sa     yyerror, execerror
 */
-void warning(std::string errorMessage1,std::string errorMessage2);
-
+void warning(std::string errorMessage1, std::string errorMessage2);
 
 /*! 
 	\brief  Run time error recovery function
@@ -33,8 +32,7 @@ void warning(std::string errorMessage1,std::string errorMessage2);
 	\param  errorMessage2: second error message
 	\sa     warning, longjmp
 */
-void execerror(std::string errorMessage1,std::string errorMessage2);
-
+void execerror(std::string errorMessage1, std::string errorMessage2);
 
 /*! 
 	\brief  Run time error recovery function
@@ -55,5 +53,4 @@ void fpecatch(int p);
 */
 double errcheck(double d, std::string s);
 
-
-#endif 
+#endif
