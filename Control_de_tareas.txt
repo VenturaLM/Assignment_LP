@@ -142,15 +142,15 @@ OTROS:					[ ]								CHECK
 SENTENCIAS DE CONTROL:	[ ]								CHECK
 -----------------------------------------------------------------
 	ASIGNACION											[ ]
-		IDENTIFICADOR := EXPR NUMÉRICA					[ ]
+		IDENTIFICADOR := EXPR NUMÉRICA					[x]
 		IDENTIFICADOR := EXPR ALFANUMÉRICA				[ ]
 
 	LECTURA												[ ]
-		leer(identificador)								[ ]
+		leer(identificador)								[x]
 		leer_cadena(identificador)						[ ]
 
 	ESCRITURA											[ ]
-		escribir										[ ]
+		escribir										[x]
 		escribir_cadena									[ ]
 
 	SENTENCIAS DE CONTROL								[ ]
