@@ -156,7 +156,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block repeat for
+%type <st> stmt asgn print read if while block repeat for clear place
 
 %type <prog> program
 
@@ -170,7 +170,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* NEW in example 17: IF, ELSE, WHILE */
-%token PRINT READ IF ELSE WHILE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM
+%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM
 
 /* NEW in example 17 */
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -328,6 +328,16 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	 }
+	| clear SEMICOLON
+	 {
+		// Default action
+			// $$ = $1;
+	 }
+	| place SEMICOLON
+	 {
+		// Default action
+			// $$ = $1;
+	 }
 ;
 
 
@@ -459,6 +469,20 @@ asgn:   VARIABLE ASSIGNMENT exp
 	| CONSTANT ASSIGNMENT asgn 
 		{   
  			execerror("Semantic error in multiple assignment: it is not allowed to modify a constant ",$1);
+		}
+;
+
+clear:  CLEAR
+		{
+			// Create a new clear node
+			$$ = new lp::ClearStmt();
+		}
+;
+
+place:  PLACE LPAREN exp COMMA exp RPAREN
+		{
+			// Create a new place node
+			$$ = new lp::PlaceStmt($3, $5);
 		}
 ;
 

@@ -1529,6 +1529,86 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	/*!
+  \class   ClearStmt
+  \brief   Definition of atributes and methods of ClearStmt class
+  \note    ClearStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+  \warning  In this class, print and evaluate functions have the same meaning.
+*/
+	class ClearStmt : public Statement
+	{
+	public:
+		/*!
+	\brief Constructor of ClearStmt
+	\param expression: pointer to ExpNode
+	\post  A new ClearStmt is created with the parameter
+*/
+		ClearStmt()
+		{
+		}
+
+		/*!
+	\brief   Print the ClearStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!
+	\brief   Evaluate the ClearStmt
+	\return  double
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!
+  \class   PlaceStmt
+  \brief   Definition of atributes and methods of PlaceStmt class
+  \note    PlaceStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+  \warning  In this class, print and evaluate functions have the same meaning.
+*/
+	class PlaceStmt : public Statement
+	{
+	private:
+		ExpNode *_left;
+		ExpNode *_right;
+
+	public:
+		/*!
+	\brief Constructor of ClearStmt
+	\param expression: pointer to ExpNode
+	\post  A new PlaceStmt is created with the parameter
+*/
+		PlaceStmt(ExpNode *left, ExpNode *right)
+		{
+			this->_left = left;
+			this->_right = right;
+		}
+
+		/*!
+	\brief   Print the ClearStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!
+	\brief   Evaluate the ClearStmt
+	\return  double
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*!	
   \class   ReadStmt
   \brief   Definition of atributes and methods of ReadStmt class

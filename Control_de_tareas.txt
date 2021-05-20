@@ -47,13 +47,13 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 		repetir											[x]
 		hasta											[x]
 
-	SENTENCIA DE BUCLE PARA:							[ ]
-		para											[ ]
-		desde											[ ]
-		hasta											[ ]
-		paso											[ ]
-		hacer											[ ]
-		fin_para										[ ]
+	SENTENCIA DE BUCLE PARA:							[x]
+		para											[x]
+		desde											[x]
+		hasta											[x]
+		paso											[x]
+		hacer											[x]
+		fin_para										[x]
 
 	SENTENCIA DE SELECCIÓN MÚLTIPLE:					[ ]
 		casos											[ ]
@@ -61,9 +61,9 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 		fin_casos										[ ]
 
 
-	MACROS:												[ ]
-		#borrar											[ ]
-		#lugar											[ ]
+	MACROS:												[!]
+		#borrar											[!]
+		#lugar											[!]
 
 	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[ ]
 	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[ ]
@@ -170,12 +170,12 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 					lista de sentencias
 			fin_mientras
 
-		BUCLE "repetir"									[ ]
+		BUCLE "repetir"									[x]
 			repetir
 				lista de sentencias
 			hasta condición
 
-		BUCLE "para"									[ ]
+		BUCLE "para"									[x]
 			para identificador
 				desde expresión numérica 1
 				hasta expresión numérica 2

@@ -5,7 +5,7 @@ k:=8;
 para k
 	desde 1
 	hasta 10
-	paso k := k + 1;
+	paso 1
 	hacer
     dato := dato + 1;
 fin_para
