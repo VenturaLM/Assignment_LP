@@ -50,10 +50,10 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 	SENTENCIA DE BUCLE PARA:							[ ]
 		para											[ ]
 		desde											[ ]
-		hast											[ ]
+		hasta											[ ]
 		paso											[ ]
 		hacer											[ ]
-		fin_si											[ ]
+		fin_para										[ ]
 
 	SENTENCIA DE SELECCIÓN MÚLTIPLE:					[ ]
 		casos											[ ]
