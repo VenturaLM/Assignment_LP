@@ -6,60 +6,53 @@
 	\version 1.0
 */
 
-
 #include <iostream>
 
 #include "variable.hpp"
-
-
 
 /*
 	Operator
 */
 
 lp::Variable &lp::Variable::operator=(const lp::Variable &v)
+{
+  // Check that is not the current object
+  if (this != &v)
   {
- 	// Check that is not the current object
-		if (this != &v) 
-		{
-			// Inherited methods
-			this->setName(v.getName());
+    // Inherited methods
+    this->setName(v.getName());
 
-			this->setToken(v.getToken());
+    this->setToken(v.getToken());
 
-		    //  Own method
-			this->setType(v.getType());
-		}
-
-    // Return the current object
-		return *this;
+    //  Own method
+    this->setType(v.getType());
   }
 
+  // Return the current object
+  return *this;
+}
 
 /*	
   	I/O Functions
 */
-	
 
 void lp::Variable::read()
 {
   // Inherited attributes
-   std::cout << "Name of the Variable: ";
-   std::cin >> this->_name;
+  std::cout << "Name of the Variable: ";
+  std::cin >> this->_name;
 
-   std::cout << "Token of the Variable: ";
-   std::cin >> this->_token;
-   // The \n character is read 
-   std::cin.ignore(); 
+  std::cout << "Token of the Variable: ";
+  std::cin >> this->_token;
+  // The \n character is read
+  std::cin.ignore();
 
   // Own attribute
-   std::cout << "Type of the Variable: ";
-   std::cin >> this->_type;
-   // The \n character is read 
-   std::cin.ignore(); 
-
+  std::cout << "Type of the Variable: ";
+  std::cin >> this->_type;
+  // The \n character is read
+  std::cin.ignore();
 }
-
 
 void lp::Variable::write() const
 {
@@ -69,7 +62,4 @@ void lp::Variable::write() const
 
   //  Own method
   std::cout << "Token:" << this->getType() << std::endl;
-
 }
-
-
