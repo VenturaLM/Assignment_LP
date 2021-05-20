@@ -124,10 +124,10 @@ OPERADORES:				[ ]								CHECK
 		MAYOR O IGUAL QUE >=							[ ]
 		DISTINTO DE <>									[ ]
 
-	LOGICOS												[ ]
-		DISYUNCIÓN #o									[ ]
-		CONJUNCIÓN #y									[ ]
-		NEGACIÓN   #no									[ ]
+	LOGICOS												[x]
+		DISYUNCIÓN #o									[x]
+		CONJUNCIÓN #y									[x]
+		NEGACIÓN   #no									[x]
 
 -----------------------------------------------------------------
 OTROS:					[ ]								CHECK
