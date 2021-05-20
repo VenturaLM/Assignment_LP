@@ -43,9 +43,9 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 		hacer											[x]
 		fin_mientras									[x]
 
-	SENTENCIA DE BUCLE REPETIR:							[ ]
-		repetir											[ ]
-		hasta											[ ]
+	SENTENCIA DE BUCLE REPETIR:							[x]
+		repetir											[x]
+		hasta											[x]
 
 	SENTENCIA DE BUCLE PARA:							[ ]
 		para											[ ]
