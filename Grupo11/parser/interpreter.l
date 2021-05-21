@@ -103,11 +103,11 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 				yymore();
 				BEGIN(Q1);
 			}
-<Q1>[^#]	{
+<Q1>[^<<]	{
 				yymore();
 			}
 
-<Q1>"#" 	{
+<Q1>">>" 	{
 				BEGIN 0;
 			}
 
