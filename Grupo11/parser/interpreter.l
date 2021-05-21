@@ -54,19 +54,21 @@ unsigned int stringLength = 0;
 
 /*! \name REGULAR DEFINITIONS  */
 
-DIGIT  [0-9] 
+DIGIT	[0-9] 
 
-LETTER [a-zA-Z]
+LETTER	[a-zA-Z]
 
-NUMBER1 {DIGIT}+(\.{DIGIT}+)?
+NUMBER1	{DIGIT}+(\.{DIGIT}+)?
 
-NUMBER2 {DIGIT}(\.{DIGIT}+)?(E[+-]?{DIGIT}+)?
+NUMBER2	{DIGIT}(\.{DIGIT}+)?(E[+-]?{DIGIT}+)?
 
-INVALID_NUMBER {DIGIT}+(\.)(E[+-]?{DIGIT}+)?|{DIGIT}+(\.{DIGIT}+)?(E[+-]?)({DIGIT}+)?|{DIGIT}+(\.)(E[+-]?)
+INVALID_NUMBER	{DIGIT}+(\.)(E[+-]?{DIGIT}+)?|{DIGIT}+(\.{DIGIT}+)?(E[+-]?)({DIGIT}+)?|{DIGIT}+(\.)(E[+-]?)
 
-IDENTIFIER  {LETTER}({LETTER}+|{DIGIT}+|(\_{LETTER})+|(\_{DIGIT})+)*
+IDENTIFIER	{LETTER}({LETTER}+|{DIGIT}+|(\_{LETTER})+|(\_{DIGIT})+)*
 
-INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DIGIT}|\_)?
+INVALID_IDENTIFIER	({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DIGIT}|\_)?
+
+INLINE_COMMENT	@(.)*$
 
 /* NEW in example 3 */
 /* STATE  */
@@ -99,14 +101,13 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 <STRING_ST>"\\\'"		{yymore();}
 <STRING_ST>.			{yymore();}
 
-"#"         {
+"<<" 		{
 				yymore();
 				BEGIN(Q1);
 			}
 <Q1>[^<<]	{
 				yymore();
 			}
-
 <Q1>">>" 	{
 				BEGIN 0;
 			}
@@ -124,15 +125,15 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 		}
 
 {NUMBER1}|{NUMBER2} {
-					  /* MODIFIED in example 4 */
-					  /* Conversion of type and sending of the numerical value to the parser */
-					   yylval.number = atof(yytext); 
+						/* MODIFIED in example 4 */
+						/* Conversion of type and sending of the numerical value to the parser */
+						yylval.number = atof(yytext); 
 
-                       return NUMBER; 
+						return NUMBER; 
                     }
 {INVALID_NUMBER}  	{
-                	warning("Lexical error: Not a valid number.", yytext);
-              	}
+                		warning("Lexical error: Not a valid number.", yytext);
+              		}
 
 
 {IDENTIFIER}   		{
@@ -169,19 +170,21 @@ INVALID_IDENTIFIER ({LETTER}|\_|{DIGIT})({LETTER}+|{DIGIT}+|(\_)+)+({LETTER}|{DI
 							{
 								lp::Symbol	*s = table.getSymbol(identifier);
 
-/*
+								/*
 								std::cout << "lex: "<< s->getName() 
 										  << "token " << s->getToken()
   										  << std::endl; 
-*/
+								*/
 
 								/*  If the identifier is in the table then its token is returned  */
 								return s->getToken();
 							}
                     }
-{INVALID_IDENTIFIER} {
-                  warning("Lexical error: Not a valid identifier.", yytext);
-                }
+{INVALID_IDENTIFIER}	{
+							warning("Lexical error: Not a valid identifier.", yytext);
+                		}
+
+{INLINE_COMMENT} { ; }
 
 "-"		{ return MINUS;  } 			/* NEW in example 3 */
 "+"		{ return PLUS;   } 			/* NEW in example 3 */

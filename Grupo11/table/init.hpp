@@ -87,6 +87,8 @@ static struct
 	{"fin_para", ENDFOR},
 	{"desde", FROM},
 	{"paso", STEP},
+	{"leer_cadena", READSTRING},
+	{"escribir_cadena", WRITESTRING},
 	{"", 0}};
 
 // NEW in example 13

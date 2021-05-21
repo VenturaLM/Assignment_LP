@@ -157,7 +157,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block repeat for clear place
+%type <st> stmt asgn print read if while block repeat for clear place writestring readstring
 
 %type <prog> program
 
@@ -171,7 +171,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* NEW in example 17: IF, ELSE, WHILE */
-%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM
+%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM READSTRING WRITESTRING
 
 /* NEW in example 17 */
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -213,7 +213,9 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************************/
 
 /* MODIFIED in example 3 */
-%left PLUS MINUS 
+%left PLUS MINUS
+
+%left CONCAT
 
 /* MODIFIED in example 5 */
 %left MULTIPLICATION DIVISION MODULO ENTIRE_DIVISION
@@ -228,7 +230,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 
 %%
- //! \name Grammar rules
+//! \name Grammar rules
 
 /* MODIFIED  Grammar in example 16 */
 
@@ -286,63 +288,73 @@ stmtlist:  /* empty: epsilon rule */
  
 
 stmt: SEMICOLON  /* Empty statement: ";" */
-	  {
+	{
 		// Create a new empty statement node
 		$$ = new lp::EmptyStmt(); 
-	  }
+	}
 	| asgn  SEMICOLON
-	  {
+	{
 		// Default action
 		// $$ = $1;
-	  }
+	}
 	| print SEMICOLON
-	  {
+	{
 		// Default action
 		// $$ = $1;
-	  }
+	}
 	| read SEMICOLON
-	  {
+	{
 		// Default action
 		// $$ = $1;
-	  }
+	}
 	/*  NEW in example 17 */
 	| if 
-	 {
+	{
 		// Default action
 		// $$ = $1;
-	 }
+	}
 	/*  NEW in example 17 */
 	| while 
-	 {
+	{
 		// Default action
 		// $$ = $1;
-	 }
+	}
 	| repeat
- 	 {
+ 	{
  		// Default action
  		// $$ = $1;
- 	 }
+ 	}
 	| for
- 	 {
+ 	{
  		// Default action
  		// $$ = $1;
- 	 }
+ 	}
 	/*  NEW in example 17 */
 	| block 
-	 {
+	{
 		// Default action
 		// $$ = $1;
-	 }
+	}
 	| clear SEMICOLON
-	 {
+	{
 		// Default action
-			// $$ = $1;
-	 }
+		// $$ = $1;
+	}
 	| place SEMICOLON
-	 {
+	{
 		// Default action
-			// $$ = $1;
-	 }
+		// $$ = $1;
+	}
+	 writestring SEMICOLON
+	{
+		// Default action
+		// $$ = $1;
+	}
+	| readstring SEMICOLON
+	{
+		// Default action
+		// $$ = $1;
+	}
 ;
 
 
@@ -363,17 +375,17 @@ controlSymbol:  /* Epsilon rule*/
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
 	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmt ENDIF
-    {
+	{
 		// Create a new if statement node
 		lp::ConstantNode *aux = new lp::ConstantNode($4);
-    	$$ = new lp::IfStmt(aux, $7);
+		$$ = new lp::IfStmt(aux, $7);
 
 		// To control the interactive mode
 		control--;
 		warning("Warning: this IF is not necessary:", "constant condition");
 	}
 
-    | IF controlSymbol LPAREN CONSTANT RPAREN THEN stmt ELSE stmt ENDIF
+	| IF controlSymbol LPAREN CONSTANT RPAREN THEN stmt ELSE stmt ENDIF
 	{
 		
 		// Create a new if statement node
@@ -383,7 +395,7 @@ if:	/* Simple conditional statement */
 		// To control the interactive mode
 		control--;
 		warning("Warning: this IF is not necessary:", "constant condition");
-    }
+	}
 
 	| IF controlSymbol cond THEN stmt ENDIF
     {
@@ -509,6 +521,25 @@ read:  READ LPAREN VARIABLE RPAREN
 		{   
  			execerror("Semantic error in \"read statement\": it is not allowed to modify a constant ",$3);
 		}
+;
+
+writestring:  WRITESTRING LPAREN exp RPAREN
+	{
+		// Create a new print node
+		$$ = new lp::WriteStringStmt($3);
+	}
+;
+
+readstring:  READSTRING LPAREN VARIABLE RPAREN
+	{
+		// Create a new read node
+		$$ = new lp::ReadStringStmt($3);
+	}
+
+	| READSTRING LPAREN CONSTANT RPAREN
+	{
+		execerror("Semantic error in \"readstring statement\": it is not allowed to modify a constant ",$3);
+	}
 ;
 
 

@@ -69,6 +69,17 @@ namespace lp
 		{
 			return false;
 		}
+
+		/*!
+		\brief   Evaluate the expression as STRING
+		\warning Virtual function: could be redefined in the heir classes
+		\return  string
+		\sa		 print
+	*/
+		virtual std::string evaluateString()
+		{
+			return "";
+		}
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +134,13 @@ namespace lp
 		\sa		 print
 	*/
 		bool evaluateBool();
+
+		/*!
+		\brief   Evaluate the Variable as STRING
+		\return  string
+		\sa		 print
+	*/
+		std::string evaluateString();
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -479,6 +497,37 @@ namespace lp
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
+	/*!
+  \class   StringOperatorNode
+  \brief   Definition of atributes and methods of StringOperatorNode class
+  \note    StringOperatorNode Class publicly inherits from OperatorNode class
+  \warning Abstract class, because it does not redefine the print method of ExpNode
+*/
+	class StringOperatorNode : public OperatorNode
+	{
+	public:
+		/*!
+		\brief Constructor of StringOperatorNode uses OperatorNode's constructor as members initializer
+		\param L: pointer to ExpNode
+		\param R: pointer to ExpNode
+		\post  A new StringOperatorNode is created with the parameters
+	*/
+		StringOperatorNode(ExpNode *L, ExpNode *R) : OperatorNode(L, R)
+		{
+			//	Empty
+		}
+
+		/*!
+	\brief   Get the type of the children expressions
+	\return  int
+	\sa		 print()
+	*/
+		int getType();
+	};
+
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*!	
   \class   NumericOperatorNode
   \brief   Definition of atributes and methods of NumericOperatorNode class
@@ -504,37 +553,6 @@ namespace lp
 	\return  int
 	\sa		 print()
 	*/
-		int getType();
-	};
-
-	//////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*!
-	\class   StringOperatorNode
-	\brief   Definition of atributes and methods of StringOperatorNode class
-	\note    StringOperatorNode Class publicly inherits from OperatorNode class
-	\warning Abstract class, because it does not redefine the print method of ExpNode
-	*/
-	class StringOperatorNode : public OperatorNode
-	{
-	public:
-		/*!
-			\brief Constructor of StringOperatorNode uses OperatorNode's constructor as members initializer
-			\param L: pointer to ExpNode
-			\param R: pointer to ExpNode
-			\post  A new StringOperatorNode is created with the parameters
-		*/
-		StringOperatorNode(ExpNode *L, ExpNode *R) : OperatorNode(L, R)
-		{
-			//	Empty
-		}
-
-		/*!
-		\brief   Get the type of the children expressions
-		\return  int
-		\sa		 print()
-		*/
 		int getType();
 	};
 
@@ -1923,6 +1941,87 @@ namespace lp
 
 		/*!	
 	\brief   Evaluate the BlockStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!
+  \class   WriteStringStmt
+  \brief   Definition of atributes and methods of WriteStringStmt class
+  \note    WriteStringStmt Class publicly inherits from Statement class
+		   and adds its own print and evaluate functions
+  \warning  In this class, print and evaluate functions have the same meaning.
+*/
+	class WriteStringStmt : public Statement
+	{
+	private:
+		ExpNode *_exp; //!< Expresssion the print statement
+
+	public:
+		/*!
+	\brief Constructor of WriteStringStmt
+	\param expression: pointer to ExpNode
+	\post  A new WriteStringStmt is created with the parameter
+*/
+		WriteStringStmt(ExpNode *expression)
+		{
+			this->_exp = expression;
+		}
+
+		/*!
+	\brief   Print the WriteStringStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!
+	\brief   Evaluate the WriteStringStmt
+	\return  double
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
+  \class   ReadStringStmt
+  \brief   Definition of atributes and methods of ReadStringStmt class
+  \note    ReadStringStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class ReadStringStmt : public Statement
+	{
+	private:
+		std::string _id; //!< Name of the ReadStringStmt
+
+	public:
+		/*!		
+	\brief Constructor of ReadStringStmt
+	\param id: string, name of the variable of the ReadStringStmt
+	\post  A new ReadStringStmt is created with the parameter
+*/
+		ReadStringStmt(std::string id)
+		{
+			this->_id = id;
+		}
+
+		/*!
+	\brief   Print the ReadStringStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the ReadStringStmt
 	\return  void
 	\sa		 print
 */
