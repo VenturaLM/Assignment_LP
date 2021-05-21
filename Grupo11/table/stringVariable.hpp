@@ -6,15 +6,15 @@
 	\version 1.0
 */
 
-#ifndef _StringVariable_HPP_
-#define _StringVariable_HPP_
+#ifndef _STRINGVARIABLE_HPP_
+#define _STRINGVARIABLE_HPP_
 
 #include <string>
 #include <iostream>
 
 #include "variable.hpp"
 
-/*!
+/*! 
 	\namespace lp
 	\brief Name space for the subject Language Processors
 */
@@ -64,12 +64,13 @@ namespace lp
 	\param n: object of StringVariable class
 	\pre   None
 	\post  A new StringVariable is created with the values of an existent StringVariable
-	\sa    setName(), setValue()
+	\sa    setName, setValue
 */
 		StringVariable(const StringVariable &n)
 		{
 			// Inherited methods
 			this->setName(n.getName());
+
 			this->setToken(n.getToken());
 
 			this->setType(n.getType());
@@ -78,11 +79,11 @@ namespace lp
 			this->setValue(n.getValue());
 		}
 
-		/*!
+		/*! 
 	\name Observer
 */
 
-		/*!
+		/*! 
 	\brief  Public method that returns the value of the StringVariable
 	\note   Función inline
 	\pre    None
@@ -95,11 +96,11 @@ namespace lp
 			return this->_value;
 		}
 
-		/*!
+		/*! 
 	\name Modifier
 */
 
-		/*!
+		/*! 
 	\brief   This functions modifies the value of the StringVariable
 	\note    Inline function
 	\param   value: new value of the StringVariable
@@ -113,7 +114,7 @@ namespace lp
 			this->_value = value;
 		}
 
-		/*!
+		/*! 
 	\name I/O Functions
 */
 
@@ -172,5 +173,5 @@ namespace lp
 	// End of name space lp
 }
 
-// End of _StringVariable_HPP_
+// End of _STRINGVARIABLE_HPP_
 #endif

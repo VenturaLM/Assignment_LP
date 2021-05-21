@@ -58,7 +58,9 @@ lp::StringVariable &lp::StringVariable::operator=(const lp::StringVariable &n)
 	{
 		// Inherited methods
 		this->setName(n.getName());
+
 		this->setToken(n.getToken());
+
 		this->setType(n.getType());
 
 		// Own method
@@ -69,7 +71,7 @@ lp::StringVariable &lp::StringVariable::operator=(const lp::StringVariable &n)
 	return *this;
 }
 
-/*!
+/*! 
 	\namespace lp
 	\brief Name space for the subject Language Processors
 */
@@ -80,18 +82,16 @@ namespace lp
 	{
 		// Inherited attributes
 		i >> n._name;
-		i >> n._token;
 
+		i >> n._token;
 		// The \n character is read
 		i.ignore();
 
 		i >> n._type;
-
 		// The \n character is read
 		i.ignore();
 
 		i >> n._token;
-
 		// The \n character is read
 		i.ignore();
 
@@ -104,6 +104,21 @@ namespace lp
 		i.ignore();
 
 		////////////////////////////////////
+
+		/* Alternative way using an auxiliar string 
+
+  std::string auxiliar;
+
+  std::getline(i,auxiliar);
+  n._token = atof(auxiliar.c_str());
+
+  std::getline(i,auxiliar);
+  n._type = atof(auxiliar.c_str());
+
+  std::getline(i,auxiliar);
+  n._value = atof(auxiliar.c_str());
+
+*/
 
 		// The input stream is returned
 		return i;
