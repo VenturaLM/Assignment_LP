@@ -200,6 +200,10 @@ INLINE_COMMENT	@(.)*$
 
 "#mod"  { return MODULO; }		/* NEW in final assignment. */
 
+"#borrar" { return CLEAR; }
+
+"#lugar" { return PLACE; }
+
 "**"	{ return POWER; }		/* NEW in final assignment. */
 
 ":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */

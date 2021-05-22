@@ -345,7 +345,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	}
-	 writestring SEMICOLON
+	| writestring SEMICOLON
 	{
 		// Default action
 		// $$ = $1;
