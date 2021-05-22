@@ -82,8 +82,6 @@ static struct
 	{"repetir", REPEAT},
 	{"hasta", UNTIL},
 	{"para", FOR},
-	{"borrar", CLEAR},
-	{"lugar", PLACE},
 	{"fin_para", ENDFOR},
 	{"desde", FROM},
 	{"paso", STEP},
