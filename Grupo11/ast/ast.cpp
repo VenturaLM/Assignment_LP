@@ -1542,49 +1542,6 @@ void lp::WriteStringStmt::evaluate()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-void lp::ReadStringStmt::print()
-{
-	std::cout << "ReadStringStmt: " << std::endl;
-	std::cout << " readstring (" << this->_id << ")";
-	std::cout << std::endl;
-}
-
-void lp::ReadStringStmt::evaluate()
-{
-	fflush(stdin);
-	char stringAux[100];
-	std::cin.getline(stringAux, 100);
-	fflush(stdin);
-	/* Get the identifier in the table of symbols as Variable */
-	lp::Variable *var = (lp::Variable *)table.getSymbol(this->_id);
-
-	// Check if the type of the variable is NUMBER
-	if (var->getType() == STRING)
-	{
-		/* Get the identifier in the table of symbols as NumericVariable */
-		lp::StringVariable *n = (lp::StringVariable *)table.getSymbol(this->_id);
-
-		/* Assignment the read value to the identifier */
-		n->setValue(stringAux);
-	}
-	// The type of variable is not NUMBER
-	else
-	{
-		// Delete $1 from the table of symbols as Variable
-		table.eraseSymbol(this->_id);
-
-		// Insert $1 in the table of symbols as NumericVariable
-		// with the type NUMBER and the read value
-		lp::StringVariable *n = new lp::StringVariable(this->_id,
-													   VARIABLE, STRING, stringAux);
-
-		table.installSymbol(n);
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////
-
 void lp::ForStmt::print()
 {
 	std::cout << "ForStmt: " << std::endl;
@@ -1780,5 +1737,48 @@ void lp::AST::evaluate()
 	for (stmtIter = stmts->begin(); stmtIter != stmts->end(); stmtIter++)
 	{
 		(*stmtIter)->evaluate();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::ReadStringStmt::print()
+{
+	std::cout << "ReadStringStmt: " << std::endl;
+	std::cout << " readstring (" << this->_id << ")";
+	std::cout << std::endl;
+}
+
+void lp::ReadStringStmt::evaluate()
+{
+	fflush(stdin);
+	char stringAux[100];
+	std::cin.getline(stringAux, 100);
+	fflush(stdin);
+	/* Get the identifier in the table of symbols as Variable */
+	lp::Variable *var = (lp::Variable *)table.getSymbol(this->_id);
+
+	// Check if the type of the variable is NUMBER
+	if (var->getType() == STRING)
+	{
+		/* Get the identifier in the table of symbols as NumericVariable */
+		lp::StringVariable *n = (lp::StringVariable *)table.getSymbol(this->_id);
+
+		/* Assignment the read value to the identifier */
+		n->setValue(stringAux);
+	}
+	// The type of variable is not NUMBER
+	else
+	{
+		// Delete $1 from the table of symbols as Variable
+		table.eraseSymbol(this->_id);
+
+		// Insert $1 in the table of symbols as NumericVariable
+		// with the type NUMBER and the read value
+		lp::StringVariable *n = new lp::StringVariable(this->_id,
+													   VARIABLE, STRING, stringAux);
+
+		table.installSymbol(n);
 	}
 }
