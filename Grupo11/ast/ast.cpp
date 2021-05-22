@@ -1624,13 +1624,6 @@ void lp::ForStmt::evaluate()
 			{
 				//modify the identifier in every step
 				v->setValue(a);
-				// std::list<Statement *>::iterator i = this->_stmt->begin();
-				// //execute the list of statements
-				// while (i != _stmt->end())
-				// {
-				// 	(*i)->evaluate();
-				// 	i++;
-				// }
 				this->_stmt->evaluate();
 			}
 		}
