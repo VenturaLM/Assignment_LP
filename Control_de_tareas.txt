@@ -61,9 +61,9 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 		fin_casos										[ ]
 
 
-	MACROS:												[!]
-		#borrar											[!]
-		#lugar											[!]
+	MACROS:												[#]
+		#borrar											[#]
+		#lugar											[#]
 
 	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[ ]
 	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[ ]
@@ -114,7 +114,7 @@ OPERADORES:				[ ]								CHECK
 		MODULO #mod										[x]
 		POTENCIA **										[x]
 
-	ALFANUMERICOS										[ ]
+	ALFANUMERICOS										[x]
 		CONCATENACION ||								[x]
 
 	RELACIONALES NÚMEROS Y CADENAS						[ ] Faltan cadenas solo.
@@ -147,11 +147,11 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 
 	LECTURA												[ ]
 		leer(identificador)								[x]
-		leer_cadena(identificador)						[ ]
+		leer_cadena(identificador)						[x]
 
 	ESCRITURA											[ ]
 		escribir										[x]
-		escribir_cadena									[ ]
+		escribir_cadena									[x]
 
 	SENTENCIAS DE CONTROL								[ ]
 		CONDICIONAL SIMPLE								[x]
@@ -194,10 +194,10 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 
 
 -----------------------------------------------------------------
-COMANDOS ESPECIALES:	[ ]								CHECK
+COMANDOS ESPECIALES:	[x]								CHECK
 -----------------------------------------------------------------
-	#borrar												[ ]
-	#lugar(expresión numérica 1, expresión numérica 2)	[ ]
+	#borrar												[x]
+	#lugar(expresión numérica 1, expresión numérica 2)	[x]
 
 -----------------------------------------------------------------
 OBSERVACIONES:			[ ]								CHECK
