@@ -345,7 +345,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	}
-	 writestring SEMICOLON
+	| writestring SEMICOLON
 	{
 		// Default action
 		// $$ = $1;
@@ -542,6 +542,15 @@ readstring:  READSTRING LPAREN VARIABLE RPAREN
 	}
 ;
 
+exp: STRING
+    {
+      $$ = new lp::StringNode($1);
+    }
+  |   exp CONCAT exp
+    {
+      $$ = new lp::ConcatNode($1, $3);
+    }
+;
 
 exp:	NUMBER 
 		{ 

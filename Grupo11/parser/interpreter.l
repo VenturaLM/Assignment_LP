@@ -227,6 +227,8 @@ INLINE_COMMENT	@(.)*$
 
 "}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
 
+"||"  	{ return CONCAT; }
+
 
 
 ^# { /* The interpreter finishes when the symbol # is written at the beginning of the line */
