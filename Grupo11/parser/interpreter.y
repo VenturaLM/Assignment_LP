@@ -235,8 +235,8 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /* MODIFIED  Grammar in example 16 */
 
 program : stmtlist
-		  { 
-		    // Create a new AST
+		{ 
+			// Create a new AST
 			$$ = new lp::AST($1); 
 
 			// Assign the AST to the root
@@ -244,29 +244,29 @@ program : stmtlist
 
 			// End of parsing
 			//	return 1;
-		  }
+		}
 ;
 
 stmtlist:  /* empty: epsilon rule */
-		  { 
-			// create a empty list of statements
-			$$ = new std::list<lp::Statement *>(); 
-		  }  
+			{ 
+				// create a empty list of statements
+				$$ = new std::list<lp::Statement *>(); 
+			}  
 
-        | stmtlist stmt 
-		  { 
+		|	stmtlist stmt 
+			{ 
 			// copy up the list and add the stmt to it
 			$$ = $1;
 			$$->push_back($2);
 
 			// Control the interative mode of execution of the interpreter
 			if (interactiveMode == true && control == 0)
- 			{
+			{
 				for(std::list<lp::Statement *>::iterator it = $$->begin(); 
 						it != $$->end(); 
 						it++)
 				{
-                    (*it)->print(); 
+					(*it)->print(); 
 					(*it)->evaluate();
 					
 				}
@@ -276,14 +276,14 @@ stmtlist:  /* empty: epsilon rule */
 			}
 		}
 
-    | stmtlist error 
-      { 
-			 // just copy up the stmtlist when an error occurs
-			 $$ = $1;
+		|	stmtlist error 
+			{ 
+					// just copy up the stmtlist when an error occurs
+					$$ = $1;
 
-			 // The previous look-ahead token ought to be discarded with `yyclearin;'
-			 yyclearin; 
-       } 
+					// The previous look-ahead token ought to be discarded with `yyclearin;'
+					yyclearin; 
+			} 
 ;
  
 
@@ -379,6 +379,7 @@ controlSymbol:  /* Epsilon rule*/
 
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
+	/* Comentado porque provoca un conflicto de desplazamiento reduccion.
 	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmt ENDIF
 	{
 		// Create a new if statement node
@@ -400,9 +401,9 @@ if:	/* Simple conditional statement */
 		// To control the interactive mode
 		control--;
 		warning("Warning: this IF is not necessary:", "constant condition");
-	}
+	} | */
 
-	| IF controlSymbol cond THEN stmt ENDIF
+	IF controlSymbol cond THEN stmt ENDIF
     {
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5);
@@ -438,14 +439,14 @@ for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
 
 			// To control the interactive mode
 			control--;
-    }
+    	}
 ;
 
-switch:  SWITCH controlSymbol stmt
+switch:  SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWITCH
 		{
+			//TODO
 			// Create a new switch statement node
 			//$$ = new lp::ForStmt($3, $5, $7, $9);
-			//SWITCH CASE DEFAULT ENDSWITCH COLON
 			// To control the interactive mode
 			//control--;
     	}
@@ -458,7 +459,7 @@ repeat:  REPEAT controlSymbol stmt UNTIL cond
 
 			// To control the interactive mode
 			control--;
-    }
+    	}
 ;
 
 	/*  NEW in example 17 */
@@ -469,7 +470,7 @@ while:  WHILE controlSymbol cond DO stmt ENDWHILE
 
 			// To control the interactive mode
 			control--;
-    }
+    	}
 ;
 
 	/*  NEW in example 17 */
@@ -486,19 +487,19 @@ asgn:   VARIABLE ASSIGNMENT exp
 			$$ = new lp::AssignmentStmt($1, $3);
 		}
 
-	|  VARIABLE ASSIGNMENT asgn 
+	|	VARIABLE ASSIGNMENT asgn 
 		{ 
 			// Create a new assignment node
 			$$ = new lp::AssignmentStmt($1, (lp::AssignmentStmt *) $3);
 		}
 
-	   /* NEW in example 11 */ 
-	| CONSTANT ASSIGNMENT exp 
+	 	/* NEW in example 11 */ 
+	|	CONSTANT ASSIGNMENT exp 
 		{   
  			execerror("Semantic error in assignment: it is not allowed to modify a constant ", $1);
 		}
-	   /* NEW in example 11 */ 
-	| CONSTANT ASSIGNMENT asgn 
+	 	/* NEW in example 11 */ 
+	|	CONSTANT ASSIGNMENT asgn 
 		{   
  			execerror("Semantic error in multiple assignment: it is not allowed to modify a constant ",$1);
 		}
@@ -531,8 +532,8 @@ read:  READ LPAREN VARIABLE RPAREN
 			 $$ = new lp::ReadStmt($3);
 		}
 
-  	  /* NEW rule in example 11 */
-	| READ LPAREN CONSTANT RPAREN  
+  	 	/* NEW rule in example 11 */
+	|	READ LPAREN CONSTANT RPAREN  
 		{   
  			execerror("Semantic error in \"read statement\": it is not allowed to modify a constant ",$3);
 		}
@@ -550,8 +551,7 @@ readstring:  READSTRING LPAREN VARIABLE RPAREN
 		// Create a new read node
 		$$ = new lp::ReadStringStmt($3);
 	}
-
-	| READSTRING LPAREN CONSTANT RPAREN
+	|	READSTRING LPAREN CONSTANT RPAREN
 	{
 		execerror("Semantic error in \"readstring statement\": it is not allowed to modify a constant ",$3);
 	}
@@ -561,7 +561,7 @@ exp: STRING
     {
       $$ = new lp::StringNode($1);
     }
-  |   exp CONCAT exp
+	|	exp CONCAT exp
     {
       $$ = new lp::ConcatNode($1, $3);
     }
@@ -634,13 +634,13 @@ exp:	NUMBER
   		  $$ = new lp::PowerNode($1, $3);
 		}
 
-	 | VARIABLE
+	| VARIABLE
 		{
 		  // Create a new variable node	
 		  $$ = new lp::VariableNode($1);
 		}
 
-	 | CONSTANT
+	| CONSTANT
 		{
 		  // Create a new constant node	
 		  $$ = new lp::ConstantNode($1);
@@ -751,36 +751,36 @@ exp:	NUMBER
 
 
 listOfExp: 
-			/* Empty list of numeric expressions */
-			{
-			    // Create a new list STL
-				$$ = new std::list<lp::ExpNode *>(); 
-			}
+		/* Empty list of numeric expressions */
+		{
+			// Create a new list STL
+			$$ = new std::list<lp::ExpNode *>(); 
+		}
 
 	|  exp restOfListOfExp
-			{
-				$$ = $2;
+		{
+			$$ = $2;
 
-				// Insert the expression in the list of expressions
-				$$->push_front($1);
-			}
+			// Insert the expression in the list of expressions
+			$$->push_front($1);
+		}
 ;
 
 restOfListOfExp:
-			/* Empty list of numeric expressions */
-			{
-			    // Create a new list STL
-				$$ = new std::list<lp::ExpNode *>(); 
-			}
+		/* Empty list of numeric expressions */
+		{
+			// Create a new list STL
+			$$ = new std::list<lp::ExpNode *>(); 
+		}
 
-		|	COMMA exp restOfListOfExp
-			{
-				// Get the list of expressions
-				$$ = $3;
+	|	COMMA exp restOfListOfExp
+		{
+			// Get the list of expressions
+			$$ = $3;
 
-				// Insert the expression in the list of expressions
-				$$->push_front($2);
-			}
+			// Insert the expression in the list of expressions
+			$$->push_front($2);
+		}
 ;
 
 

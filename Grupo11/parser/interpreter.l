@@ -137,97 +137,101 @@ INLINE_COMMENT	@(.)*$
 
 
 {IDENTIFIER}   		{
-						 /* NEW in example 7 */
-						 std::string identifier(yytext);
+						/* NEW in example 7 */
+						std::string identifier(yytext);
+						for (size_t i = 0; i < identifier.size(); i++)
+						{
+							identifier[i] = tolower(identifier[i]);
+						}
 
 						/* 
-                          strdup() function returns a pointer to a new string 
-                          which  is a duplicate of the string yytext
-                        */
-						  yylval.identifier =  strdup(yytext); 
+						strdup() function returns a pointer to a new string 
+						which  is a duplicate of the string yytext
+						*/
+						yylval.identifier = strdup(yytext);
 
-						/* If the identifier is not in the table of symbols then it is inserted */	
-						 if (table.lookupSymbol(identifier) == false)
-							{
-								/* 
-								 The identifier is inserted into the symbol table 
-								 as undefined Variable with value 0.0
-								*/
-								lp::NumericVariable *n = new lp::NumericVariable(identifier,VARIABLE,UNDEFINED,0.0);
+						/* If the identifier is not in the table of symbols then it is inserted */
+						if (table.lookupSymbol(identifier) == false)
+						{
+							/* 
+							The identifier is inserted into the symbol table 
+							as undefined Variable with value 0.0
+							*/
+							lp::NumericVariable *n = new lp::NumericVariable(identifier, VARIABLE, UNDEFINED, 0.0);
 
-								/* A pointer to the new NumericVariable is inserted into the table of symbols */
-								table.installSymbol(n);
+							/* A pointer to the new NumericVariable is inserted into the table of symbols */
+							table.installSymbol(n);
 
-								return VARIABLE;
-							}
+							return VARIABLE;
+						}
 
 						/* MODIFIED in example 11 */
 						/* 
 							If the identifier is in the table of symbols then its token is returned 
-								The identifier can be a variable or a numeric constant
+							The identifier can be a variable or a numeric constant
 						*/
-						else 
-							{
-								lp::Symbol	*s = table.getSymbol(identifier);
+						else
+						{
+							lp::Symbol *s = table.getSymbol(identifier);
 
-								/*
-								std::cout << "lex: "<< s->getName() 
-										  << "token " << s->getToken()
-  										  << std::endl; 
-								*/
+							/*
+							std::cout << "lex: "<< s->getName() 
+									  << "token " << s->getToken()
+									  << std::endl; 
+							*/
 
-								/*  If the identifier is in the table then its token is returned  */
-								return s->getToken();
-							}
-                    }
+							/*  If the identifier is in the table then its token is returned  */
+							return s->getToken();
+						}
+					}
 {INVALID_IDENTIFIER}	{
 							warning("Lexical error: Not a valid identifier.", yytext);
                 		}
 
 {INLINE_COMMENT} { ; }
 
-"-"		{ return MINUS;  } 			/* NEW in example 3 */
-"+"		{ return PLUS;   } 			/* NEW in example 3 */
+"-"		{ return MINUS;  }				/* NEW in example 3 */
+"+"		{ return PLUS;   }				/* NEW in example 3 */
 
-"*"	    { return MULTIPLICATION; } 	/* NEW in example 3 */
-"/"     { return DIVISION; } 		/* NEW in example 3 */
-"#div"  { return ENTIRE_DIVISION; }	/* NEW in final assignment. */
+"*"	    { return MULTIPLICATION; }		/* NEW in example 3 */
+"/"     { return DIVISION; }			/* NEW in example 3 */
+"#div"  { return ENTIRE_DIVISION; }		/* NEW in final assignment. */
 
-"("     { return LPAREN; } 			/* NEW in example 3 */
-")"	    { return RPAREN; } 			/* NEW in example 3 */
+"("     { return LPAREN; }				/* NEW in example 3 */
+")"	    { return RPAREN; }				/* NEW in example 3 */
 
 
 
-"#mod"  { return MODULO; }		/* NEW in final assignment. */
+"#mod"  { return MODULO; }				/* NEW in final assignment. */
 
 "#borrar" { return CLEAR; }
 
 "#lugar" { return PLACE; }
 
-"**"	{ return POWER; }		/* NEW in final assignment. */
+"**"	{ return POWER; }				/* NEW in final assignment. */
 
-":=" 	{ return ASSIGNMENT; }		/* NEW in example 7 */
+":=" 	{ return ASSIGNMENT; }			/* NEW in example 7 */
 
 
-"="		{ return EQUAL; }			/* NEW in final assignment. */
+"="		{ return EQUAL; }				/* NEW in final assignment. */
 
-"<>"	{ return NOT_EQUAL; }		/* NEW in final assignemnt. */
+"<>"	{ return NOT_EQUAL; }			/* NEW in final assignemnt. */
 
-">="	{ return GREATER_OR_EQUAL; }/* NEW in example 15 */
+">="	{ return GREATER_OR_EQUAL; }	/* NEW in example 15 */
 
-"<="	{ return LESS_OR_EQUAL; }	/* NEW in example 15 */
+"<="	{ return LESS_OR_EQUAL; }		/* NEW in example 15 */
 
-">"		{ return GREATER_THAN; }	/* NEW in example 15 */
+">"		{ return GREATER_THAN; }		/* NEW in example 15 */
 
-"<"		{ return LESS_THAN; }		/* NEW in example 15 */
+"<"		{ return LESS_THAN; }			/* NEW in example 15 */
 
-"#no"	{ return NOT; }				/* NEW in example 15 */
+"#no"	{ return NOT; }					/* NEW in example 15 */
 
-"#o"	{ return OR; }				/* NEW in example 15 */
+"#o"	{ return OR; }					/* NEW in example 15 */
 
-"#y"	{ return AND; }				/* NEW in example 15 */
+"#y"	{ return AND; }					/* NEW in example 15 */
 
-"{"		{ return LETFCURLYBRACKET; } 	/* NEW in example 17 */
+"{"		{ return LETFCURLYBRACKET; }	/* NEW in example 17 */
 
 "}"		{ return RIGHTCURLYBRACKET; }	/* NEW in example 17 */
 
@@ -236,24 +240,24 @@ INLINE_COMMENT	@(.)*$
 
 
 ^# { /* The interpreter finishes when the symbol # is written at the beginning of the line */
-	// std::cout << CLEAR_SCREEN; 
+	//	std::cout << CLEAR_SCREEN; 
 	//  PLACE(24,10);
-  	  std::cout <<  BIYELLOW;
-   	  std::cout <<  ">>>>>>> End of program <<<<<<<";
- 	  std::cout << std::endl;
-   	  std::cout << RESET;
-	 // PLACE(25,1);
+		std::cout <<  BIYELLOW;
+		std::cout <<  ">>>>>>> End of program <<<<<<<";
+		std::cout << std::endl;
+		std::cout << RESET;
+	// PLACE(25,1);
 
   	  return 0;
 	}
 
 <<EOF>> { /* The interpreter finishes when finds the end of file character */
 		/*  PLACE(24,10);
-	  	  std::cout <<  BICYAN;
-	   	  std::cout <<  ">>>>>>> End of file <<<<<<<";
-	 	  std::cout << std::endl;
-	   	  std::cout << RESET;
-		  PLACE(25,1);
+			std::cout <<  BICYAN;
+			std::cout <<  ">>>>>>> End of file <<<<<<<";
+			std::cout << std::endl;
+			std::cout << RESET;
+			PLACE(25,1);
 		*/
 	  	  return 0;
 	}

@@ -55,17 +55,17 @@ PALABRAS RESERVADAS:		[ ]							CHECK
 		hacer											[x]
 		fin_para										[x]
 
-	SENTENCIA DE SELECCIÓN MÚLTIPLE:					[ ]
-		casos											[ ]
-		valor											[ ]
-		fin_casos										[ ]
+	SENTENCIA DE SELECCIÓN MÚLTIPLE:					[x]
+		casos											[x]
+		valor											[x]
+		fin_casos										[x]
 
 
-	MACROS:												[#]
-		#borrar											[#]
-		#lugar											[#]
+	MACROS:												[x]
+		#borrar											[x]
+		#lugar											[x]
 
-	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[ ]
+	NO SE DISTINGUE ENTRE MAYÚSCULAS Y MINÚSCULAS		[x]
 	LAS PALABRAS RESERVADAS NO SON IDENTIFICADORES		[ ]
 
 
@@ -130,7 +130,7 @@ OPERADORES:				[ ]								CHECK
 		NEGACIÓN   #no									[x]
 
 -----------------------------------------------------------------
-OTROS:					[ ]								CHECK
+OTROS:					[x]								CHECK
 -----------------------------------------------------------------
 	COMENTARIOS											[x]
 		VARIAS LINEAS: DELIMITADORES <<	.... >>			[x]
@@ -145,11 +145,11 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		IDENTIFICADOR := EXPR NUMÉRICA					[x]
 		IDENTIFICADOR := EXPR ALFANUMÉRICA				[ ]
 
-	LECTURA												[ ]
+	LECTURA												[x]
 		leer(identificador)								[x]
 		leer_cadena(identificador)						[x]
 
-	ESCRITURA											[ ]
+	ESCRITURA											[x]
 		escribir										[x]
 		escribir_cadena									[x]
 
@@ -228,10 +228,10 @@ CONTROL DE ERRORES:		[ ]								CHECK
 		OTROS											[ ]
 
 -----------------------------------------------------------------
-MODOS DE EJECUCIÓN:		[ ]								CHECK
+MODOS DE EJECUCIÓN:		[x]								CHECK
 -----------------------------------------------------------------
-	INTERACTIVO											[ ]
-	DESDE FICHERO										[ ]
+	INTERACTIVO											[x]
+	DESDE FICHERO										[x]
 
 -----------------------------------------------------------------
 OPCIONALES:				[ ]								CHECK
