@@ -1,8 +1,0 @@
-<< Esto es un comentario
-de doble linea.
->>
-@ Esto es un comentario de una linea.
-
-leer_cadena(dato);
-leer_cadena(dato2);
-escribir_cadena(dato || dato2);

@@ -1,20 +1,6 @@
-a = b = PI;
+leer_cadena(dato);
+leer_cadena(dato2);
 
-print a;
-print b;
-print PI;
-
-dato = 2;
-print dato;
-
-dato = true;
-print dato;
-
-
-dato = 9;
-print dato;
-
-
-print 3> PI;
-
-
+si(dato < dato2) entonces
+escribir(hola);
+fin_si
