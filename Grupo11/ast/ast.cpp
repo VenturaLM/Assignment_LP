@@ -789,11 +789,33 @@ bool lp::GreaterThanNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		double leftNumber, rightNumber;
-		leftNumber = this->_left->evaluateNumber();
-		rightNumber = this->_right->evaluateNumber();
+		if (this->_left->getType() == NUMBER and this->_right->getType() == NUMBER)
+		{
+			double leftNumber, rightNumber;
+			leftNumber = this->_left->evaluateNumber();
+			rightNumber = this->_right->evaluateNumber();
 
-		result = (leftNumber > rightNumber);
+			result = (leftNumber > rightNumber);
+		}
+		
+		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
+		{
+			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
+
+			for (unsigned i = 0; i < leftString.size(); i++)
+				leftString[i] = tolower(leftString[i]);
+
+			for (unsigned i = 0; i < rightString.size(); i++)
+				rightString[i] = tolower(rightString[i]);
+
+
+			int cmp = strcmp(leftString.c_str(), rightString.c_str());
+
+			if (cmp < 0)
+				result = true;
+			else
+				result = false;
+		}
 	}
 	else
 	{
@@ -821,11 +843,32 @@ bool lp::GreaterOrEqualNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		double leftNumber, rightNumber;
-		leftNumber = this->_left->evaluateNumber();
-		rightNumber = this->_right->evaluateNumber();
+		if (this->_left->getType() == NUMBER and this->_right->getType() == NUMBER)
+		{
+			double leftNumber, rightNumber;
+			leftNumber = this->_left->evaluateNumber();
+			rightNumber = this->_right->evaluateNumber();
 
-		result = (leftNumber >= rightNumber);
+			result = (leftNumber >= rightNumber);
+		}
+
+		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
+		{
+			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
+
+			for (unsigned i = 0; i < leftString.size(); i++)
+				leftString[i] = tolower(leftString[i]);
+
+			for (unsigned i = 0; i < rightString.size(); i++)
+				rightString[i] = tolower(rightString[i]);
+
+			int cmp = strcmp(leftString.c_str(), rightString.c_str());
+
+			if (cmp <= 0)
+				result = true;
+			else
+				result = false;
+		}
 	}
 	else
 	{
@@ -853,11 +896,32 @@ bool lp::LessThanNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		double leftNumber, rightNumber;
-		leftNumber = this->_left->evaluateNumber();
-		rightNumber = this->_right->evaluateNumber();
+		if (this->_left->getType() == NUMBER and this->_right->getType() == NUMBER)
+		{
+			double leftNumber, rightNumber;
+			leftNumber = this->_left->evaluateNumber();
+			rightNumber = this->_right->evaluateNumber();
 
-		result = (leftNumber < rightNumber);
+			result = (leftNumber < rightNumber);
+		}
+		
+		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
+		{
+			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
+
+			for (unsigned i = 0; i < leftString.size(); i++)
+				leftString[i] = tolower(leftString[i]);
+
+			for (unsigned i = 0; i < rightString.size(); i++)
+				rightString[i] = tolower(rightString[i]);
+
+			int cmp = strcmp(leftString.c_str(), rightString.c_str());
+
+			if (cmp > 0)
+				result = true;
+			else
+				result = false;
+		}
 	}
 	else
 	{
@@ -885,11 +949,32 @@ bool lp::LessOrEqualNode::evaluateBool()
 
 	if (this->getType() == BOOL)
 	{
-		double leftNumber, rightNumber;
-		leftNumber = this->_left->evaluateNumber();
-		rightNumber = this->_right->evaluateNumber();
+		if (this->_left->getType() == NUMBER and this->_right->getType() == NUMBER)
+		{
+			double leftNumber, rightNumber;
+			leftNumber = this->_left->evaluateNumber();
+			rightNumber = this->_right->evaluateNumber();
 
-		result = (leftNumber <= rightNumber);
+			result = (leftNumber <= rightNumber);
+		}
+		
+		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
+		{
+			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
+
+			for (unsigned i = 0; i < leftString.size(); i++)
+				leftString[i] = tolower(leftString[i]);
+
+			for (unsigned i = 0; i < rightString.size(); i++)
+				rightString[i] = tolower(rightString[i]);
+
+			int cmp = strcmp(leftString.c_str(), rightString.c_str());
+
+			if (cmp >= 0)
+				result = true;
+			else
+				result = false;
+		}
 	}
 	else
 	{
@@ -935,6 +1020,25 @@ bool lp::EqualNode::evaluateBool()
 			//
 			result = (leftBoolean == rightBoolean);
 			break;
+		case STRING:
+		{
+			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
+
+			for (unsigned i = 0; i < leftString.size(); i++)
+				leftString[i] = tolower(leftString[i]);
+
+			for (unsigned i = 0; i < rightString.size(); i++)
+				rightString[i] = tolower(rightString[i]);
+
+			int cmp = strcmp(leftString.c_str(), rightString.c_str());
+
+			if (cmp == 0)
+				result = true;
+			else
+				result = false;
+
+			break;
+		}
 		default:
 			warning("Runtime error: incompatible types of parameters for ",
 					"Equal operator");
@@ -985,6 +1089,25 @@ bool lp::NotEqualNode::evaluateBool()
 			//
 			result = (leftBoolean != rightBoolean);
 			break;
+		case STRING:
+		{
+			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
+
+			for (unsigned i = 0; i < leftString.size(); i++)
+				leftString[i] = tolower(leftString[i]);
+
+			for (unsigned i = 0; i < rightString.size(); i++)
+				rightString[i] = tolower(rightString[i]);
+
+			int cmp = strcmp(leftString.c_str(), rightString.c_str());
+
+			if (cmp != 0)
+				result = true;
+			else
+				result = false;
+
+			break;
+		}
 		default:
 			warning("Runtime error: incompatible types of parameters for ",
 					"Not Equal operator");

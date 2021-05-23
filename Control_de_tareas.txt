@@ -117,12 +117,13 @@ OPERADORES:				[ ]								CHECK
 	ALFANUMERICOS										[x]
 		CONCATENACION ||								[x]
 
-	RELACIONALES NÚMEROS Y CADENAS						[ ] Faltan cadenas solo; ver listas de ifs, si es que son posibles.
-		MENOR QUE <										[!]
-		MENOR O IGUAL QUE <=							[!]
-		MAYOR QUE >										[!]
-		MAYOR O IGUAL QUE >=							[!]
-		DISTINTO DE <>									[!]
+	RELACIONALES NÚMEROS Y CADENAS						[x]
+		MENOR QUE <										[x]
+		MENOR O IGUAL QUE <=							[x]
+		MAYOR QUE >										[x]
+		MAYOR O IGUAL QUE >=							[x]
+		DISTINTO DE <>									[x]
+		IGUAL QUE =										[x]
 
 	LOGICOS												[x]
 		DISYUNCIÓN #o									[x]
