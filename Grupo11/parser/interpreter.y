@@ -157,7 +157,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block repeat for clear place writestring readstring
+%type <st> stmt asgn print read if while block repeat for clear place writestring readstring switch
 
 %type <prog> program
 
@@ -171,7 +171,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* NEW in example 17: IF, ELSE, WHILE */
-%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM READSTRING WRITESTRING
+%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM READSTRING WRITESTRING SWITCH CASE DEFAULT ENDSWITCH COLON
 
 /* NEW in example 17 */
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
@@ -329,6 +329,11 @@ stmt: SEMICOLON  /* Empty statement: ";" */
  		// Default action
  		// $$ = $1;
  	}
+	| switch
+ 	{
+ 		// Default action
+ 		// $$ = $1;
+ 	}
 	/*  NEW in example 17 */
 	| block 
 	{
@@ -434,6 +439,16 @@ for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
 			// To control the interactive mode
 			control--;
     }
+;
+
+switch:  SWITCH controlSymbol stmt
+		{
+			// Create a new switch statement node
+			//$$ = new lp::ForStmt($3, $5, $7, $9);
+			//SWITCH CASE DEFAULT ENDSWITCH COLON
+			// To control the interactive mode
+			//control--;
+    	}
 ;
 
 repeat:  REPEAT controlSymbol stmt UNTIL cond
