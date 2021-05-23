@@ -16,6 +16,7 @@
 // New in example 2
 #include <stdio.h>
 #include <string>
+#include <unistd.h>
 //
 
 /////////////////////////////
@@ -101,15 +102,36 @@ int main(int argc, char *argv[])
       otherwise
             the input device is the keyboard (stdin)
  	*/
-	if (argc == 2)
-	{
-		yyin = fopen(argv[1], "r");
 
-		interactiveMode = false;
-	}
-	else
+	switch (argc)
 	{
+	case 1:
 		interactiveMode = true;
+		break;
+
+	case 2:
+		std::string file = argv[1];
+		if ((file[file.size() - 2] != '.') or (file[file.size() - 1] != 'e'))
+		{
+			std::cerr << "[ERROR] The extension of the file \'" << file << "\' is not \'.e\'"
+					  << std::endl;
+			exit(-1);
+		}
+		else if (file.size() < 3)
+		{
+			std::cerr << "[ERROR] The name \'" << file << "\' of the file is invalid"
+					  << std::endl;
+			exit(-1);
+		}
+		else if (access(argv[1], F_OK) != 0)
+		{
+			std::cerr << "[ERROR] The file \'" << file << "\' does not exist"
+					  << std::endl;
+			exit(-1);
+		}
+
+		yyin = fopen(argv[1], "r");
+		interactiveMode = false;
 	}
 
 	// Copy the name of the interpreter

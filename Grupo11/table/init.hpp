@@ -87,6 +87,10 @@ static struct
 	{"paso", STEP},
 	{"leer_cadena", READSTRING},
 	{"escribir_cadena", WRITESTRING},
+	{"casos", SWITCH},
+	{"valor", CASE},
+	{"fin_casos", ENDSWITCH},
+	{"defecto", DEFAULT},
 	{"", 0}};
 
 // NEW in example 13

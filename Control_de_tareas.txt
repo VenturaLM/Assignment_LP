@@ -224,8 +224,8 @@ CONTROL DE ERRORES:		[ ]								CHECK
 
 	DE EJECUCIÓN										[ ]
 		SENTENCIA "PARA" CON BUCLE INFINITO				[ ]
-		FICHERO INEXISTENTE								[ ]
-		FICHERO CON EXTENSIÓN INCORRECTA				[ ]
+		FICHERO INEXISTENTE								[x]
+		FICHERO CON EXTENSIÓN INCORRECTA				[x]
 		OTROS											[ ]
 
 -----------------------------------------------------------------
