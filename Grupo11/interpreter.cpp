@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
            it is set as input device for yylex();
       otherwise
             the input device is the keyboard (stdin)
- */
+ 	*/
 	if (argc == 2)
 	{
 		yyin = fopen(argv[1], "r");
