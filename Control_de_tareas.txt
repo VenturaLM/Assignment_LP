@@ -90,15 +90,15 @@ NÚMERO:					[x]								CHECK
 	TODOS SON TRATADOS COMO NÚMERO						[x]
 
 -----------------------------------------------------------------
-CADENA:					[ ]								CHECK
+CADENA:					[x]								CHECK
 -----------------------------------------------------------------
 	CARACTERES DELIMITADOS POR COMILLAS SIMPLES 		[x]
-	INCLUYE COMILLA SIMPLE CON \ \'						[ ]
+	INCLUYE COMILLA SIMPLE CON \ \'						[x]
 	COMILLAS EXTERIORES NO SON PARTE DE LA CADENA 		[x]
 
 	INTERPRETA \n y t									[x]
 -----------------------------------------------------------------
-OPERADORES:				[ ]								CHECK
+OPERADORES:				[x]								CHECK
 -----------------------------------------------------------------
 	NUMERICOS											[x]
 		ASIGNACION :=									[x]
@@ -142,9 +142,9 @@ OTROS:					[x]								CHECK
 -----------------------------------------------------------------
 SENTENCIAS DE CONTROL:	[ ]								CHECK
 -----------------------------------------------------------------
-	ASIGNACION											[ ]
+	ASIGNACION											[x]
 		IDENTIFICADOR := EXPR NUMÉRICA					[x]
-		IDENTIFICADOR := EXPR ALFANUMÉRICA				[ ]
+		IDENTIFICADOR := EXPR ALFANUMÉRICA				[x]
 
 	LECTURA												[x]
 		leer(identificador)								[x]
@@ -201,9 +201,9 @@ COMANDOS ESPECIALES:	[x]								CHECK
 	#lugar(expresión numérica 1, expresión numérica 2)	[x]
 
 -----------------------------------------------------------------
-OBSERVACIONES:			[ ]								CHECK
+OBSERVACIONES:			[x]								CHECK
 -----------------------------------------------------------------
-	CAMBIO DE TIPO DINÁMICO								[ ]
+	CAMBIO DE TIPO DINÁMICO								[x]
 
 
 -----------------------------------------------------------------
