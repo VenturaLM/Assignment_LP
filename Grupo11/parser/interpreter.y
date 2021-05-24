@@ -720,13 +720,13 @@ exp:	NUMBER
 
 	|	exp PLUS_EQUAL exp 
 	 	{
-		  // Create a new "less or equal" node	
- 			//$$ = new lp::PlusEqualNode($1,$3);
+		  // Create a new "plus equal" node	
+ 			$$ = new lp::EqualNode($1,$3);
 		}
 
 	|	exp MINUS_EQUAL exp 
 	 	{
-		  // Create a new "less or equal" node	
+		  // Create a new "minus equal" node	
  			//$$ = new lp::MinusEqualNode($1,$3);
 		}
 

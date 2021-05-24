@@ -422,6 +422,35 @@ double lp::PlusNode::evaluateNumber()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+void lp::PlusEqualNode::print()
+{
+	std::cout << "PlusEqualNode: +" << std::endl;
+	std::cout << "\t";
+	this->_left->print();
+	std::cout << "\t";
+	this->_right->print();
+}
+
+double lp::PlusEqualNode::evaluateNumber()
+{
+	double result = 0.0;
+
+	// Ckeck the types of the expressions
+	if (this->getType() == NUMBER)
+	{
+		result = this->_left->evaluateNumber() + this->_right->evaluateNumber();
+	}
+	else
+	{
+		warning("Runtime error: the expressions are not numeric for ", "Plus");
+	}
+
+	return result;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 void lp::MinusNode::print()
 {
 	std::cout << "MinusNode: -" << std::endl;
@@ -1809,7 +1838,7 @@ void lp::RepeatStmt::evaluate()
 
 		for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
 			(*stmtIter)->evaluate();
-			
+
 	} while (this->_cond->evaluateBool() == false);
 }
 

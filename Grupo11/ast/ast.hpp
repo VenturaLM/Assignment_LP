@@ -1269,6 +1269,44 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*!	
+  \class   PlusEqualNode
+  \brief   Definition of atributes and methods of PlusEqualNode class
+  \note    PlusEqualNode Class publicly inherits from NumericOperatorNode class 
+		   and adds its own print and evaluate functions
+*/
+	class PlusEqualNode : public NumericOperatorNode
+	{
+	public:
+		/*!		
+	\brief Constructor of PlusEqualNode uses NumericOperatorNode's constructor as members initializer
+	\param L: pointer to ExpNode
+	\param R: pointer to ExpNode
+	\post  A new PlusEqualNode is created with the parameter
+*/
+		PlusEqualNode(ExpNode *L, ExpNode *R) : NumericOperatorNode(L, R)
+		{
+			// Empty
+		}
+
+		/*!
+	\brief   Print the PlusEqualNode
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the PlusEqualNode
+	\return  double
+	\sa		 print
+*/
+		double evaluateNumber();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
   \class   NotEqualNode
   \brief   Definition of atributes and methods of NotEqualNode class
   \note    NotEqualNode Class publicly inherits from RelationalOperatorNode class 

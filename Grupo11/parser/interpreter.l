@@ -208,8 +208,11 @@ INLINE_COMMENT	@(.)*$
 
 "**"	{ return POWER; }				/* NEW in final assignment. */
 
-":=" 	{ return ASSIGNMENT; }			/* NEW in example 7 */
+"+:="	{ return PLUS_EQUAL; }
 
+"-:="	{ return MINUS_EQUAL; }
+
+":=" 	{ return ASSIGNMENT; }			/* NEW in example 7 */
 
 "="		{ return EQUAL; }				/* NEW in final assignment. */
 
@@ -218,10 +221,6 @@ INLINE_COMMENT	@(.)*$
 ">="	{ return GREATER_OR_EQUAL; }	/* NEW in example 15 */
 
 "<="	{ return LESS_OR_EQUAL; }		/* NEW in example 15 */
-
-"+:="	{ return PLUS_EQUAL; }
-
-"-:="	{ return MINUS_EQUAL; }
 
 ">"		{ return GREATER_THAN; }		/* NEW in example 15 */
 
