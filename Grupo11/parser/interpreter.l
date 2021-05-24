@@ -200,8 +200,6 @@ INLINE_COMMENT	@(.)*$
 "("     { return LPAREN; }				/* NEW in example 3 */
 ")"	    { return RPAREN; }				/* NEW in example 3 */
 
-
-
 "#mod"  { return MODULO; }				/* NEW in final assignment. */
 
 "#borrar" { return CLEAR; }
@@ -238,18 +236,6 @@ INLINE_COMMENT	@(.)*$
 "||"  	{ return CONCAT; }
 
 
-
-^# { /* The interpreter finishes when the symbol # is written at the beginning of the line */
-	//	std::cout << CLEAR_SCREEN; 
-	//  PLACE(24,10);
-		std::cout <<  BIYELLOW;
-		std::cout <<  ">>>>>>> End of program <<<<<<<";
-		std::cout << std::endl;
-		std::cout << RESET;
-	// PLACE(25,1);
-
-  	  return 0;
-	}
 
 <<EOF>> { /* The interpreter finishes when finds the end of file character */
 		/*  PLACE(24,10);
