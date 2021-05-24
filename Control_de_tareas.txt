@@ -168,7 +168,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 
 		BUCLE "mientras"								[x]
 			mientras condición hacer
-					lista de sentencias
+				lista de sentencias
 			fin_mientras
 
 		BUCLE "repetir"									[x]

@@ -136,15 +136,15 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /* Data type YYSTYPE  */
 /* NEW in example 4 */
 %union {
-  char *string;
-  char * identifier; 				 /* NEW in example 7 */
-  double number;  
-  bool logic;						 /* NEW in example 15 */
-  lp::ExpNode *expNode;  			 /* NEW in example 16 */
-  std::list<lp::ExpNode *>  *parameters;    // New in example 16; NOTE: #include<list> must be in interpreter.l, init.cpp, interpreter.cpp
-  std::list<lp::Statement *> *stmts; /* NEW in example 16 */
-  lp::Statement *st;				 /* NEW in example 16 */
-  lp::AST *prog;					 /* NEW in example 16 */
+	char *string;
+	char * identifier; 				 /* NEW in example 7 */
+	double number;  
+	bool logic;						 /* NEW in example 15 */
+	lp::ExpNode *expNode;  			 /* NEW in example 16 */
+	std::list<lp::ExpNode *>  *parameters;    // New in example 16; NOTE: #include<list> must be in interpreter.l, init.cpp, interpreter.cpp
+	std::list<lp::Statement *> *stmts; /* NEW in example 16 */
+	lp::Statement *st;				 /* NEW in example 16 */
+	lp::AST *prog;					 /* NEW in example 16 */
 }
 
 /* Type of the non-terminal symbols */
@@ -247,7 +247,7 @@ program : stmtlist
 		}
 ;
 
-stmtlist:  /* empty: epsilon rule */
+stmtlist:	/* empty: epsilon rule */
 			{ 
 				// create a empty list of statements
 				$$ = new std::list<lp::Statement *>(); 
@@ -255,34 +255,34 @@ stmtlist:  /* empty: epsilon rule */
 
 		|	stmtlist stmt 
 			{ 
-			// copy up the list and add the stmt to it
-			$$ = $1;
-			$$->push_back($2);
+				// copy up the list and add the stmt to it
+				$$ = $1;
+				$$->push_back($2);
 
-			// Control the interative mode of execution of the interpreter
-			if (interactiveMode == true && control == 0)
-			{
-				for(std::list<lp::Statement *>::iterator it = $$->begin(); 
-						it != $$->end(); 
-						it++)
+				// Control the interative mode of execution of the interpreter
+				if (interactiveMode == true && control == 0)
 				{
-					(*it)->print(); 
-					(*it)->evaluate();
-					
-				}
+					for(std::list<lp::Statement *>::iterator it = $$->begin(); 
+							it != $$->end(); 
+							it++)
+					{
+						(*it)->print(); 
+						(*it)->evaluate();
+						
+					}
 
-				// Delete the AST code, because it has already run in the interactive mode.
-				$$->clear();
+					// Delete the AST code, because it has already run in the interactive mode.
+					$$->clear();
+				}
 			}
-		}
 
 		|	stmtlist error 
 			{ 
-					// just copy up the stmtlist when an error occurs
-					$$ = $1;
+				// just copy up the stmtlist when an error occurs
+				$$ = $1;
 
-					// The previous look-ahead token ought to be discarded with `yyclearin;'
-					yyclearin; 
+				// The previous look-ahead token ought to be discarded with `yyclearin;'
+				yyclearin; 
 			} 
 ;
  
@@ -363,7 +363,7 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 ;
 
 
-block: LETFCURLYBRACKET stmtlist RIGHTCURLYBRACKET  
+block:	LETFCURLYBRACKET stmtlist RIGHTCURLYBRACKET  
 		{
 			// Create a new block of statements node
 			$$ = new lp::BlockStmt($2); 
@@ -422,17 +422,17 @@ if:	/* Simple conditional statement */
 	}
 ;
 
-for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmt ENDFOR
+for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmt ENDFOR
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9);
 
 			// To control the interactive mode
 			control--;
-    }
+		}
 ;
 
-for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
+for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9, $11);
@@ -442,7 +442,7 @@ for:  FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
     	}
 ;
 
-switch:  SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWITCH
+switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWITCH
 		{
 			//TODO
 			// Create a new switch statement node
@@ -452,7 +452,7 @@ switch:  SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSW
     	}
 ;
 
-repeat:  REPEAT controlSymbol stmt UNTIL cond
+repeat:	REPEAT controlSymbol stmt UNTIL cond
 		{
 			// Create a new repeat statement node
 			$$ = new lp::RepeatStmt($5, $3);
@@ -463,7 +463,7 @@ repeat:  REPEAT controlSymbol stmt UNTIL cond
 ;
 
 	/*  NEW in example 17 */
-while:  WHILE controlSymbol cond DO stmt ENDWHILE
+while:	WHILE controlSymbol cond DO stmt ENDWHILE
 		{
 			// Create a new while statement node
 			$$ = new lp::WhileStmt($3, $5);
@@ -474,14 +474,14 @@ while:  WHILE controlSymbol cond DO stmt ENDWHILE
 ;
 
 	/*  NEW in example 17 */
-cond: 	LPAREN exp RPAREN
+cond:	LPAREN exp RPAREN
 		{ 
 			$$ = $2;
 		}
 ;
 
 
-asgn:   VARIABLE ASSIGNMENT exp 
+asgn:	VARIABLE ASSIGNMENT exp 
 		{ 
 			// Create a new assignment node
 			$$ = new lp::AssignmentStmt($1, $3);
@@ -505,28 +505,28 @@ asgn:   VARIABLE ASSIGNMENT exp
 		}
 ;
 
-clear:  CLEAR
+clear:	CLEAR
 		{
 			// Create a new clear node
 			$$ = new lp::ClearStmt();
 		}
 ;
 
-place:  PLACE LPAREN exp COMMA exp RPAREN
+place:	PLACE LPAREN exp COMMA exp RPAREN
 		{
 			// Create a new place node
 			$$ = new lp::PlaceStmt($3, $5);
 		}
 ;
 
-print:  PRINT exp 
+print:	PRINT exp 
 		{
 			// Create a new print node
 			 $$ = new lp::PrintStmt($2);
 		}
 ;	
 
-read:  READ LPAREN VARIABLE RPAREN  
+read:	READ LPAREN VARIABLE RPAREN  
 		{
 			// Create a new read node
 			 $$ = new lp::ReadStmt($3);
@@ -539,32 +539,32 @@ read:  READ LPAREN VARIABLE RPAREN
 		}
 ;
 
-writestring:  WRITESTRING LPAREN exp RPAREN
-	{
-		// Create a new print node
-		$$ = new lp::WriteStringStmt($3);
-	}
+writestring:	WRITESTRING LPAREN exp RPAREN
+				{
+					// Create a new print node
+					$$ = new lp::WriteStringStmt($3);
+				}
 ;
 
-readstring:  READSTRING LPAREN VARIABLE RPAREN
-	{
-		// Create a new read node
-		$$ = new lp::ReadStringStmt($3);
-	}
-	|	READSTRING LPAREN CONSTANT RPAREN
-	{
-		execerror("Semantic error in \"readstring statement\": it is not allowed to modify a constant ",$3);
-	}
+readstring:	READSTRING LPAREN VARIABLE RPAREN
+			{
+				// Create a new read node
+				$$ = new lp::ReadStringStmt($3);
+			}
+			|	READSTRING LPAREN CONSTANT RPAREN
+			{
+				execerror("Semantic error in \"readstring statement\": it is not allowed to modify a constant ",$3);
+			}
 ;
 
-exp: STRING
-    {
-      $$ = new lp::StringNode($1);
-    }
+exp:	STRING
+		{
+		$$ = new lp::StringNode($1);
+		}
 	|	exp CONCAT exp
-    {
-      $$ = new lp::ConcatNode($1, $3);
-    }
+		{
+		$$ = new lp::ConcatNode($1, $3);
+		}
 ;
 
 exp:	NUMBER 
@@ -634,20 +634,20 @@ exp:	NUMBER
   		  $$ = new lp::PowerNode($1, $3);
 		}
 
-	| VARIABLE
+	|	VARIABLE
 		{
 		  // Create a new variable node	
 		  $$ = new lp::VariableNode($1);
 		}
 
-	| CONSTANT
+	|	CONSTANT
 		{
 		  // Create a new constant node	
 		  $$ = new lp::ConstantNode($1);
 
 		}
 
-	| BUILTIN LPAREN listOfExp RPAREN
+	|	BUILTIN LPAREN listOfExp RPAREN
 		{
 			// Get the identifier in the table of symbols as Builtin
 			lp::Builtin *f= (lp::Builtin *) table.getSymbol($1);
@@ -694,55 +694,55 @@ exp:	NUMBER
 	  			 execerror("Syntax error: incompatible number of parameters for function", $1);
 		}
 
-	| exp GREATER_THAN exp
+	|	exp GREATER_THAN exp
 	 	{
 		  // Create a new "greater than" node	
  			$$ = new lp::GreaterThanNode($1,$3);
 		}
 
-	| exp GREATER_OR_EQUAL exp 
+	|	exp GREATER_OR_EQUAL exp 
 	 	{
 		  // Create a new "greater or equal" node	
  			$$ = new lp::GreaterOrEqualNode($1,$3);
 		}
 
-	| exp LESS_THAN exp 	
+	|	exp LESS_THAN exp 	
 	 	{
 		  // Create a new "less than" node	
  			$$ = new lp::LessThanNode($1,$3);
 		}
 
-	| exp LESS_OR_EQUAL exp 
+	|	exp LESS_OR_EQUAL exp 
 	 	{
 		  // Create a new "less or equal" node	
  			$$ = new lp::LessOrEqualNode($1,$3);
 		}
 
-	| exp EQUAL exp 	
+	|	exp EQUAL exp 	
 	 	{
 		  // Create a new "equal" node	
  			$$ = new lp::EqualNode($1,$3);
 		}
 
-    | exp NOT_EQUAL exp 	
+    |	exp NOT_EQUAL exp 	
 	 	{
 		  // Create a new "not equal" node	
  			$$ = new lp::NotEqualNode($1,$3);
 		}
 
-    | exp AND exp 
+    |	exp AND exp 
 	 	{
 		  // Create a new "logic and" node	
  			$$ = new lp::AndNode($1,$3);
 		}
 
-    | exp OR exp 
+    |	exp OR exp 
 	 	{
 		  // Create a new "logic or" node	
  			$$ = new lp::OrNode($1,$3);
 		}
 
-    | NOT exp 
+    |	NOT exp 
 	 	{
 		  // Create a new "logic negation" node	
  			$$ = new lp::NotNode($2);
@@ -757,7 +757,7 @@ listOfExp:
 			$$ = new std::list<lp::ExpNode *>(); 
 		}
 
-	|  exp restOfListOfExp
+	|	exp restOfListOfExp
 		{
 			$$ = $2;
 
@@ -783,9 +783,4 @@ restOfListOfExp:
 		}
 ;
 
-
-
 %%
-
-
-
