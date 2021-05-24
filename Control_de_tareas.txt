@@ -210,13 +210,13 @@ OBSERVACIONES:			[x]								CHECK
 CONTROL DE ERRORES:		[ ]								CHECK
 -----------------------------------------------------------------
 	LÉXICOS
-		IDENTIFICADOR MAL ESCRITO 						[ ]
+		IDENTIFICADOR MAL ESCRITO 						[x]
 		SIMBOLO NO PERMITIDO							[ ]
 		OTROS											[ ]
 
 	SINTÁCTICOS											[ ]
-		SENTENCIA DE CONTROL MAL ESCRITA				[ ]
-		SENTENCIA CON ARGUMENTOS INCOMPATIBLES			[ ]
+		SENTENCIA DE CONTROL MAL ESCRITA				[x]
+		SENTENCIA CON ARGUMENTOS INCOMPATIBLES			[x]
 		OTROS											[ ]
 
 	SEMÁNTICOS											[ ]
