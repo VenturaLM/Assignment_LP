@@ -1716,8 +1716,8 @@ namespace lp
 	{
 	private:
 		ExpNode *_cond;	   //!< Condicion of the if statement
-		Statement *_stmt1; //!< Statement of the consequent
-		Statement *_stmt2; //!< Statement of the alternative
+		std::list<Statement *> *_stmt1; //!< Statement of the consequent
+		std::list<Statement *> *_stmt2; //!< Statement of the alternative
 
 	public:
 		/*!		
@@ -1726,11 +1726,10 @@ namespace lp
 	\param statement1: Statement of the consequent
 	\post  A new IfStmt is created with the parameters
 */
-		IfStmt(ExpNode *condition, Statement *statement1)
+		IfStmt(ExpNode *condition, std::list<Statement *> *statement1)
 		{
 			this->_cond = condition;
 			this->_stmt1 = statement1;
-			this->_stmt2 = NULL;
 		}
 
 		/*!		
@@ -1740,9 +1739,22 @@ namespace lp
 	\param statement2: Statement of the alternative
 	\post  A new IfStmt is created with the parameters
 */
-		IfStmt(ExpNode *condition, Statement *statement1, Statement *statement2)
+		IfStmt(ExpNode *condition, std::list<Statement *> *statement1, std::list<Statement *> *statement2)
 		{
 			this->_cond = condition;
+			this->_stmt1 = statement1;
+			this->_stmt2 = statement2;
+		}
+
+		IfStmt(ConstantNode *condition, std::list<Statement *> *statement1)
+		{
+			this->_cond = (ExpNode *)condition;
+			this->_stmt1 = statement1;
+		}
+
+		IfStmt(ConstantNode *condition, std::list<Statement *> *statement1, std::list<Statement *> *statement2)
+		{
+			this->_cond = (ExpNode *)condition;
 			this->_stmt1 = statement1;
 			this->_stmt2 = statement2;
 		}
@@ -1832,7 +1844,7 @@ namespace lp
 	{
 	private:
 		ExpNode *_cond;	  //!< Condicion of the repeat statement
-		Statement *_stmt; //!< Statement of the body of the repeat loop
+		std::list<Statement *> *_stmt; //!< Statement of the body of the repeat loop
 
 	public:
 		/*!		
@@ -1841,7 +1853,7 @@ namespace lp
 	\param statement: Statement of the body of the loop 
 	\post  A new RepeatStmt is created with the parameters
 */
-		RepeatStmt(ExpNode *condition, Statement *statement)
+		RepeatStmt(std::list<Statement *> *statement, ExpNode *condition)
 		{
 			this->_cond = condition;
 			this->_stmt = statement;

@@ -1588,29 +1588,46 @@ void lp::IfStmt::print()
 	this->_cond->print();
 
 	// Consequent
-	std::cout << "\t";
-	this->_stmt1->print();
+	std::list<Statement *>::iterator stmtIter;
+	for (stmtIter = this->_stmt1->begin(); stmtIter != this->_stmt1->end(); stmtIter++)
+		(*stmtIter)->print();
 
 	// The alternative is printed if exists
-	if (this->_stmt2 != NULL)
-	{
-		std::cout << "\t";
-		this->_stmt2->print();
-	}
+	for (stmtIter = this->_stmt2->begin(); stmtIter != this->_stmt2->end(); stmtIter++)
+		(*stmtIter)->print();
 
 	std::cout << std::endl;
 }
 
 void lp::IfStmt::evaluate()
 {
-	// If the condition is true,
-	if (this->_cond->evaluateBool() == true)
-		// the consequent is run
-		this->_stmt1->evaluate();
 
-	// Otherwise, the alternative is run if exists
-	else if (this->_stmt2 != NULL)
-		this->_stmt2->evaluate();
+	//check if the condition is boolean
+	if (this->_cond->getType() != BOOL)
+	{
+		warning("Runtime error: incompatible types for", "if condition");
+	}
+	else
+	{
+		// If the condition is true,
+		if (this->_cond->evaluateBool() == true)
+		{
+			// the consequent is run
+			std::list<Statement *>::iterator stmtIter;
+
+			for (stmtIter = this->_stmt1->begin(); stmtIter != this->_stmt1->end(); stmtIter++)
+				(*stmtIter)->evaluate();
+		}
+
+		// Otherwise, the alternative is run if exists
+		else if (this->_stmt2 != NULL)
+		{
+			std::list<Statement *>::iterator stmtIter;
+
+			for (stmtIter = this->_stmt2->begin(); stmtIter != this->_stmt2->end(); stmtIter++)
+				(*stmtIter)->evaluate();
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -1765,8 +1782,10 @@ void lp::RepeatStmt::print()
 	this->_cond->print();
 
 	// Body of the repeat loop
-	std::cout << "\t";
-	this->_stmt->print();
+	std::list<Statement *>::iterator stmtIter;
+
+	for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+		(*stmtIter)->print();
 
 	std::cout << std::endl;
 }
@@ -1776,7 +1795,11 @@ void lp::RepeatStmt::evaluate()
 	// While the condition is true. the body is run
 	do
 	{
-		this->_stmt->evaluate();
+		std::list<Statement *>::iterator stmtIter;
+
+		for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+			(*stmtIter)->evaluate();
+			
 	} while (this->_cond->evaluateBool() == false);
 }
 

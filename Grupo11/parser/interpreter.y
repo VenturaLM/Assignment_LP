@@ -380,7 +380,7 @@ controlSymbol:  /* Epsilon rule*/
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
 	/* Comentado porque provoca un conflicto de desplazamiento reduccion.
-	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmt ENDIF
+	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmtlist ENDIF
 	{
 		// Create a new if statement node
 		lp::ConstantNode *aux = new lp::ConstantNode($4);
@@ -391,7 +391,7 @@ if:	/* Simple conditional statement */
 		warning("Warning: this IF is not necessary:", "constant condition");
 	}
 
-	| IF controlSymbol LPAREN CONSTANT RPAREN THEN stmt ELSE stmt ENDIF
+	| IF controlSymbol LPAREN CONSTANT RPAREN THEN stmtlist ELSE stmt ENDIF
 	{
 		
 		// Create a new if statement node
@@ -403,7 +403,7 @@ if:	/* Simple conditional statement */
 		warning("Warning: this IF is not necessary:", "constant condition");
 	} | */
 
-	IF controlSymbol cond THEN stmt ENDIF
+	IF controlSymbol cond THEN stmtlist ENDIF
     {
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5);
@@ -412,7 +412,7 @@ if:	/* Simple conditional statement */
 	}
 
 	/* Compound conditional statement */
-	| IF controlSymbol cond THEN stmt ELSE stmt ENDIF
+	| IF controlSymbol cond THEN stmtlist ELSE stmtlist ENDIF
 	{
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5, $7);
@@ -452,10 +452,10 @@ switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWI
     	}
 ;
 
-repeat:	REPEAT controlSymbol stmt UNTIL cond
+repeat:	REPEAT controlSymbol stmtlist UNTIL cond
 		{
 			// Create a new repeat statement node
-			$$ = new lp::RepeatStmt($5, $3);
+			$$ = new lp::RepeatStmt($3, $5);
 
 			// To control the interactive mode
 			control--;
