@@ -446,7 +446,7 @@ switch:  SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSW
 		{
 			//TODO
 			// Create a new switch statement node
-			//$$ = new lp::ForStmt($3, $5, $7, $9);
+			//$$ = new lp::SwitchStmt($3, $5);
 			// To control the interactive mode
 			//control--;
     	}
