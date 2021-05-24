@@ -1679,7 +1679,7 @@ namespace lp
 
 	public:
 		/*!		
-	\brief Constructor of  WhileStmt
+	\brief Constructor of  EmptyStmt
 	\post  A new EmptyStmt is created 
 */
 		EmptyStmt()
@@ -1774,34 +1774,33 @@ namespace lp
 	class ForStmt : public Statement
 	{
 	private:
-		std::string _identifier; //identifier
-		ExpNode *_exp1;			 //1º expresion
-		ExpNode *_exp2;			 //2º expresion
-		ExpNode *_stepExp;		 //step expresion
-		Statement *_stmt;		 //!< Statement of the for loop
+		std::string _identifier;		//identifier
+		ExpNode *_exp1;					//1º expresion
+		ExpNode *_exp2;					//2º expresion
+		ExpNode *_stepExp;				//step expresion
+		std::list<Statement *> *_stmts; //!< Statement of the for loop
 
 	public:
 		/*!		
 	\brief Constructor of ForStmt
 	\param condition: ExpNode of the condition
-	\param statement1: First statement
-	\param statement2: Second statement 
+	\param statement: First statement
 	\post  A new ForStmt is created with the parameters
 */
-		ForStmt(std::string identifier, ExpNode *exp1, ExpNode *exp2, ExpNode *stepExp, Statement *statement) : _identifier(identifier)
+		ForStmt(std::string identifier, ExpNode *exp1, ExpNode *exp2, ExpNode *stepExp, std::list<Statement *> *statement) : _identifier(identifier)
 		{
 			this->_exp1 = exp1;
 			this->_exp2 = exp2;
 			this->_stepExp = stepExp;
-			this->_stmt = statement;
+			this->_stmts = statement;
 		}
 
-		ForStmt(std::string identifier, ExpNode *exp1, ExpNode *exp2, Statement *statement) : _identifier(identifier)
+		ForStmt(std::string identifier, ExpNode *exp1, ExpNode *exp2, std::list<Statement *> *statement) : _identifier(identifier)
 		{
 			this->_exp1 = exp1;
 			this->_exp2 = exp2;
 			this->_stepExp = NULL;
-			this->_stmt = statement;
+			this->_stmts = statement;
 		}
 
 		/*!
@@ -1875,8 +1874,8 @@ namespace lp
 	class WhileStmt : public Statement
 	{
 	private:
-		ExpNode *_cond;	  //!< Condicion of the while statement
-		Statement *_stmt; //!< Statement of the body of the while loop
+		ExpNode *_cond;					//!< Condicion of the while statement
+		std::list<Statement *> *_stmts; //!< Statement of the body of the while loop
 
 	public:
 		/*!		
@@ -1885,10 +1884,10 @@ namespace lp
 	\param statement: Statement of the body of the loop 
 	\post  A new WhileStmt is created with the parameters
 */
-		WhileStmt(ExpNode *condition, Statement *statement)
+		WhileStmt(ExpNode *condition, std::list<Statement *> *statement)
 		{
 			this->_cond = condition;
-			this->_stmt = statement;
+			this->_stmts = statement;
 		}
 
 		/*!

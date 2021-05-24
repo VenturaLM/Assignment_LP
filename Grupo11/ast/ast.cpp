@@ -797,7 +797,7 @@ bool lp::GreaterThanNode::evaluateBool()
 
 			result = (leftNumber > rightNumber);
 		}
-		
+
 		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
 		{
 			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
@@ -807,7 +807,6 @@ bool lp::GreaterThanNode::evaluateBool()
 
 			for (unsigned i = 0; i < rightString.size(); i++)
 				rightString[i] = tolower(rightString[i]);
-
 
 			int cmp = strcmp(leftString.c_str(), rightString.c_str());
 
@@ -904,7 +903,7 @@ bool lp::LessThanNode::evaluateBool()
 
 			result = (leftNumber < rightNumber);
 		}
-		
+
 		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
 		{
 			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
@@ -957,7 +956,7 @@ bool lp::LessOrEqualNode::evaluateBool()
 
 			result = (leftNumber <= rightNumber);
 		}
-		
+
 		if (this->_left->getType() == STRING and this->_right->getType() == STRING)
 		{
 			std::string leftString = this->_left->evaluateString(), rightString = this->_right->evaluateString();
@@ -1681,8 +1680,14 @@ void lp::ForStmt::print()
 	}
 
 	// Body of the for loop
-	std::cout << "\t";
-	this->_stmt->print();
+
+	std::list<Statement *>::iterator stmtIter;
+
+	for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
+	{
+		std::cout << "\t";
+		(*stmtIter)->print();
+	}
 
 	std::cout << std::endl;
 }
@@ -1747,7 +1752,12 @@ void lp::ForStmt::evaluate()
 			{
 				//modify the identifier in every step
 				v->setValue(a);
-				this->_stmt->evaluate();
+				std::list<Statement *>::iterator stmtIter;
+
+				for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
+				{
+					(*stmtIter)->evaluate();
+				}
 			}
 		}
 	}
@@ -1792,8 +1802,13 @@ void lp::WhileStmt::print()
 	this->_cond->print();
 
 	// Body of the while loop
-	std::cout << "\t";
-	this->_stmt->print();
+	std::list<Statement *>::iterator stmtIter;
+
+	for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
+	{
+		std::cout << "\t";
+		(*stmtIter)->print();
+	}
 
 	std::cout << std::endl;
 }
@@ -1803,7 +1818,12 @@ void lp::WhileStmt::evaluate()
 	// While the condition is true. the body is run
 	while (this->_cond->evaluateBool() == true)
 	{
-		this->_stmt->evaluate();
+		std::list<Statement *>::iterator stmtIter;
+
+		for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
+		{
+			(*stmtIter)->evaluate();
+		}
 	}
 }
 

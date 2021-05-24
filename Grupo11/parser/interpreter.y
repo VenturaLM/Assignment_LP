@@ -422,7 +422,7 @@ if:	/* Simple conditional statement */
 	}
 ;
 
-for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmt ENDFOR
+for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmtlist ENDFOR
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9);
@@ -432,7 +432,7 @@ for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmt ENDFOR
 		}
 ;
 
-for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
+for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9, $11);
@@ -442,7 +442,7 @@ for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmt ENDFOR
     	}
 ;
 
-switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWITCH
+switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmt DEFAULT stmt ENDSWITCH
 		{
 			//TODO
 			// Create a new switch statement node
@@ -463,7 +463,7 @@ repeat:	REPEAT controlSymbol stmt UNTIL cond
 ;
 
 	/*  NEW in example 17 */
-while:	WHILE controlSymbol cond DO stmt ENDWHILE
+while:	WHILE controlSymbol cond DO stmtlist ENDWHILE
 		{
 			// Create a new while statement node
 			$$ = new lp::WhileStmt($3, $5);
