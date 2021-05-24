@@ -211,7 +211,7 @@ CONTROL DE ERRORES:		[ ]								CHECK
 -----------------------------------------------------------------
 	LÉXICOS
 		IDENTIFICADOR MAL ESCRITO 						[x]
-		SIMBOLO NO PERMITIDO							[ ]
+		SIMBOLO NO PERMITIDO							[x]
 		OTROS											[ ]
 
 	SINTÁCTICOS											[ ]
