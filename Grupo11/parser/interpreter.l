@@ -219,6 +219,10 @@ INLINE_COMMENT	@(.)*$
 
 "<="	{ return LESS_OR_EQUAL; }		/* NEW in example 15 */
 
+"+:="	{ return PLUS_EQUAL; }
+
+"-:="	{ return MINUS_EQUAL; }
+
 ">"		{ return GREATER_THAN; }		/* NEW in example 15 */
 
 "<"		{ return LESS_THAN; }			/* NEW in example 15 */

@@ -1715,7 +1715,7 @@ namespace lp
 	class IfStmt : public Statement
 	{
 	private:
-		ExpNode *_cond;	   //!< Condicion of the if statement
+		ExpNode *_cond;					//!< Condicion of the if statement
 		std::list<Statement *> *_stmt1; //!< Statement of the consequent
 		std::list<Statement *> *_stmt2; //!< Statement of the alternative
 
@@ -1842,7 +1842,7 @@ namespace lp
 	class RepeatStmt : public Statement
 	{
 	private:
-		ExpNode *_cond;	  //!< Condicion of the repeat statement
+		ExpNode *_cond;				   //!< Condicion of the repeat statement
 		std::list<Statement *> *_stmt; //!< Statement of the body of the repeat loop
 
 	public:

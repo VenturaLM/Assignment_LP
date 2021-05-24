@@ -207,7 +207,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 %left AND
 
-%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL
+%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL PLUS_EQUAL MINUS_EQUAL
 
 %left NOT
 /*******************************************************/
@@ -716,6 +716,18 @@ exp:	NUMBER
 	 	{
 		  // Create a new "less or equal" node	
  			$$ = new lp::LessOrEqualNode($1,$3);
+		}
+
+	|	exp PLUS_EQUAL exp 
+	 	{
+		  // Create a new "less or equal" node	
+ 			//$$ = new lp::PlusEqualNode($1,$3);
+		}
+
+	|	exp MINUS_EQUAL exp 
+	 	{
+		  // Create a new "less or equal" node	
+ 			//$$ = new lp::MinusEqualNode($1,$3);
 		}
 
 	|	exp EQUAL exp 	
