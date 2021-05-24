@@ -154,7 +154,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		escribir										[x]
 		escribir_cadena									[x]
 
-	SENTENCIAS DE CONTROL								[ ] Preguntar por stmtlist
+	SENTENCIAS DE CONTROL								[ ]
 		CONDICIONAL SIMPLE								[x]
 			si condición
 				entonces lista de sentencias
