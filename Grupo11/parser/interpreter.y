@@ -598,11 +598,11 @@ exp:	NUMBER
 	| 	exp PLUS exp 
 		{ 
 			// Create a new plus node
-			 $$ = new lp::PlusNode($1, $3);
-		 }
+				$$ = new lp::PlusNode($1, $3);
+			}
 
 	| 	exp MINUS exp
-      	{
+		{
 			// Create a new minus node
 			$$ = new lp::MinusNode($1, $3);
 		}
@@ -615,57 +615,57 @@ exp:	NUMBER
 
 	| 	exp DIVISION exp
 		{
-		  // Create a new division node	
-		  $$ = new lp::DivisionNode($1, $3);
-	   }
+			// Create a new division node	
+			$$ = new lp::DivisionNode($1, $3);
+		}
 
 	| 	exp ENTIRE_DIVISION exp
 		{
-		  // Create a new quotient node
-		  $$ = new lp::DivisionEnteraNode($1, $3);
-	   	}
+			// Create a new quotient node
+			$$ = new lp::DivisionEnteraNode($1, $3);
+		}
 
 	| 	LPAREN exp RPAREN
-       	{ 
-		    // just copy up the expression node 
-			$$ = $2;
-		 }
-
-  	| 	PLUS exp %prec UNARY
 		{ 
-		  // Create a new unary plus node	
-  		  $$ = new lp::UnaryPlusNode($2);
+			// just copy up the expression node 
+			$$ = $2;
+		}
+
+	| 	PLUS exp %prec UNARY
+		{ 
+			// Create a new unary plus node	
+			$$ = new lp::UnaryPlusNode($2);
 		}
 
 	| 	MINUS exp %prec UNARY
 		{ 
-		  // Create a new unary minus node	
-  		  $$ = new lp::UnaryMinusNode($2);
+			// Create a new unary minus node	
+			$$ = new lp::UnaryMinusNode($2);
 		}
 
 	|	exp MODULO exp 
 		{
-		  // Create a new modulo node	
+			// Create a new modulo node	
 
-		  $$ = new lp::ModuloNode($1, $3);
-       }
+			$$ = new lp::ModuloNode($1, $3);
+		}
 
 	|	exp POWER exp 
-     	{ 
-		  // Create a new power node	
-  		  $$ = new lp::PowerNode($1, $3);
+		{ 
+			// Create a new power node	
+			$$ = new lp::PowerNode($1, $3);
 		}
 
 	|	VARIABLE
 		{
-		  // Create a new variable node	
-		  $$ = new lp::VariableNode($1);
+			// Create a new variable node	
+			$$ = new lp::VariableNode($1);
 		}
 
 	|	CONSTANT
 		{
-		  // Create a new constant node	
-		  $$ = new lp::ConstantNode($1);
+			// Create a new constant node	
+			$$ = new lp::ConstantNode($1);
 
 		}
 
@@ -709,65 +709,65 @@ exp:	NUMBER
 						break;
 
 					default:
-				  			 execerror("Syntax error: too many parameters for function ", $1);
+								execerror("Syntax error: too many parameters for function ", $1);
 				} 
 			}
 			else
-	  			 execerror("Syntax error: incompatible number of parameters for function", $1);
+					execerror("Syntax error: incompatible number of parameters for function", $1);
 		}
 
 	|	exp GREATER_THAN exp
-	 	{
-		  // Create a new "greater than" node	
- 			$$ = new lp::GreaterThanNode($1,$3);
+		{
+			// Create a new "greater than" node	
+			$$ = new lp::GreaterThanNode($1,$3);
 		}
 
 	|	exp GREATER_OR_EQUAL exp 
-	 	{
-		  // Create a new "greater or equal" node	
- 			$$ = new lp::GreaterOrEqualNode($1,$3);
+		{
+			// Create a new "greater or equal" node	
+			$$ = new lp::GreaterOrEqualNode($1,$3);
 		}
 
 	|	exp LESS_THAN exp 	
-	 	{
-		  // Create a new "less than" node	
- 			$$ = new lp::LessThanNode($1,$3);
+		{
+			// Create a new "less than" node	
+			$$ = new lp::LessThanNode($1,$3);
 		}
 
 	|	exp LESS_OR_EQUAL exp 
-	 	{
-		  // Create a new "less or equal" node	
- 			$$ = new lp::LessOrEqualNode($1,$3);
+		{
+			// Create a new "less or equal" node	
+			$$ = new lp::LessOrEqualNode($1,$3);
 		}
 
 	|	exp EQUAL exp 	
-	 	{
-		  // Create a new "equal" node	
- 			$$ = new lp::EqualNode($1,$3);
+		{
+			// Create a new "equal" node	
+			$$ = new lp::EqualNode($1,$3);
 		}
 
-    |	exp NOT_EQUAL exp 	
-	 	{
-		  // Create a new "not equal" node	
- 			$$ = new lp::NotEqualNode($1,$3);
+	|	exp NOT_EQUAL exp 	
+		{
+			// Create a new "not equal" node	
+			$$ = new lp::NotEqualNode($1,$3);
 		}
 
-    |	exp AND exp 
-	 	{
-		  // Create a new "logic and" node	
- 			$$ = new lp::AndNode($1,$3);
+	|	exp AND exp 
+		{
+			// Create a new "logic and" node	
+			$$ = new lp::AndNode($1,$3);
 		}
 
-    |	exp OR exp 
-	 	{
-		  // Create a new "logic or" node	
- 			$$ = new lp::OrNode($1,$3);
+	|	exp OR exp 
+		{
+			// Create a new "logic or" node	
+			$$ = new lp::OrNode($1,$3);
 		}
 
-    |	NOT exp 
-	 	{
-		  // Create a new "logic negation" node	
- 			$$ = new lp::NotNode($2);
+	|	NOT exp 
+		{
+			// Create a new "logic negation" node	
+			$$ = new lp::NotNode($2);
 		}
 ;
 
