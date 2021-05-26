@@ -240,3 +240,8 @@ OPCIONALES:				[ ]								CHECK
 	OPERADORES UNARIOS (++, --, etc)					[ ]
 	OPERADORES ARITMETICOS Y ASIGNACION (+:=,-:=)		[x]
 	OTROS:												[ ]
+
+
+Preguntas profesor:
+- Si el .y del switch está bien.
+- Para que son los UNARY
