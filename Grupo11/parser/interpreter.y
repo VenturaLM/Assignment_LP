@@ -177,7 +177,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
 
 /* NEW in example 7 */
-%right ASSIGNMENT
+%right ASSIGNMENT PLUS_EQUAL
 
 /* NEW in example 14 */
 %token COMMA
@@ -207,7 +207,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 %left AND
 
-%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL PLUS_EQUAL MINUS_EQUAL
+%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL MINUS_EQUAL
 
 %left NOT
 /*******************************************************/
@@ -360,6 +360,16 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	}
+	| PLUS_EQUAL SEMICOLON 
+	{
+		// Create a new "plus equal" node	
+		// $$ = $1;
+	}
+	| MINUS_EQUAL SEMICOLON 
+	{
+		// Create a new "minus equal" node	
+		// $$ = $1;
+	}
 ;
 
 
@@ -391,7 +401,7 @@ if:	/* Simple conditional statement */
 		warning("Warning: this IF is not necessary:", "constant condition");
 	}
 
-	| IF controlSymbol LPAREN CONSTANT RPAREN THEN stmtlist ELSE stmt ENDIF
+|	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmtlist ELSE stmt ENDIF
 	{
 		
 		// Create a new if statement node
@@ -412,7 +422,7 @@ if:	/* Simple conditional statement */
 	}
 
 	/* Compound conditional statement */
-	| IF controlSymbol cond THEN stmtlist ELSE stmtlist ENDIF
+|	IF controlSymbol cond THEN stmtlist ELSE stmtlist ENDIF
 	{
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5, $7);
@@ -493,6 +503,12 @@ asgn:	VARIABLE ASSIGNMENT exp
 			$$ = new lp::AssignmentStmt($1, (lp::AssignmentStmt *) $3);
 		}
 
+	|	VARIABLE PLUS_EQUAL exp 
+		{ 
+			// Create a new assignment node
+			$$ = new lp::PlusEqualStmt($1, $3);
+		}
+
 	 	/* NEW in example 11 */ 
 	|	CONSTANT ASSIGNMENT exp 
 		{   
@@ -551,7 +567,7 @@ readstring:	READSTRING LPAREN VARIABLE RPAREN
 				// Create a new read node
 				$$ = new lp::ReadStringStmt($3);
 			}
-			|	READSTRING LPAREN CONSTANT RPAREN
+		|	READSTRING LPAREN CONSTANT RPAREN
 			{
 				execerror("Semantic error in \"readstring statement\": it is not allowed to modify a constant ",$3);
 			}
@@ -716,18 +732,6 @@ exp:	NUMBER
 	 	{
 		  // Create a new "less or equal" node	
  			$$ = new lp::LessOrEqualNode($1,$3);
-		}
-
-	|	exp PLUS_EQUAL exp 
-	 	{
-		  // Create a new "plus equal" node	
- 			$$ = new lp::EqualNode($1,$3);
-		}
-
-	|	exp MINUS_EQUAL exp 
-	 	{
-		  // Create a new "minus equal" node	
- 			//$$ = new lp::MinusEqualNode($1,$3);
 		}
 
 	|	exp EQUAL exp 	

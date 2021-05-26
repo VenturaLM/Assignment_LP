@@ -422,35 +422,6 @@ double lp::PlusNode::evaluateNumber()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-void lp::PlusEqualNode::print()
-{
-	std::cout << "PlusEqualNode: +" << std::endl;
-	std::cout << "\t";
-	this->_left->print();
-	std::cout << "\t";
-	this->_right->print();
-}
-
-double lp::PlusEqualNode::evaluateNumber()
-{
-	double result = 0.0;
-
-	// Ckeck the types of the expressions
-	if (this->getType() == NUMBER)
-	{
-		result = this->_left->evaluateNumber() + this->_right->evaluateNumber();
-	}
-	else
-	{
-		warning("Runtime error: the expressions are not numeric for ", "Plus");
-	}
-
-	return result;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////
-
 void lp::MinusNode::print()
 {
 	std::cout << "MinusNode: -" << std::endl;
@@ -1286,7 +1257,7 @@ void lp::AssignmentStmt::evaluate()
 			// evaluate the expression as NUMBER
 			value = this->_exp->evaluateNumber();
 
-			// Check the type of the first varible
+			// Check the type of the first variable
 			if (firstVar->getType() == NUMBER)
 			{
 				// Get the identifier in the table of symbols as NumericVariable
@@ -1482,6 +1453,61 @@ void lp::AssignmentStmt::evaluate()
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::PlusEqualStmt::print()
+{
+	std::cout << "plus_equal_node: =" << std::endl;
+	std::cout << "\t";
+	std::cout << this->_id << std::endl;
+	std::cout << "\t";
+
+	// Check the expression
+	if (this->_exp != NULL)
+	{
+		this->_exp->print();
+		std::cout << std::endl;
+	}
+}
+
+void lp::PlusEqualStmt::evaluate()
+{
+	/* Get the identifier in the table of symbols as Variable */
+	lp::Variable *firstVar = (lp::Variable *)table.getSymbol(this->_id);
+	// Check the expression
+	if (this->_exp != NULL)
+	{
+		double value;
+		// evaluate the expression as NUMBER
+		value = this->_exp->evaluateNumber();
+
+		std::cout << "Este es el value: " << value << std::endl;
+		std::cout << "Este es el Token: " << firstVar->getName() << std::endl;
+		std::cout << "Este es el Token: " << firstVar->getToken() << std::endl;
+		// Check the type of the first variable
+		if (firstVar->getType() == NUMBER)
+		{
+			// Get the identifier in the table of symbols as NumericVariable
+			lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_id);
+
+			// Assignment the value to the identifier in the table of symbols
+			v->setValue(value);
+		}
+		// The type of variable is not NUMBER
+		else
+		{
+			// Delete the variable from the table of symbols
+			table.eraseSymbol(this->_id);
+
+			// Insert the variable in the table of symbols as NumericVariable
+			// with the type NUMBER and the value
+			lp::NumericVariable *v = new lp::NumericVariable(this->_id,
+															 VARIABLE, NUMBER, value);
+			table.installSymbol(v);
+		}
+	}
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -1269,44 +1269,6 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*!	
-  \class   PlusEqualNode
-  \brief   Definition of atributes and methods of PlusEqualNode class
-  \note    PlusEqualNode Class publicly inherits from NumericOperatorNode class 
-		   and adds its own print and evaluate functions
-*/
-	class PlusEqualNode : public NumericOperatorNode
-	{
-	public:
-		/*!		
-	\brief Constructor of PlusEqualNode uses NumericOperatorNode's constructor as members initializer
-	\param L: pointer to ExpNode
-	\param R: pointer to ExpNode
-	\post  A new PlusEqualNode is created with the parameter
-*/
-		PlusEqualNode(ExpNode *L, ExpNode *R) : NumericOperatorNode(L, R)
-		{
-			// Empty
-		}
-
-		/*!
-	\brief   Print the PlusEqualNode
-	\return  void
-	\sa		 evaluate()
-*/
-		void print();
-
-		/*!	
-	\brief   Evaluate the PlusEqualNode
-	\return  double
-	\sa		 print
-*/
-		double evaluateNumber();
-	};
-
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*!	
   \class   NotEqualNode
   \brief   Definition of atributes and methods of NotEqualNode class
   \note    NotEqualNode Class publicly inherits from RelationalOperatorNode class 
@@ -1535,6 +1497,47 @@ namespace lp
 
 		/*!	
 	\brief   Evaluate the AssignmentStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
+  \class   PlusEqualStmt
+  \brief   Definition of atributes and methods of PlusEqualStmt class
+  \note    PlusEqualStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class PlusEqualStmt : public Statement
+	{
+	private:
+		std::string _id; //!< Name of the variable of the assignment statement
+		ExpNode *_exp;	 //!< Expresssion the assignment statement
+
+	public:
+		/*!		
+	\brief Constructor of PlusEqualStmt 
+	\param id: string, variable of the PlusEqualStmt
+	\param expression: pointer to ExpNode
+	\post  A new PlusEqualStmt is created with the parameters
+*/
+		PlusEqualStmt(std::string id, ExpNode *expression) : _id(id), _exp(expression)
+		{
+		}
+
+		/*!
+	\brief   Print the PlusEqualStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the PlusEqualStmt
 	\return  void
 	\sa		 print
 */
