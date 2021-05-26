@@ -452,7 +452,7 @@ for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR
     	}
 ;
 
-switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmt DEFAULT stmt ENDSWITCH
+switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWITCH
 		{
 			//TODO
 			// Create a new switch statement node
