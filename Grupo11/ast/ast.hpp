@@ -1548,6 +1548,47 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*!	
+  \class   MinusEqualStmt
+  \brief   Definition of atributes and methods of MinusEqualStmt class
+  \note    MinusEqualStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class MinusEqualStmt : public Statement
+	{
+	private:
+		std::string _id; //!< Name of the variable of the assignment statement
+		ExpNode *_exp;	 //!< Expresssion the assignment statement
+
+	public:
+		/*!		
+	\brief Constructor of MinusEqualStmt 
+	\param id: string, variable of the MinusEqualStmt
+	\param expression: pointer to ExpNode
+	\post  A new MinusEqualStmt is created with the parameters
+*/
+		MinusEqualStmt(std::string id, ExpNode *expression) : _id(id), _exp(expression)
+		{
+		}
+
+		/*!
+	\brief   Print the MinusEqualStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the MinusEqualStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
   \class   PrintStmt
   \brief   Definition of atributes and methods of PrintStmt class
   \note    PrintStmt Class publicly inherits from Statement class 

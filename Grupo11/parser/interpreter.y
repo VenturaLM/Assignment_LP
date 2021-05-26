@@ -509,6 +509,12 @@ asgn:	VARIABLE ASSIGNMENT exp
 			$$ = new lp::PlusEqualStmt($1, $3);
 		}
 
+	|	VARIABLE MINUS_EQUAL exp 
+		{ 
+			// Create a new assignment node
+			$$ = new lp::MinusEqualStmt($1, $3);
+		}
+
 	 	/* NEW in example 11 */ 
 	|	CONSTANT ASSIGNMENT exp 
 		{   

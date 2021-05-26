@@ -1475,6 +1475,7 @@ void lp::PlusEqualStmt::evaluate()
 {
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *firstVar = (lp::Variable *)table.getSymbol(this->_id);
+	lp::NumericVariable *var = (lp::NumericVariable *)table.getSymbol(this->_id);
 	// Check the expression
 	if (this->_exp != NULL)
 	{
@@ -1482,9 +1483,6 @@ void lp::PlusEqualStmt::evaluate()
 		// evaluate the expression as NUMBER
 		value = this->_exp->evaluateNumber();
 
-		std::cout << "Este es el value: " << value << std::endl;
-		std::cout << "Este es el Token: " << firstVar->getName() << std::endl;
-		std::cout << "Este es el Token: " << firstVar->getToken() << std::endl;
 		// Check the type of the first variable
 		if (firstVar->getType() == NUMBER)
 		{
@@ -1492,7 +1490,7 @@ void lp::PlusEqualStmt::evaluate()
 			lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_id);
 
 			// Assignment the value to the identifier in the table of symbols
-			v->setValue(value);
+			v->setValue(value + var->getValue());
 		}
 		// The type of variable is not NUMBER
 		else
@@ -1503,7 +1501,61 @@ void lp::PlusEqualStmt::evaluate()
 			// Insert the variable in the table of symbols as NumericVariable
 			// with the type NUMBER and the value
 			lp::NumericVariable *v = new lp::NumericVariable(this->_id,
-															 VARIABLE, NUMBER, value);
+															 VARIABLE, NUMBER, value + var->getValue());
+			table.installSymbol(v);
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::MinusEqualStmt::print()
+{
+	std::cout << "minus_equal_node: =" << std::endl;
+	std::cout << "\t";
+	std::cout << this->_id << std::endl;
+	std::cout << "\t";
+
+	// Check the expression
+	if (this->_exp != NULL)
+	{
+		this->_exp->print();
+		std::cout << std::endl;
+	}
+}
+
+void lp::MinusEqualStmt::evaluate()
+{
+	/* Get the identifier in the table of symbols as Variable */
+	lp::Variable *firstVar = (lp::Variable *)table.getSymbol(this->_id);
+	lp::NumericVariable *var = (lp::NumericVariable *)table.getSymbol(this->_id);
+	// Check the expression
+	if (this->_exp != NULL)
+	{
+		double value;
+		// evaluate the expression as NUMBER
+		value = this->_exp->evaluateNumber();
+
+		// Check the type of the first variable
+		if (firstVar->getType() == NUMBER)
+		{
+			// Get the identifier in the table of symbols as NumericVariable
+			lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_id);
+
+			// Assignment the value to the identifier in the table of symbols
+			v->setValue(var->getValue() - value);
+		}
+		// The type of variable is not NUMBER
+		else
+		{
+			// Delete the variable from the table of symbols
+			table.eraseSymbol(this->_id);
+
+			// Insert the variable in the table of symbols as NumericVariable
+			// with the type NUMBER and the value
+			lp::NumericVariable *v = new lp::NumericVariable(this->_id,
+															 VARIABLE, NUMBER, var->getValue() - value);
 			table.installSymbol(v);
 		}
 	}
