@@ -389,30 +389,6 @@ controlSymbol:  /* Epsilon rule*/
 
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
-	/* Comentado porque provoca un conflicto de desplazamiento reduccion.
-	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmtlist ENDIF
-	{
-		// Create a new if statement node
-		lp::ConstantNode *aux = new lp::ConstantNode($4);
-		$$ = new lp::IfStmt(aux, $7);
-
-		// To control the interactive mode
-		control--;
-		warning("Warning: this IF is not necessary:", "constant condition");
-	}
-
-|	IF controlSymbol LPAREN CONSTANT RPAREN THEN stmtlist ELSE stmt ENDIF
-	{
-		
-		// Create a new if statement node
-		lp::ConstantNode *aux = new lp::ConstantNode($4);
-		$$ = new lp::IfStmt(aux, $7, $9);
-
-		// To control the interactive mode
-		control--;
-		warning("Warning: this IF is not necessary:", "constant condition");
-	} | */
-
 	IF controlSymbol cond THEN stmtlist ENDIF
     {
 		// Create a new if statement node
