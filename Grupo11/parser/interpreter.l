@@ -192,6 +192,8 @@ INLINE_COMMENT	@(.)*$
 
 "-"		{ return MINUS;  }				/* NEW in example 3 */
 "+"		{ return PLUS;   }				/* NEW in example 3 */
+"++"	{ return PLUSPLUS;   }
+"--"	{ return MINUSMINUS;   }
 
 "*"	    { return MULTIPLICATION; }		/* NEW in example 3 */
 "/"     { return DIVISION; }			/* NEW in example 3 */

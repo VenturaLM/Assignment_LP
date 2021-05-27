@@ -1458,7 +1458,7 @@ void lp::AssignmentStmt::evaluate()
 
 void lp::PlusEqualStmt::print()
 {
-	std::cout << "plus_equal_node: =" << std::endl;
+	std::cout << "plus_equal_node: +:=" << std::endl;
 	std::cout << "\t";
 	std::cout << this->_id << std::endl;
 	std::cout << "\t";
@@ -1510,9 +1510,53 @@ void lp::PlusEqualStmt::evaluate()
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+void lp::PlusPlusNode::print()
+{
+	std::cout << "plus_plus_node: ++" << std::endl;
+	std::cout << "\t";
+	std::cout << this->_id << std::endl;
+}
+
+void lp::PlusPlusNode::evaluate()
+{
+	lp::Variable *firstVar = (lp::Variable *)table.getSymbol(this->_id);
+	lp::NumericVariable *var = (lp::NumericVariable *)table.getSymbol(this->_id);
+
+	if (firstVar->getType() == NUMBER)
+	{
+		lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_id);
+		v->setValue(1 + var->getValue());
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::MinusMinusNode::print()
+{
+	std::cout << "minus_minus_node: --" << std::endl;
+	std::cout << "\t";
+	std::cout << this->_id << std::endl;
+}
+
+void lp::MinusMinusNode::evaluate()
+{
+	lp::Variable *firstVar = (lp::Variable *)table.getSymbol(this->_id);
+	lp::NumericVariable *var = (lp::NumericVariable *)table.getSymbol(this->_id);
+
+	if (firstVar->getType() == NUMBER)
+	{
+		lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_id);
+		v->setValue(var->getValue() - 1);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 void lp::MinusEqualStmt::print()
 {
-	std::cout << "minus_equal_node: =" << std::endl;
+	std::cout << "minus_equal_node: -:=" << std::endl;
 	std::cout << "\t";
 	std::cout << this->_id << std::endl;
 	std::cout << "\t";

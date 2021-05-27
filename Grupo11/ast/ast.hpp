@@ -2125,6 +2125,88 @@ namespace lp
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*!	
+  \class   PlusPlusNode
+  \brief   Definition of atributes and methods of PlusPlusNode class
+  \note    PlusPlusNode Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class PlusPlusNode : public Statement
+	{
+	private:
+		std::string _id; //!< Name of the variable of the plusplus statement
+
+	public:
+		/*!		
+	\brief Constructor of PlusPlusNode 
+	\param id: string, variable of the PlusPlusNode
+	\param expression: pointer to ExpNode
+	\post  A new PlusPlusNode is created with the parameters
+*/
+		PlusPlusNode(std::string id)
+		{
+			this->_id = id;
+		}
+
+		/*!
+	\brief   Print the PlusPlusNode
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the PlusPlusNode
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
+  \class   MinusMinusNode
+  \brief   Definition of atributes and methods of MinusMinusNode class
+  \note    MinusMinusNode Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class MinusMinusNode : public Statement
+	{
+	private:
+		std::string _id; //!< Name of the variable of the minus minus statement
+
+	public:
+		/*!		
+	\brief Constructor of MinusMinusNode 
+	\param id: string, variable of the MinusMinusNode
+	\param expression: pointer to ExpNode
+	\post  A new MinusMinusNode is created with the parameters
+*/
+		MinusMinusNode(std::string id)
+		{
+			this->_id = id;
+		}
+
+		/*!
+	\brief   Print the MinusMinusNode
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the MinusMinusNode
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
   \class   AST
   \brief   Definition of atributes and methods of AST class
 */

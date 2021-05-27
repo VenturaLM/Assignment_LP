@@ -237,7 +237,7 @@ MODOS DE EJECUCIÓN:		[x]								CHECK
 -----------------------------------------------------------------
 OPCIONALES:				[ ]								CHECK
 -----------------------------------------------------------------
-	OPERADORES UNARIOS (++, --, etc)					[ ]
+	OPERADORES UNARIOS (++, --, etc)					[x]
 	OPERADORES ARITMETICOS Y ASIGNACION (+:=,-:=)		[x]
 	OTROS:												[ ]
 

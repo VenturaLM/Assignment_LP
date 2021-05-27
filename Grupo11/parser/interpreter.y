@@ -157,7 +157,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <stmts> stmtlist
 
 // New in example 17: if, while, block
-%type <st> stmt asgn print read if while block repeat for clear place writestring readstring switch
+%type <st> stmt asgn print read if while block repeat for clear place writestring readstring switch plusplus minusminus
 
 %type <prog> program
 
@@ -171,13 +171,13 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 /*******************************************/
 
 /* NEW in example 17: IF, ELSE, WHILE */
-%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM READSTRING WRITESTRING SWITCH CASE DEFAULT ENDSWITCH COLON
+%token PRINT READ IF ELSE WHILE CLEAR PLACE THEN ENDIF DO ENDWHILE REPEAT UNTIL FOR STEP TO ENDFOR FROM READSTRING WRITESTRING SWITCH CASE DEFAULT ENDSWITCH COLON PLUSPLUS MINUSMINUS
 
 /* NEW in example 17 */
 %token LETFCURLYBRACKET RIGHTCURLYBRACKET
 
 /* NEW in example 7 */
-%right ASSIGNMENT PLUS_EQUAL
+%right ASSIGNMENT PLUS_EQUAL MINUS_EQUAL 
 
 /* NEW in example 14 */
 %token COMMA
@@ -207,7 +207,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 %left AND
 
-%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL MINUS_EQUAL
+%nonassoc GREATER_OR_EQUAL LESS_OR_EQUAL GREATER_THAN LESS_THAN EQUAL NOT_EQUAL 
 
 %left NOT
 /*******************************************************/
@@ -222,7 +222,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 
 %left LPAREN RPAREN
 
-%nonassoc  UNARY
+%nonassoc  UNARY PLUSPLUS MINUSMINUS
 
 // Maximum precedence 
 /* MODIFIED in final assignment. */
@@ -350,6 +350,16 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 		// Default action
 		// $$ = $1;
 	}
+	| plusplus SEMICOLON
+	{
+		// Default action
+		// $$ = $1;
+	}
+	| minusminus SEMICOLON
+	{
+		// Default action
+		// $$ = $1;
+	}
 	| writestring SEMICOLON
 	{
 		// Default action
@@ -428,8 +438,9 @@ for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR
 		}
 ;
 
-switch:	SWITCH controlSymbol exp stmtlist DEFAULT exp stmt ENDSWITCH stmt
+switch:	SWITCH controlSymbol exp ENDSWITCH SEMICOLON
 		{
+			//SWITCH controlSymbol exp caselist ENDSWITCH SEMICOLON
 			//TODO
 			// Create a new switch statement node
 			//$$ = new lp::SwitchStmt($3, $5);
@@ -510,6 +521,22 @@ clear:	CLEAR
 		}
 ;
 
+plusplus:	PLUSPLUS VARIABLE 
+		{
+			// PLUS exp %prec UNARY
+			// Create a new print node
+			$$ = new lp::PlusPlusNode($2);
+		}
+;
+
+minusminus:	MINUSMINUS VARIABLE 
+		{
+			// PLUS exp %prec UNARY
+			// Create a new print node
+			$$ = new lp::MinusMinusNode($2);
+		}
+;
+
 place:	PLACE LPAREN exp COMMA exp RPAREN
 		{
 			// Create a new place node
@@ -522,7 +549,7 @@ print:	PRINT exp
 			// Create a new print node
 			 $$ = new lp::PrintStmt($2);
 		}
-;	
+;
 
 read:	READ LPAREN VARIABLE RPAREN  
 		{
