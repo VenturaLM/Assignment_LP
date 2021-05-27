@@ -631,7 +631,7 @@ exp:	NUMBER
 			$$ = $2;
 		}
 
-	| 	PLUS exp %prec UNARY
+	|	PLUS exp %prec UNARY
 		{ 
 			// Create a new unary plus node	
 			$$ = new lp::UnaryPlusNode($2);
