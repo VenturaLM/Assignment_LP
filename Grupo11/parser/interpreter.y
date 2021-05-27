@@ -449,20 +449,20 @@ for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR
 
 			// To control the interactive mode
 			control--;
-    	}
+		}
 ;
 
-switch:	SWITCH controlSymbol LPAREN VARIABLE RPAREN stmtlist DEFAULT stmt ENDSWITCH
+switch:	SWITCH controlSymbol exp stmtlist DEFAULT exp stmt ENDSWITCH stmt
 		{
 			//TODO
 			// Create a new switch statement node
 			//$$ = new lp::SwitchStmt($3, $5);
 			// To control the interactive mode
 			//control--;
-    	}
+		}
 ;
 
-repeat:	REPEAT controlSymbol stmtlist UNTIL cond
+repeat:	REPEAT controlSymbol stmtlist UNTIL cond SEMICOLON
 		{
 			// Create a new repeat statement node
 			$$ = new lp::RepeatStmt($3, $5);

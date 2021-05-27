@@ -195,16 +195,16 @@ INLINE_COMMENT	@(.)*$
 
 "*"	    { return MULTIPLICATION; }		/* NEW in example 3 */
 "/"     { return DIVISION; }			/* NEW in example 3 */
-"#div"  { return ENTIRE_DIVISION; }		/* NEW in final assignment. */
+(?i:#div)  { return ENTIRE_DIVISION; }		/* NEW in final assignment. */
 
 "("     { return LPAREN; }				/* NEW in example 3 */
 ")"	    { return RPAREN; }				/* NEW in example 3 */
 
-"#mod"  { return MODULO; }				/* NEW in final assignment. */
+(?i:#mod)  { return MODULO; }				/* NEW in final assignment. */
 
-"#borrar" { return CLEAR; }
+(?i:#borrar) { return CLEAR; }
 
-"#lugar" { return PLACE; }
+(?i:#lugar) { return PLACE; }
 
 "**"	{ return POWER; }				/* NEW in final assignment. */
 
@@ -226,11 +226,11 @@ INLINE_COMMENT	@(.)*$
 
 "<"		{ return LESS_THAN; }			/* NEW in example 15 */
 
-"#no"	{ return NOT; }					/* NEW in example 15 */
+(?i:#no)	{ return NOT; }					/* NEW in example 15 */
 
-"#o"	{ return OR; }					/* NEW in example 15 */
+(?i:#o)	{ return OR; }					/* NEW in example 15 */
 
-"#y"	{ return AND; }					/* NEW in example 15 */
+(?i:#y)	{ return AND; }					/* NEW in example 15 */
 
 "{"		{ return LETFCURLYBRACKET; }	/* NEW in example 17 */
 

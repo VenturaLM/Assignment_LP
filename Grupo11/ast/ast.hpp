@@ -1924,8 +1924,8 @@ namespace lp
 	class RepeatStmt : public Statement
 	{
 	private:
-		ExpNode *_cond;				   //!< Condicion of the repeat statement
-		std::list<Statement *> *_stmt; //!< Statement of the body of the repeat loop
+		ExpNode *_cond;					//!< Condicion of the repeat statement
+		std::list<Statement *> *_stmts; //!< Statement of the body of the repeat loop
 
 	public:
 		/*!		
@@ -1936,8 +1936,8 @@ namespace lp
 */
 		RepeatStmt(std::list<Statement *> *statement, ExpNode *condition)
 		{
+			this->_stmts = statement;
 			this->_cond = condition;
-			this->_stmt = statement;
 		}
 
 		/*!

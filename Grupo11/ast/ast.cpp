@@ -1901,7 +1901,7 @@ void lp::RepeatStmt::print()
 	// Body of the repeat loop
 	std::list<Statement *>::iterator stmtIter;
 
-	for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+	for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
 		(*stmtIter)->print();
 
 	std::cout << std::endl;
@@ -1914,7 +1914,7 @@ void lp::RepeatStmt::evaluate()
 	{
 		std::list<Statement *>::iterator stmtIter;
 
-		for (stmtIter = this->_stmt->begin(); stmtIter != this->_stmt->end(); stmtIter++)
+		for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
 			(*stmtIter)->evaluate();
 
 	} while (this->_cond->evaluateBool() == false);
