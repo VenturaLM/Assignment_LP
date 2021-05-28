@@ -17,6 +17,27 @@ escribir_cadena('Cadena n2: ');
 escribir_cadena(n2);
 escribir_cadena('\n');
 
+si(n1 < n2) entonces
+escribir_cadena('Success: n1 < n2 \n');
+fin_si
+
+si(n1 > n2) entonces
+escribir_cadena('Success: n1 > n2 \n');
+fin_si
+
+si(n1 <= n2) entonces
+escribir_cadena('Success: n1 <= n2 \n');
+fin_si
+
+si(n1 >= n2) entonces
+escribir_cadena('Success: n1 >= n2 \n');
+fin_si
+
+si(n1 = n2) entonces
+escribir_cadena('Success: n1 = n2 \n');
+fin_si
+
 si(n1 <> n2) entonces
 escribir_cadena('Success: n1 <> n2 \n');
 fin_si
+

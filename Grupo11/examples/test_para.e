@@ -1,3 +1,5 @@
+@Ejemplo del uso del bucle PARA
+
 dato1:=0;
 leer(dato);
 escribir dato;
@@ -8,8 +10,8 @@ para k
 	hasta 10
 	paso 1
 	hacer
-    dato := dato + 1;
-	dato1 := dato + 2;
+    dato +:= 1;
+	dato1 +:= 2;
 fin_para
 
 escribir dato;

@@ -1,0 +1,5 @@
+@Ejemplo de errores 
+
+dato__1 := 4;
+dato_ := 4;
+_dato := 4;
