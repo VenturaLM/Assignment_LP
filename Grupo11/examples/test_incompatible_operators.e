@@ -1,12 +1,3 @@
-
-<<
-
- heyy
-
-	que pasa
-
->>
-
 escribir_cadena('Introduzca el primer número:\n');
 leer(n1);
 
