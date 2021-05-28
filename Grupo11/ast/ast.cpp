@@ -1243,6 +1243,7 @@ void lp::AssignmentStmt::evaluate()
 		a: firstVar
 		b: secondVar
 	*/
+
 	lp::Variable *firstVar = (lp::Variable *)table.getSymbol(this->_id);
 
 	// Check the expression
@@ -2062,10 +2063,9 @@ void lp::ReadStringStmt::print()
 
 void lp::ReadStringStmt::evaluate()
 {
-	fflush(stdin);
-	char stringAux[100];
-	std::cin.getline(stringAux, 100);
-	fflush(stdin);
+	std::string tempString;
+	std::cin >> tempString;
+
 	/* Get the identifier in the table of symbols as Variable */
 	lp::Variable *var = (lp::Variable *)table.getSymbol(this->_id);
 
@@ -2076,7 +2076,7 @@ void lp::ReadStringStmt::evaluate()
 		lp::StringVariable *n = (lp::StringVariable *)table.getSymbol(this->_id);
 
 		/* Assignment the read value to the identifier */
-		n->setValue(stringAux);
+		n->setValue(tempString);
 	}
 	// The type of variable is not NUMBER
 	else
@@ -2087,7 +2087,7 @@ void lp::ReadStringStmt::evaluate()
 		// Insert $1 in the table of symbols as NumericVariable
 		// with the type NUMBER and the read value
 		lp::StringVariable *n = new lp::StringVariable(this->_id,
-													   VARIABLE, STRING, stringAux);
+													   VARIABLE, STRING, tempString);
 
 		table.installSymbol(n);
 	}

@@ -148,7 +148,7 @@ INLINE_COMMENT	@(.)*$
 						strdup() function returns a pointer to a new string 
 						which  is a duplicate of the string yytext
 						*/
-						yylval.identifier = strdup(yytext);
+						yylval.identifier = strdup(identifier.c_str());
 
 						/* If the identifier is not in the table of symbols then it is inserted */
 						if (table.lookupSymbol(identifier) == false)
