@@ -1609,7 +1609,7 @@ void lp::MinusEqualStmt::evaluate()
 
 void lp::ClearStmt::print()
 {
-	std::cout << "ClearStmt: " << std::endl;
+	std::cout << "Borrar: " << std::endl;
 }
 
 void lp::ClearStmt::evaluate()
@@ -1622,7 +1622,7 @@ void lp::ClearStmt::evaluate()
 
 void lp::PlaceStmt::print()
 {
-	std::cout << "PlaceStmt: " << std::endl;
+	std::cout << "Lugar: " << std::endl;
 	this->_left->print();
 	this->_right->print();
 }
@@ -1645,9 +1645,9 @@ void lp::PrintStmt::print()
 
 void lp::PrintStmt::evaluate()
 {
-	std::cout << BIYELLOW;
-	std::cout << "Print: ";
-	std::cout << RESET;
+	// std::cout << BIYELLOW;
+	// std::cout << "Print: ";
+	// std::cout << RESET;
 
 	switch (this->_exp->getType())
 	{
@@ -1681,9 +1681,9 @@ void lp::ReadStmt::print()
 void lp::ReadStmt::evaluate()
 {
 	double value;
-	std::cout << BIYELLOW;
-	std::cout << "Insert a numeric value --> ";
-	std::cout << RESET;
+	// std::cout << BIYELLOW;
+	// std::cout << "Insert a numeric value --> ";
+	// std::cout << RESET;
 	std::cin >> value;
 
 	/* Get the identifier in the table of symbols as Variable */

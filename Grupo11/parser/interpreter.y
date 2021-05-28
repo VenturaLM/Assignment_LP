@@ -266,7 +266,7 @@ stmtlist:	/* empty: epsilon rule */
 							it != $$->end(); 
 							it++)
 					{
-						(*it)->print(); 
+						/*(*it)->print();*/
 						(*it)->evaluate();
 						
 					}
@@ -399,7 +399,7 @@ controlSymbol:  /* Epsilon rule*/
 
 	/*  NEW in example 17 */
 if:	/* Simple conditional statement */
-	IF controlSymbol cond THEN stmtlist ENDIF
+	IF controlSymbol cond THEN stmtlist ENDIF SEMICOLON
     {
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5);
@@ -408,7 +408,7 @@ if:	/* Simple conditional statement */
 	}
 
 	/* Compound conditional statement */
-|	IF controlSymbol cond THEN stmtlist ELSE stmtlist ENDIF
+|	IF controlSymbol cond THEN stmtlist ELSE stmtlist ENDIF SEMICOLON
 	{
 		// Create a new if statement node
 		$$ = new lp::IfStmt($3, $5, $7);
@@ -418,7 +418,7 @@ if:	/* Simple conditional statement */
 	}
 ;
 
-for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmtlist ENDFOR
+for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmtlist ENDFOR SEMICOLON
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9);
@@ -428,7 +428,7 @@ for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmtlist ENDFOR
 		}
 ;
 
-for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR
+for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR SEMICOLON
 		{
 			// Create a new for statement node
 			$$ = new lp::ForStmt($3, $5, $7, $9, $11);
@@ -460,7 +460,7 @@ repeat:	REPEAT controlSymbol stmtlist UNTIL cond SEMICOLON
 ;
 
 	/*  NEW in example 17 */
-while:	WHILE controlSymbol cond DO stmtlist ENDWHILE
+while:	WHILE controlSymbol cond DO stmtlist ENDWHILE SEMICOLON
 		{
 			// Create a new while statement node
 			$$ = new lp::WhileStmt($3, $5);
