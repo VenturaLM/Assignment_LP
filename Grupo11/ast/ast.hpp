@@ -1786,6 +1786,56 @@ namespace lp
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
+  \class   CaseStmt
+  \brief   Definition of atributes and methods of CaseStmt class
+  \note    CaseStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class CaseStmt : public Statement
+	{
+	private:
+		ExpNode *_caseCond;				//!< Condicion of the statement
+		std::list<Statement *> *_stmts; //!< Statements
+
+	public:
+		/*!		
+	\brief Constructor of  CaseStmt
+	\post  A new CaseStmt is created 
+*/
+		CaseStmt(ExpNode *caseCond, std::list<Statement *> *statement) : _caseCond(caseCond), _stmts(statement)
+		{
+			// Empty
+		}
+
+		/*!
+	\brief   Print the CaseStmt
+	\return  void
+	\sa		 evaluate()
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the CaseStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+
+		/*!	
+	\brief   get the condition
+	\return  ExpNode *
+	\sa		 print
+*/
+		inline ExpNode *getCondition()
+		{
+			return this->_caseCond;
+		}
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	// NEW in example 17
 
 	/*!	
@@ -1906,6 +1956,51 @@ namespace lp
 
 		/*!	
 	\brief   Evaluate the ForStmt
+	\return  void
+	\sa		 print
+*/
+		void evaluate();
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*!	
+  \class   SwitchStmt
+  \brief   Definition of atributes and methods of SwitchStmt class
+  \note    SwitchStmt Class publicly inherits from Statement class 
+		   and adds its own print and evaluate functions
+*/
+	class SwitchStmt : public Statement
+	{
+	private:
+		ExpNode *_exp;					 //!< Exp
+		std::list<CaseStmt *> *_stmts1;	 //!< Cases
+		std::list<Statement *> *_stmts2; //!< Default
+
+	public:
+		/*!		
+	\brief Constructor of SwitchStmt
+	\param condition: ExpNode of the condition
+	\param statement: First statement
+	\post  A new SwitchStmt is created with the parameters
+*/
+		SwitchStmt(ExpNode *exp, std::list<CaseStmt *> *stmts1, std::list<Statement *> *stmts2 = NULL)
+		{
+			this->_exp = exp;
+			this->_stmts1 = stmts1;
+			this->_stmts2 = stmts2;
+		}
+
+		/*!
+	\brief   Print the SwitchStmt
+	\return  void
+	\sa		 evaluate
+*/
+		void print();
+
+		/*!	
+	\brief   Evaluate the SwitchStmt
 	\return  void
 	\sa		 print
 */

@@ -2004,6 +2004,118 @@ void lp::WhileStmt::evaluate()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+void lp::SwitchStmt::print()
+{
+	//not implemented
+}
+
+void lp::SwitchStmt::evaluate()
+{
+	bool def = true;
+
+	if (_stmts2 == NULL)
+	{
+		def = false;
+	}
+
+	switch (this->_exp->getType())
+	{
+	case NUMBER:
+
+		if (_stmts1->size() != 0)
+		{
+			std::list<CaseStmt *>::iterator caseIt;
+			double variable = _exp->evaluateNumber();
+
+			for (caseIt = this->_stmts1->begin(); caseIt != this->_stmts1->end(); caseIt++)
+			{
+				if (std::abs((variable - (*caseIt)->getCondition()->evaluateNumber())) < ERROR_BOUND)
+				{
+					(*caseIt)->evaluate();
+					def = false;
+				}
+			}
+		}
+		if (def)
+		{
+			std::list<Statement *>::iterator stmtIt;
+
+			for (stmtIt = this->_stmts2->begin(); stmtIt != this->_stmts2->end(); stmtIt++)
+			{
+				(*stmtIt)->evaluate();
+			}
+
+			def = false;
+		}
+		break;
+
+	case BOOL:
+
+		if (_stmts1->size() != 0)
+		{
+			std::list<CaseStmt *>::iterator caseIt;
+			bool variable = _exp->evaluateBool();
+
+			for (caseIt = this->_stmts1->begin(); caseIt != this->_stmts1->end(); caseIt++)
+			{
+				if (variable == (*caseIt)->getCondition()->evaluateBool())
+				{
+					(*caseIt)->evaluate();
+					def = false;
+				}
+			}
+		}
+		if (def)
+		{
+			std::list<Statement *>::iterator stmtIt;
+
+			for (stmtIt = this->_stmts2->begin(); stmtIt != this->_stmts2->end(); stmtIt++)
+			{
+				(*stmtIt)->evaluate();
+			}
+
+			def = false;
+		}
+		break;
+
+	case STRING:
+
+		if (_stmts1->size() != 0)
+		{
+			std::list<CaseStmt *>::iterator caseIt;
+			std::string variable = _exp->evaluateString();
+
+			for (caseIt = this->_stmts1->begin(); caseIt != this->_stmts1->end(); caseIt++)
+			{
+				if (variable == (*caseIt)->getCondition()->evaluateString())
+				{
+					(*caseIt)->evaluate();
+					def = false;
+				}
+			}
+		}
+		if (def)
+		{
+			std::list<Statement *>::iterator stmtIt;
+
+			for (stmtIt = this->_stmts2->begin(); stmtIt != this->_stmts2->end(); stmtIt++)
+			{
+				(*stmtIt)->evaluate();
+			}
+
+			def = false;
+		}
+		break;
+
+	default:
+		warning("Runtime error: incompatible types of parameters for ",
+				"Switch statement");
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 // NEW in example 17
 
 void lp::BlockStmt::print()
@@ -2019,6 +2131,25 @@ void lp::BlockStmt::print()
 }
 
 void lp::BlockStmt::evaluate()
+{
+	std::list<Statement *>::iterator stmtIter;
+
+	for (stmtIter = this->_stmts->begin(); stmtIter != this->_stmts->end(); stmtIter++)
+	{
+		(*stmtIter)->evaluate();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+// NEW in example 17
+
+void lp::CaseStmt::print()
+{
+	//nothing
+}
+
+void lp::CaseStmt::evaluate()
 {
 	std::list<Statement *>::iterator stmtIter;
 

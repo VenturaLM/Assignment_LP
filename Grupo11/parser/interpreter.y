@@ -143,6 +143,7 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 	lp::ExpNode *expNode;  			 /* NEW in example 16 */
 	std::list<lp::ExpNode *>  *parameters;    // New in example 16; NOTE: #include<list> must be in interpreter.l, init.cpp, interpreter.cpp
 	std::list<lp::Statement *> *stmts; /* NEW in example 16 */
+	std::list<lp::CaseStmt *> *caseStmts;
 	lp::Statement *st;				 /* NEW in example 16 */
 	lp::AST *prog;					 /* NEW in example 16 */
 }
@@ -152,9 +153,11 @@ extern lp::AST *root; //!< External root of the abstract syntax tree AST
 %type <expNode> exp cond 
 
 /* New in example 14 */
-%type <parameters> listOfExp  restOfListOfExp
+%type <parameters> listOfExp restOfListOfExp
 
-%type <stmts> stmtlist
+%type <stmts> stmtlist 
+
+%type <caseStmts> caselist
 
 // New in example 17: if, while, block
 %type <st> stmt asgn print read if while block repeat for clear place writestring readstring switch plusplus minusminus
@@ -382,6 +385,23 @@ stmt: SEMICOLON  /* Empty statement: ";" */
 	}
 ;
 
+caselist:
+		/* Empty list of expressions */
+		{
+			// Create a new list STL
+			$$ = new std::list<lp::CaseStmt *>();
+		}
+
+	|	caselist CASE exp COLON stmtlist
+		{
+			// Get the list of expressions
+			$$ = $1;
+
+			// Insert the expression in the list of expressions
+			$$->push_back(new lp::CaseStmt($3, $5));
+			//$$->push_back($3, $5);
+		}
+;
 
 block:	LETFCURLYBRACKET stmtlist RIGHTCURLYBRACKET  
 		{
@@ -418,35 +438,54 @@ if:	/* Simple conditional statement */
 	}
 ;
 
-for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmtlist ENDFOR SEMICOLON
-		{
-			// Create a new for statement node
-			$$ = new lp::ForStmt($3, $5, $7, $9);
+for:	
+	FOR controlSymbol VARIABLE FROM exp UNTIL exp DO stmtlist ENDFOR SEMICOLON
+	{
+		// Create a new for statement node
+		$$ = new lp::ForStmt($3, $5, $7, $9);
 
-			// To control the interactive mode
-			control--;
-		}
+		// To control the interactive mode
+		control--;
+	}
+
+|	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR SEMICOLON
+	{
+		// Create a new for statement node
+		$$ = new lp::ForStmt($3, $5, $7, $9, $11);
+
+		// To control the interactive mode
+		control--;
+	}
 ;
 
-for:	FOR controlSymbol VARIABLE FROM exp UNTIL exp STEP exp DO stmtlist ENDFOR SEMICOLON
-		{
-			// Create a new for statement node
-			$$ = new lp::ForStmt($3, $5, $7, $9, $11);
+switch:	
+	SWITCH controlSymbol cond caselist ENDSWITCH SEMICOLON
+	{
+		// Create a new switch statement node
+		$$ = new lp::SwitchStmt($3, $4);
 
-			// To control the interactive mode
-			control--;
-		}
-;
+		// To control the interactive mode
+		control--;
+	}
 
-switch:	SWITCH controlSymbol exp ENDSWITCH SEMICOLON
-		{
-			//SWITCH controlSymbol exp caselist ENDSWITCH SEMICOLON
-			//TODO
-			// Create a new switch statement node
-			//$$ = new lp::SwitchStmt($3, $5);
-			// To control the interactive mode
-			//control--;
-		}
+|	SWITCH controlSymbol cond caselist DEFAULT COLON stmtlist ENDSWITCH SEMICOLON
+	{
+		// Create a new switch statement node
+		$$ = new lp::SwitchStmt($3, $4, $7);
+
+		// To control the interactive mode
+		control--;
+	}
+
+|	SWITCH controlSymbol caselist ENDSWITCH SEMICOLON
+	{
+		execerror("Semantic error in \"switch statement\": there is no condition ","");
+	}
+
+|	SWITCH controlSymbol caselist DEFAULT COLON stmtlist ENDSWITCH SEMICOLON
+	{
+		execerror("Semantic error in \"switch statement\": there is no condition ","");
+	}
 ;
 
 repeat:	REPEAT controlSymbol stmtlist UNTIL cond SEMICOLON

@@ -1,6 +1,7 @@
 @Ejemplo del uso del bucle MIENTRAS
 
 dato1:=0;
+escribir_cadena('Introduzca un número:\n');
 leer(dato2);
 k:=8;
 

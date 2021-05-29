@@ -112,7 +112,6 @@ INLINE_COMMENT	@(.)*$
 				BEGIN 0;
 			}
 
-
 ";"		{
 			/* NEW in example 5 */
 			return SEMICOLON;
@@ -240,6 +239,7 @@ INLINE_COMMENT	@(.)*$
 
 "||"  	{ return CONCAT; }
 
+":"		{ return COLON; }
 
 
 <<EOF>> { /* The interpreter finishes when finds the end of file character */
