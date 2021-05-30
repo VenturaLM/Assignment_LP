@@ -1,5 +1,5 @@
 /*!
-	\file    StringVariable.hpp
+	\file    stringVariable.hpp
 	\brief   Declaration of StringVariable class.
 	\author
 	\date    2021-05-20
