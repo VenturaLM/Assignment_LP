@@ -4,13 +4,17 @@
 */
 
 /*!
- \mainpage Flex and Bison: example 17
+ \mainpage Flex and Bison: Práctica final
  \author   
- \date     2018 - 4 - 26
- \version  1.0
+ \date     2021 - 5 - 30
+ \version  2.0
  \note Novelties
-	+ AST: intermidiate code
-	+ New statements: if, while, block
+	+ New statements: switch, for, do_while
+	+ New operators: +:=, -:=, ++, --
+	+ New macros
+	+ New control errors
+	+ New string type and string related functions
+	+ many more
 */
 
 // New in example 2
