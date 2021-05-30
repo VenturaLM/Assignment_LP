@@ -1863,7 +1863,6 @@ void lp::ForStmt::print()
 
 void lp::ForStmt::evaluate()
 {
-	//check if condition is boolean
 	if (this->_exp1->getType() != NUMBER)
 	{
 		warning("Runtime error: incompatible types for", "first for expresion");
@@ -1876,50 +1875,41 @@ void lp::ForStmt::evaluate()
 	{
 		lp::Variable *var = (lp::Variable *)table.getSymbol(this->_identifier);
 
-		//check if _identifier is a number
 		if (var->getType() != NUMBER)
 		{
 			table.eraseSymbol(this->_identifier);
-
-			// Insert the variable in the table of symbols as NumericVariable
-			// with the type NUMBER and the value
 			lp::NumericVariable *v = new lp::NumericVariable(this->_identifier, VARIABLE, NUMBER, 0);
 			table.installSymbol(v);
 		}
 
 		int step;
-		//check if step is NULL
 		if (this->_stepExp != NULL)
 		{
 			step = this->_stepExp->evaluateNumber();
 		}
 		else
 		{
-			//if step doesn't exists, put the default value of one
 			step = 1;
 		}
 
 		if (step == 0)
 		{
-			warning("Infinite loop in for: ", "step equals zero");
+			warning("Infinite loop in for: ", "step = zero");
 		}
 		else if ((this->_exp1->evaluateNumber() > this->_exp2->evaluateNumber()) and step > 0)
 		{
-			warning("Infinite loop in for: ", "'from' greater than 'to' and step is positive");
+			warning("Infinite loop in for: ", "'from' is > than 'to' and step is +");
 		}
 		else if ((this->_exp1->evaluateNumber() < this->_exp2->evaluateNumber()) and step < 0)
 		{
-			warning("Infinite loop in for: ", "'to' greater than 'from' and step is negative");
+			warning("Infinite loop in for: ", "'to' is > than 'from' and step is -");
 		}
 		else
 		{
-			//Numeric variable to modify the identifier
 			lp::NumericVariable *v = (lp::NumericVariable *)table.getSymbol(this->_identifier);
-			//for loop
-			//from _exp1 to _exp2 with step "step"
+
 			for (int a = this->_exp1->evaluateNumber(); a <= this->_exp2->evaluateNumber(); a = a + step)
 			{
-				//modify the identifier in every step
 				v->setValue(a);
 				std::list<Statement *>::iterator stmtIter;
 

@@ -1,6 +1,23 @@
+<<
+  Asignatura:    Procesadores de Lenguajes
+
+  Titulación:    Ingeniería Informática
+  Especialidad:  Computación
+  Curso:         Tercero
+  Cuatrimestre:  Segundo
+
+  Departamento:  Informática y Análisis Numérico
+  Centro:        Escuela Politécnica Superior de Córdoba
+  Universidad de Córdoba
+ 
+  Curso académico: 2020 - 2021
+
+  Fichero de ejemplo para el intérprete de pseudocódigo en español: ipe.exe
+>>
+
 @Ejemplo del uso de los booleanos
 
-dato:=verdadero;
+dato:=falso;
 
 si (dato = verdadero)
 	entonces

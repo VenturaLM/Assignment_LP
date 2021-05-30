@@ -436,6 +436,14 @@ if:	/* Simple conditional statement */
 		// To control the interactive mode
 		control--;
 	}
+|	IF controlSymbol THEN stmtlist ENDIF SEMICOLON
+	{
+		execerror("Semantic error in \"if statement\": there is no condition ","");
+	}
+|	IF controlSymbol THEN stmtlist ELSE stmtlist ENDIF SEMICOLON
+	{
+		execerror("Semantic error in \"if statement\": there is no condition ","");
+	}
 ;
 
 for:	
@@ -507,6 +515,10 @@ while:	WHILE controlSymbol cond DO stmtlist ENDWHILE SEMICOLON
 			// To control the interactive mode
 			control--;
     	}
+		|	WHILE controlSymbol DO stmtlist ENDWHILE SEMICOLON
+		{
+			execerror("Semantic error in \"while statement\": there is no condition ","");
+		}
 ;
 
 	/*  NEW in example 17 */

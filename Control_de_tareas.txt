@@ -10,7 +10,7 @@
 
 
 -----------------------------------------------------------------
-NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[ ]
+NO EXISTEN CONFLICTOS EN LAS REGLAS DE PRODUCCIÓN:		[x]
 -----------------------------------------------------------------
 
 -----------------------------------------------------------------
@@ -140,7 +140,7 @@ OTROS:					[x]								CHECK
 	FIN DE LINEA ;										[x]
 
 -----------------------------------------------------------------
-SENTENCIAS DE CONTROL:	[ ]								CHECK
+SENTENCIAS DE CONTROL:	[x]								CHECK
 -----------------------------------------------------------------
 	ASIGNACION											[x]
 		IDENTIFICADOR := EXPR NUMÉRICA					[x]
@@ -154,7 +154,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 		escribir										[x]
 		escribir_cadena									[x]
 
-	SENTENCIAS DE CONTROL								[ ]
+	SENTENCIAS DE CONTROL								[x]
 		CONDICIONAL SIMPLE								[x]
 			si condición
 				entonces lista de sentencias
@@ -185,7 +185,7 @@ SENTENCIAS DE CONTROL:	[ ]								CHECK
 					lista de sentencias
 			fin_para
 
-		SELECCIÓN MÚLTIPLE								[ ]
+		SELECCIÓN MÚLTIPLE								[x]
 		casos (expresión)
 			valor v1:   … 
 			valor v2:   … 
@@ -219,11 +219,11 @@ CONTROL DE ERRORES:		[ ]								CHECK
 		SENTENCIA CON ARGUMENTOS INCOMPATIBLES			[x]
 		OTROS											[ ]
 
-	SEMÁNTICOS											[ ]
-		ARGUMENTOS U OPERANDOS INCOMPATIBLES			[ ]
+	SEMÁNTICOS											[x]
+		ARGUMENTOS U OPERANDOS INCOMPATIBLES			[x]
 
-	DE EJECUCIÓN										[ ]
-		SENTENCIA "PARA" CON BUCLE INFINITO				[ ]
+	DE EJECUCIÓN										[x]
+		SENTENCIA "PARA" CON BUCLE INFINITO				[x]
 		FICHERO INEXISTENTE								[x]
 		FICHERO CON EXTENSIÓN INCORRECTA				[x]
 		OTROS											[ ]
@@ -240,8 +240,3 @@ OPCIONALES:				[ ]								CHECK
 	OPERADORES UNARIOS (++, --, etc)					[x]
 	OPERADORES ARITMETICOS Y ASIGNACION (+:=,-:=)		[x]
 	OTROS:												[ ]
-
-
-Preguntas profesor:
-- Si el .y del switch está bien.
-- Para que son los UNARY
