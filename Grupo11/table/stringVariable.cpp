@@ -1,9 +1,9 @@
 /*!
 	\file    stringVariable.cpp
 	\brief   Code of some functions of StringVariable class.
-	\author
-	\date    2021-05-20
-	\version 1.0
+	\author  Ventura Lucena Martinez & Francisco David Castejón Soto
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #include <iostream>

@@ -1,6 +1,9 @@
 /*! 
-  \file error.cpp
-  \brief Code of error recovery functions 
+	\file error.cpp
+	\brief Code of error recovery functions
+	\author
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 // cerr, endl

@@ -1,9 +1,9 @@
 /*!	
 	\file    ast.hpp
 	\brief   Declaration of AST class
-	\author  
-	\date    2018-12-13
-	\version 1.0
+	\author  Ventura Lucena Martinez & Francisco David Castejón Soto
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _AST_HPP_

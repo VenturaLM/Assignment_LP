@@ -15,8 +15,4 @@
   Fichero de ejemplo para el intérprete de pseudocódigo en español: ipe.exe
 >>
 
-@Ejemplo de errores 
-
-dato__1 := 4;
-dato_ := 4;
-_dato := 4;
+@Ejemplo de como un archivo que no es .e no puede ser ejecutado por el intérprete.

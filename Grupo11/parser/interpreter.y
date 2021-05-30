@@ -1,6 +1,9 @@
 /*! 
-  \file interpreter.y
-  \brief Grammar file
+	\file    interpreter.y
+	\brief   Grammar file
+	\author  Ventura Lucena Martinez & Francisco David Castejón Soto
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 

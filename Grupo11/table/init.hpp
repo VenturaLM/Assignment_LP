@@ -1,9 +1,9 @@
 /*!	
-	\file   init.hpp
+	\file    init.hpp
 	\brief   Prototype of the function for the initialization of table of symbols
-	\author  
-	\date    2017-12-5
-	\version 1.0
+	\author  Ventura Lucena Martinez & Francisco David Castejón Soto
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _INIT_HPP_

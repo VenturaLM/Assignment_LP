@@ -1,6 +1,9 @@
 /*! 
-  \file mathFunction.cpp
-  \brief Code of mathematical functions 
+	\file    mathFunction.cpp
+	\brief   Code of mathematical functions 
+	\author
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #include <iostream>

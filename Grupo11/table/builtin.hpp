@@ -1,9 +1,9 @@
 /*!	
 	\file    builtin.hpp
 	\brief   Declaration of Builtin (built-in function) class
-	\author  
-	\date    2017-12-7
-	\version 1.0
+	\author
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _BUILTIN_HPP_

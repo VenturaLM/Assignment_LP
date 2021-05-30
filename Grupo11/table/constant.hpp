@@ -2,8 +2,8 @@
 	\file    constant.hpp
 	\brief   Declaration of Constant class
 	\author  
-	\date    2017-12-5
-	\version 1.0
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _CONSTANT_HPP_

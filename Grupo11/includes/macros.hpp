@@ -1,9 +1,10 @@
 /*!
-  \file   macros.hpp
-  \brief  Macros for the screen
-  \author 
-  \date   
-  \note  http://isthe.com/chongo/tech/comp/ansi_escapes.html
+	\file    macros.hpp
+	\brief   Macros for the screen
+	\author
+	\note    http://isthe.com/chongo/tech/comp/ansi_escapes.html
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _MACROS_HPP_

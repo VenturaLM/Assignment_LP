@@ -2,8 +2,8 @@
 	\file    builtinParameter2.hpp
 	\brief   Declaration of BuiltinParameter2 class
 	\author  
-	\date    2017-12-7
-	\version 1.0
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _BUILTIN2PARAMETERS_HPP_

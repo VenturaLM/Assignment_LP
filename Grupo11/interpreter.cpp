@@ -5,7 +5,7 @@
 
 /*!
  \mainpage Flex and Bison: Práctica final
- \author   
+ \author   Ventura Lucena Martinez & Francisco David Castejón Soto
  \date     2021 - 5 - 30
  \version  2.0
  \note Novelties

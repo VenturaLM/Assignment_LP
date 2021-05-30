@@ -1,6 +1,9 @@
 /*! 
-  \file error.hpp
-  \brief Prototypes of error recovery functions 
+	\file error.hpp
+	\brief Prototypes of error recovery functions
+	\author
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _ERROR_HPP_

@@ -2,8 +2,8 @@
 	\file    variable.hpp
 	\brief   Declaration of Variable class
 	\author  
-	\date    2017-12-1
-	\version 1.0
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _VARIABLE_HPP_

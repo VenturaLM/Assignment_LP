@@ -1,9 +1,9 @@
 /*!	
 	\file    ast.cpp
-	\brief   Code of funcitons of AST clas
-	\author  
-	\date    2018-12-13
-	\version 1.0
+	\brief   Code of functions of AST class
+	\author  Ventura Lucena Martinez & Francisco David Castejón Soto
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #include <cstring>
@@ -13,7 +13,7 @@
 #include <string>
 #include <list>
 
-// Para usar la funciones pow y std::abs
+// For pow and std::abs
 #include <cmath>
 
 #include "ast.hpp"

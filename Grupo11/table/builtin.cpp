@@ -1,9 +1,9 @@
 /*!	
 	\file    builtin.cpp
 	\brief   Code of some functions of Builtin class
-	\author 
-	\date    2017-12-7
-	\version 1.0
+	\author
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #include <iostream>

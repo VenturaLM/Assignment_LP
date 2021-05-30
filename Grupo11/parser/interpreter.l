@@ -1,6 +1,9 @@
 /*! 
-  \file interpreter.l
-  \brief Lexical or scanner file
+	\file    interpreter.l
+	\brief   Lexical or scanner file
+	\author  Ventura Lucena Martinez & Francisco David Castejón Soto
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 %{
 #include <iostream>

@@ -1,6 +1,9 @@
 /*! 
-  \file mathFunction.hpp
-  \brief Prototypes of mathematical functions 
+	\file    mathFunction.hpp
+	\brief   Prototypes of mathematical functions 
+	\author 
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #ifndef _MATHFUNCTION_HPP_

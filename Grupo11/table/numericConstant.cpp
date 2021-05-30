@@ -2,8 +2,8 @@
 	\file    numericConstant.cpp
 	\brief   Code of some functions of NumericConstant class
 	\author 
-	\date    2017-10-19
-	\version 1.0
+	\date    2021 - 5 - 30
+	\version 2.0
 */
 
 #include <iostream>
